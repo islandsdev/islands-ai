@@ -45,10 +45,12 @@
   }
 
   /* top bar */
-  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
-  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
-  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
-  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .topbar{background:linear-gradient(90deg,#d49070 0%,#cf6e59 52%,#ce6151 100%);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; min-height:78px; padding-top:16px; padding-bottom:16px;}
+  .topbar .brand{height:30px; width:auto; display:block;}
+  .topbar .context{text-align:right; line-height:1.35;}
+  .topbar .context .co{color:#fff; font-weight:700; font-size:14px; letter-spacing:0.03em;}
+  .topbar .context .lbl{color:rgba(255,255,255,0.9); font-weight:500; font-size:12.5px; letter-spacing:0.04em;}
 
   /* hero */
   .hero{padding:80px 0 44px; background:var(--bg);}
@@ -206,9 +208,13 @@
 
   <div class="topbar">
     <div class="wrap">
-      <div class="context-right">Islands x Aucti</div>
-      <div class="context-left">AI Visibility Audit - July 2026</div>
+      <img class="brand" src="data:image/png;base64,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" alt="Islands">
+      <div class="context">
+        <div class="co">Islands x Aucti</div>
+        <div class="lbl">AI Visibility Audit - July 2026</div>
+      </div>
     </div>
+  </div>
   </div>
 
   <div class="hero rays">
