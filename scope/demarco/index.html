@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Sales Engine — Demarco | Islands</title>
-<meta name="description" content="Islands proposal for Derek Dupont — an AI-powered sales engine for the roofing business, funded via OCI Future Ready Grant.">
+<meta name="description" content="Islands proposal for Derek Dupont: an AI-powered sales engine to generate leads, automate outreach, and grow the roofing business.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,9 +31,6 @@
   h3{font-size:20px;font-weight:700;margin:0 0 10px;letter-spacing:-.01em;}
   .grad{background:linear-gradient(90deg,var(--orange),var(--orange-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
   .muted{color:var(--muted);}
-  .btn{display:inline-block;background:var(--orange);color:#111;font-weight:600;font-size:16px;
-    padding:15px 26px;border-radius:14px;transition:transform .12s ease;}
-  .btn:hover{text-decoration:none;transform:translateY(-1px);}
 
   .bar{background:var(--ink);color:var(--bg);}
   .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;}
@@ -47,38 +44,40 @@
   .lead{font-size:clamp(19px,2.4vw,22px);max-width:640px;margin:22px 0 0;}
   .dark .lead{color:var(--muted-dk);}
 
-  /* funding row */
-  .funding{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;}
-  .f-item .num{font-size:clamp(40px,5vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1;}
-  .f-item p{margin:12px 0 0;}
-  .f-item .cap{font-size:14px;color:var(--muted);margin-top:6px;}
+  /* challenge two-col */
+  .challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;align-items:start;}
+  .challenge-col h3{font-size:22px;font-weight:700;margin:0 0 14px;}
+  .challenge-col p{margin:0 0 14px;color:var(--muted-dk);}
+  .challenge-col p:last-child{margin:0;}
+  .result-list{list-style:none;padding:0;margin:0;}
+  .result-list li{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px;}
+  .result-list li .dot{width:8px;height:8px;background:var(--orange);border-radius:50%;flex-shrink:0;margin-top:8px;}
+  .result-list li span{color:var(--muted-dk);font-size:17px;}
+  .result-list li strong{color:var(--bg);}
 
-  /* deliverables cards */
-  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
-  .card{border:1px solid var(--border);border-radius:16px;padding:32px;background:var(--bg);}
-  .off .card{background:var(--bg);}
-  .card h3{font-size:20px;font-weight:700;margin:0 0 10px;letter-spacing:-.01em;}
-  .card p{margin:0;color:var(--muted);}
-  .card ul{margin:10px 0 0;padding-left:18px;color:var(--muted);}
-  .card ul li{margin-bottom:6px;}
+  /* deliverables */
+  .deliverables{display:grid;grid-template-columns:1fr;gap:20px;margin-top:48px;}
+  .deliverable{border:1px solid var(--border);border-radius:16px;padding:36px;}
+  .deliverable .d-num{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin:0 0 12px;}
+  .deliverable h3{font-size:22px;margin:0 0 12px;}
+  .deliverable .d-body{color:var(--muted);margin:0 0 18px;}
+  .deliverable ul{margin:0;padding-left:20px;}
+  .deliverable ul li{color:var(--muted);margin-bottom:8px;font-size:16px;}
+  .scope-note{display:inline-block;background:var(--orange-bg);border:1px solid var(--orange);
+    border-radius:99px;padding:5px 14px;font-size:13px;font-weight:600;color:var(--orange);margin-top:16px;}
 
-  /* timeline */
-  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
-  .week{border:1px solid var(--border-dk);border-radius:16px;padding:28px;background:var(--card);}
-  .week-label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
-  .week h3{font-size:18px;font-weight:700;margin:0 0 8px;color:var(--bg);}
-  .week p{margin:0;font-size:15px;color:var(--muted-dk);}
+  /* funding */
+  .funding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px;}
+  .f-card{border:1px solid var(--border-dk);border-radius:16px;padding:32px;background:var(--card);}
+  .f-card .num{font-size:clamp(36px,4vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-bottom:12px;}
+  .f-card p{margin:0;color:var(--muted-dk);font-size:16px;}
+  .f-card .cap{font-size:14px;color:var(--muted-dk);margin-top:8px;opacity:0.7;}
 
   /* team */
   .team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
   .member{border:1px solid var(--border);border-radius:14px;padding:24px 28px;}
   .member .name{font-weight:700;margin:0 0 4px;}
   .member .role{font-size:15px;color:var(--muted);}
-
-  /* deadline pill */
-  .deadline-pill{display:inline-flex;align-items:center;gap:8px;background:var(--orange-bg);
-    border:1px solid var(--orange);border-radius:99px;padding:8px 18px;margin-top:32px;
-    font-size:15px;font-weight:600;color:var(--orange);}
 
   .footer{padding:44px 0;}
   .footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
@@ -88,9 +87,8 @@
 
   @media(max-width:760px){
     .wrap{padding:0 24px;}
-    .funding{grid-template-columns:1fr;gap:32px;}
-    .cards{grid-template-columns:1fr;}
-    .timeline{grid-template-columns:1fr;}
+    .challenge-grid{grid-template-columns:1fr;}
+    .funding-grid{grid-template-columns:1fr;}
     .team{grid-template-columns:1fr;}
   }
 </style>
@@ -119,87 +117,113 @@
   <!-- HERO -->
   <section class="dark">
     <div class="wrap">
-      <p class="eyebrow">OCI Future Ready Grant &middot; August 2026</p>
-      <h1>Build your<br><span class="grad">AI sales engine.</span></h1>
-      <p class="lead">Islands will build an AI-powered sales and growth system for your roofing business: automated lead generation, territory mapping, outreach sequences, and pipeline nurture. Done for you, running in 3 weeks.</p>
-      <div class="deadline-pill">Deadline: September 30, 2026 &mdash; grant-funded</div>
+      <p class="eyebrow">Initial Proposal &middot; August 2026</p>
+      <h1>Build a sales engine<br><span class="grad">that runs itself.</span></h1>
+      <p class="lead">More leads coming in. More follow-ups going out automatically. More deals in the pipeline, without adding headcount. Here is what we are thinking, and how we get there.</p>
     </div>
   </section>
 
-  <!-- FUNDING -->
-  <section>
+  <!-- CHALLENGE + SOLUTION -->
+  <section class="dark" style="padding-top:0;">
     <div class="wrap">
-      <p class="eyebrow">Funding</p>
-      <h2>$20,000 project. Half covered by the OCI grant.</h2>
-      <p class="lead muted">Demarco Construction qualifies for the OCI Future Ready Program. The grant reimburses 50% of project costs, capped at $10,000. Total project budget: $20,000.</p>
-      <div class="funding">
-        <div class="f-item">
-          <div class="num">$20K</div>
-          <p>Total project budget</p>
-          <div class="cap">Full scope: lead engine, outreach, nurture, pipeline</div>
+      <div style="height:1px;background:var(--border-dk);margin-bottom:64px;"></div>
+      <div class="challenge-grid">
+        <div class="challenge-col">
+          <p class="eyebrow">The challenge</p>
+          <h3>Growing a roofing business without a system is an uphill battle.</h3>
+          <p>Most roofing businesses at the early growth stage are entirely dependent on referrals and word of mouth. There is no repeatable way to find new customers, no automated follow-up when someone shows interest, and no visibility into where deals stand or why they stall.</p>
+          <p>The result: a lot of potential revenue that never converts, and a sales process that lives entirely in someone's head or phone. Growth is possible, but it is inconsistent and hard to scale.</p>
         </div>
-        <div class="f-item">
-          <div class="num">$10K</div>
-          <p>OCI Future Ready grant</p>
-          <div class="cap">50% reimbursement, applied under Demarco Construction</div>
-        </div>
-        <div class="f-item">
-          <div class="num">3 weeks</div>
-          <p>Delivery timeline</p>
-          <div class="cap">Live by end of September, within grant deadline</div>
+        <div class="challenge-col">
+          <p class="eyebrow">What we solve</p>
+          <h3>A predictable, automated sales operation. Built once, runs continuously.</h3>
+          <ul class="result-list">
+            <li><span class="dot"></span><span><strong>More inbound leads</strong> from territory-specific outreach targeting the right homeowners and businesses in your area</span></li>
+            <li><span class="dot"></span><span><strong>Faster response times</strong> with automated follow-up the moment a lead fills a form or shows interest</span></li>
+            <li><span class="dot"></span><span><strong>More deals closed</strong> through a structured pipeline that tracks every opportunity and keeps nothing from slipping through</span></li>
+            <li><span class="dot"></span><span><strong>Less manual work</strong> with outreach sequences, follow-ups, and reminders running automatically in the background</span></li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DELIVERABLES -->
+  <!-- PROPOSED SCOPE -->
   <section class="off">
     <div class="wrap">
-      <p class="eyebrow">What we build</p>
-      <h2>Four systems. One engine.</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>01 &mdash; Website Audit + ICP Definition</h3>
-          <p>Audit the existing roofing site for conversion gaps. Define your Ideal Customer Profile by territory, job type, and ticket size. Map where leads drop off today and fix it before we turn on outreach.</p>
-        </div>
-        <div class="card">
-          <h3>02 &mdash; Territory Mapping + Lead Sourcing</h3>
-          <p>Build a scored lead database from Google Maps, local directories, and property records. Prioritized by geography, property type, and likelihood to convert. No more cold starts.</p>
-        </div>
-        <div class="card">
-          <h3>03 &mdash; Outreach Automation</h3>
-          <p>Automated email and SMS sequences that go out to sourced leads, personalized by job type (residential, commercial, insurance). Follow-up cadence built in so no lead goes cold.</p>
-        </div>
-        <div class="card">
-          <h3>04 &mdash; Lead Nurture + Pipeline</h3>
-          <p>Anyone who fills out a form on your site gets an automated text and email within minutes. Warm leads route to you immediately. A lightweight CRM tracks every deal from first touch to close.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <p class="eyebrow">Proposed scope</p>
+      <h2>Five areas we are recommending.<br>Final scope to be confirmed together.</h2>
+      <p style="color:var(--muted);max-width:640px;margin:16px 0 0;font-size:17px;">The following is based on what we discussed, and what we have seen work for similar businesses. We will walk through each piece on our scoping call and adjust based on what actually makes sense for where Derek is today.</p>
 
-  <!-- TIMELINE -->
-  <section class="dark">
-    <div class="wrap">
-      <p class="eyebrow">Timeline</p>
-      <h2>Live in 3 weeks.</h2>
-      <p class="lead">Aggressive, but built for the September 30 OCI deadline. Every week has a clear output. You will receive hands-on training throughout so you can run and iterate on the system after we hand it off.</p>
-      <div class="timeline">
-        <div class="week">
-          <div class="week-label">Week 1</div>
-          <h3>Discovery + Setup</h3>
-          <p>ICP definition, website audit, lead source configuration, CRM selection and initial setup.</p>
+      <div class="deliverables">
+
+        <div class="deliverable">
+          <div class="d-num">01 &mdash; Suggested</div>
+          <h3>Website Audit + Conversion Improvements</h3>
+          <p class="d-body">Your website is likely getting visitors that are not converting into leads. Before we turn on any outbound engine, we want to make sure the destination works. We will audit the existing site, identify the gaps, and recommend concrete changes to copy, forms, and calls to action that turn more visitors into actual inquiries.</p>
+          <ul>
+            <li>Full review of current site structure and conversion flow</li>
+            <li>ICP definition: which job types, territories, and customer profiles to prioritize (residential, commercial, insurance claims, etc.)</li>
+            <li>Specific recommendations for form placement, messaging, and page structure</li>
+            <li>Implementation of priority changes ahead of outbound launch</li>
+          </ul>
+          <span class="scope-note">Scope to be refined on call</span>
         </div>
-        <div class="week">
-          <div class="week-label">Week 2</div>
-          <h3>Build + Launch</h3>
-          <p>Lead database live, outreach sequences running, CRM fully configured, first leads in pipeline.</p>
+
+        <div class="deliverable">
+          <div class="d-num">02 &mdash; Suggested</div>
+          <h3>Territory Mapping + Lead Database</h3>
+          <p class="d-body">Instead of waiting for leads to find you, we build a database of the right prospects in your target area and go to them. We pull from Google Maps, local directories, property records, and other sources to build a list that is scored, prioritized, and ready to contact, organized by neighborhood, property type, and estimated job value.</p>
+          <ul>
+            <li>Geographic territory definition based on Derek's service area and growth goals</li>
+            <li>Lead sourcing from multiple data sources (homeowners, property managers, commercial addresses)</li>
+            <li>Scoring and prioritization by proximity, property type, and job-type fit</li>
+            <li>Continuously refreshable as the business expands into new areas or job categories</li>
+          </ul>
+          <span class="scope-note">Scope to be refined on call</span>
         </div>
-        <div class="week">
-          <div class="week-label">Week 3</div>
-          <h3>Nurture + Training</h3>
-          <p>Form-to-SMS automation live, pipeline nurture running, team trained. OCI report filed.</p>
+
+        <div class="deliverable">
+          <div class="d-num">03 &mdash; Suggested</div>
+          <h3>Automated Outbound Outreach</h3>
+          <p class="d-body">We build and run outreach sequences to sourced leads via email and SMS. Messages are personalized by lead type so a residential homeowner gets different copy than a commercial property manager or an insurance adjuster. Multi-touch sequences mean no lead goes cold after one unanswered message, and we test and improve messaging over time based on what gets replies.</p>
+          <ul>
+            <li>Outreach sequences built for each lead segment (residential, commercial, insurance)</li>
+            <li>Automated multi-touch follow-up cadence: email, SMS, or both depending on what performs</li>
+            <li>Messaging written by Islands, reviewed with Derek before launch</li>
+            <li>A/B testing of subject lines and message content to improve reply rates over time</li>
+            <li>Warm replies routed immediately to Derek for manual follow-up</li>
+          </ul>
+          <span class="scope-note">Scope to be refined on call</span>
         </div>
+
+        <div class="deliverable">
+          <div class="d-num">04 &mdash; Suggested</div>
+          <h3>Inbound Lead Nurture</h3>
+          <p class="d-body">Right now, anyone who fills out a form on your site probably waits hours (or longer) for a response. Speed matters: the first business to respond wins the job more often than not. We build automation that responds to new form submissions within minutes, confirms interest, and starts a follow-up sequence for leads who go quiet after the first reply.</p>
+          <ul>
+            <li>Automatic email and/or SMS sent to every form submission within minutes</li>
+            <li>Hot leads (high intent) flagged and routed to Derek immediately</li>
+            <li>Multi-step follow-up sequence for leads that do not respond to the first message</li>
+            <li>Unsubscribe and opt-out handling built in</li>
+          </ul>
+          <span class="scope-note">Scope to be refined on call</span>
+        </div>
+
+        <div class="deliverable">
+          <div class="d-num">05 &mdash; Suggested</div>
+          <h3>CRM + Pipeline Setup</h3>
+          <p class="d-body">Without a CRM, deals live in text threads and memory. We set up a lightweight pipeline tracker so every lead has a status, every follow-up has a due date, and nothing disappears. We will recommend a tool based on what Derek already uses (or prefers) and configure it so it is actually something the team will use, not just another thing to ignore.</p>
+          <ul>
+            <li>CRM tool selection based on Derek's existing stack and preferences (GoHighLevel, HubSpot, or similar)</li>
+            <li>Pipeline stages configured to match Derek's actual sales process</li>
+            <li>Integration with inbound and outbound systems so leads flow in automatically</li>
+            <li>Simple reporting: how many leads, where they stall, what is closing</li>
+            <li>Training so the team can manage and update it without our help day-to-day</li>
+          </ul>
+          <span class="scope-note">Scope to be refined on call</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -208,8 +232,8 @@
   <section>
     <div class="wrap">
       <p class="eyebrow">Your team</p>
-      <h2>Five people on it from day one.</h2>
-      <p class="lead muted">100+ companies built since 2021. 5 AI exits. This is the same team behind growth systems for clients from early-stage to 9-figure revenue.</p>
+      <h2>Five people assigned from the start.</h2>
+      <p class="lead muted">100+ companies accelerated since 2021. 5 AI exits. This is the same team building growth systems for businesses from early-stage to 9-figure revenue.</p>
       <div class="team">
         <div class="member">
           <div class="name">Ali El-Shayeb</div>
@@ -221,7 +245,7 @@
         </div>
         <div class="member">
           <div class="name">Saadan Malik</div>
-          <div class="role">Project management + OCI grant</div>
+          <div class="role">Project management + grant</div>
         </div>
         <div class="member">
           <div class="name">Nadeem Ghaly</div>
@@ -235,13 +259,29 @@
     </div>
   </section>
 
-  <!-- CLOSING CTA -->
+  <!-- FUNDING (bottom) -->
   <section class="dark">
     <div class="wrap">
-      <p class="eyebrow">Next step</p>
-      <h2>Book the scoping call. We finalize scope and start.</h2>
-      <p class="lead">One call to nail down your territory, current systems, and success metrics. We handle the rest, including the OCI application. September 30 is the hard line.</p>
-      <p style="margin-top:36px;"><a class="btn" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery">Book scoping call</a></p>
+      <p class="eyebrow">Funding</p>
+      <h2>Half the project is covered by the OCI grant.</h2>
+      <p class="lead">Demarco Construction qualifies for the OCI Future Ready Program. The grant reimburses 50% of project costs up to $10,000. Total budget is $20,000, meaning the out-of-pocket investment is $10,000.</p>
+      <div class="funding-grid">
+        <div class="f-card">
+          <div class="num">$20K</div>
+          <p>Total project budget</p>
+          <div class="cap">Full scope across all five workstreams</div>
+        </div>
+        <div class="f-card">
+          <div class="num">$10K</div>
+          <p>OCI Future Ready grant</p>
+          <div class="cap">50% reimbursed after project completion</div>
+        </div>
+        <div class="f-card">
+          <div class="num">$10K</div>
+          <p>Demarco Construction investment</p>
+          <div class="cap">Net cost after grant reimbursement</div>
+        </div>
+      </div>
     </div>
   </section>
 
