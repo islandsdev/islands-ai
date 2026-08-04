@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compliance &amp; Legal Writing Guide | Hippo | Islands</title>
+<meta name="description" content="Hippo's compliance and legal writing rules for marketing and product copy, general policy and phrase-level restrictions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg-off:#f6f5f2;
+    --ink:#0a0a0a; --ink-2:#121212; --card:#161615;
+    --border:#e6e4df; --border-dk:#2a2926;
+    --muted:#6b6862; --muted-dk:#a3a09a;
+    --orange:#e0793d; --orange-2:#ef8b4e; --orange-bg:rgba(224,121,61,0.12);
+    --red-bg:rgba(196,68,68,0.12); --red-ink:#a13a3a;
+    --amber-bg:rgba(196,148,42,0.14); --amber-ink:#8a6a1f;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 48px;}
+  a{color:var(--orange);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin:0 0 18px;}
+  h1{font-size:clamp(40px,6.4vw,76px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;}
+  h2{font-size:clamp(26px,3.6vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:0 0 20px;}
+  h3{font-size:17px;font-weight:700;letter-spacing:-.005em;margin:0;}
+  .grad{background:linear-gradient(90deg,var(--orange),var(--orange-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .muted{color:var(--muted);}
+  .dark .muted{color:var(--muted-dk);}
+
+  .bar{background:var(--ink);color:var(--bg);}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;gap:16px;}
+  .logo{color:var(--bg);height:34px;display:flex;align-items:center;flex-shrink:0;}
+  .logo svg{height:34px;width:auto;display:block;}
+  .bar-meta{font-size:14px;color:var(--muted-dk);text-align:right;}
+
+  section{padding:clamp(48px,8vw,96px) 0;}
+  .dark{background:var(--ink);color:var(--bg);}
+  .off{background:var(--bg-off);}
+  .lead{font-size:clamp(18px,2.2vw,21px);max-width:700px;margin:22px 0 0;color:var(--muted);}
+  .dark .lead{color:var(--muted-dk);}
+  .sub{font-size:16px;max-width:700px;margin:14px 0 0;color:var(--muted);}
+
+  /* quick nav */
+  .quicknav{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
+  .quicknav a{display:inline-block;padding:9px 18px;border-radius:999px;border:1px solid var(--border);color:var(--ink);font-size:14px;font-weight:600;}
+  .quicknav a:hover{text-decoration:none;border-color:var(--orange);}
+
+  /* legend cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;}
+  .card{border:1px solid var(--border);border-radius:16px;padding:28px;background:var(--bg);}
+  .card h3{margin:0 0 10px;}
+  .card p{margin:0;color:var(--muted);font-size:15px;}
+  .type-badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;margin-bottom:14px;}
+  .type-badge.forbid{background:var(--red-bg);color:var(--red-ink);}
+  .type-badge.require{background:var(--bg-off);color:var(--ink);}
+  .type-badge.restrict{background:var(--amber-bg);color:var(--amber-ink);}
+
+  /* rule cards */
+  .rules{margin-top:44px;}
+  .rule{border:1px solid var(--border);border-radius:16px;padding:26px 30px;background:var(--bg);margin-bottom:16px;}
+  .rule-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+  .rule-id{font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--muted);}
+  .rule-title{font-size:17px;font-weight:700;margin:0 0 14px;letter-spacing:-.005em;}
+  .rule-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px 20px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+  .rule-meta .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .rule-meta .val{font-size:14.5px;}
+  .chiprow{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{display:inline-block;font-size:13px;background:var(--bg-off);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+  .review{font-size:14px;font-style:italic;color:var(--muted);margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+
+  .footer{padding:44px 0;}
+  .footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .footer .logo{height:26px;} .footer .logo svg{height:26px;}
+  .footer .meta{font-size:14px;color:var(--muted-dk);}
+
+  @media(max-width:900px){
+    .cards{grid-template-columns:1fr;}
+  }
+  @media(max-width:760px){
+    .wrap{padding:0 24px;}
+    .rule-meta{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <div class="wrap">
+      <span class="logo" aria-label="Islands">
+        <svg viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Islands">
+          <path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/>
+          <path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/>
+          <path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/>
+          <path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/>
+          <path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/>
+          <path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/>
+          <path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/>
+          <path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="bar-meta">Hippo &middot; Compliance &amp; Legal Writing Guide</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="dark">
+    <div class="wrap">
+      <p class="eyebrow">Companion to the Audience &amp; Messaging Guide</p>
+      <h1>Know the rules.<br><span class="grad">Before you publish.</span></h1>
+      <p class="lead">This is Hippo's compliance policy for marketing and product copy. The structured rules behind this page are the canonical, machine-readable version; this is the human-readable companion. Check it before anything about insurance, pricing, or coverage ships.</p>
+      <div class="quicknav" style="margin-top:32px;">
+        <a href="#legend">How to read a rule</a>
+        <a href="#general">General (9)</a>
+        <a href="#phrases">Phrases (7)</a>
+        <a href="#other-sections">Links, competitors, other</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGEND -->
+  <section id="legend">
+    <div class="wrap">
+      <p class="eyebrow">How to read a rule</p>
+      <h2>Three enforcement types.</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="type-badge forbid">Forbid</span>
+          <h3>Don't use it, period</h3>
+          <p>The phrase or claim is prohibited outright. There's no disclaimer or context that makes it acceptable.</p>
+        </div>
+        <div class="card">
+          <span class="type-badge require">Require</span>
+          <h3>Must be included</h3>
+          <p>Whenever the trigger condition applies, this element (a disclaimer, a source, a label) has to be present.</p>
+        </div>
+        <div class="card">
+          <span class="type-badge restrict">Restrict</span>
+          <h3>Allowed within limits</h3>
+          <p>Permitted only in a specific scope, channel, or with the required substantiation and disclaimer alongside it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENERAL -->
+  <section class="off" id="general">
+    <div class="wrap">
+      <p class="eyebrow">General &middot; 9 rules</p>
+      <h2>General rules.</h2>
+      <p class="sub">Apply across all Hippo marketing and product copy unless otherwise scoped.</p>
+
+      <div class="rules">
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-001</span><span class="type-badge forbid">Forbid</span></div>
+          <p class="rule-title">Do not imply that Hippo Insurance Services itself underwrites or issues insurance policies, or guarantees coverage outcomes.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+          </div>
+          <p class="review">Hippo is a licensed insurance agency, not an underwriter. Coverage is provided by affiliated and non-affiliated carriers.</p>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-002</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Substantiate all savings and performance claims with a disclaimer citing the support.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+            <div><p class="lbl">Only applies when present</p><div class="chiprow"><span class="chip">savings</span><span class="chip">lower rates</span><span class="chip">discounts</span></div></div>
+          </div>
+          <p class="review">Substantiation must be on file with Marketing and no more than five years old. Approved disclaimer example provided in source.</p>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-003</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Include a visible, identified source for every statistic or citation within the content.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+          </div>
+          <p class="review">Sources must be current, accurate, reputable, verifiable, and no more than five years old.</p>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-004</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Specify whether average cost or savings figures are national or regional, naming the specific region if applicable.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">Body</p></div>
+            <div><p class="lbl">Only applies when present</p><div class="chiprow"><span class="chip">average cost</span><span class="chip">average savings</span></div></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-005</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Include methodology details and the standard survey disclaimer for all survey-based claims.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">Body</p></div>
+          </div>
+          <p class="review">Refer to Approved Disclaimers section in source material for standard wording.</p>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-006</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Clearly indicate when actors are used in advertisements featuring testimonials.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+          </div>
+          <p class="review">Endorsements must not imply an actor is a customer.</p>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-007</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Label paid content and advertisements as paid.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-008</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Ensure disclaimers are prominent and clearly visible, not buried in fine print.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">GEN-009</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Include the required disclaimer whenever content references insurance products, quotes, policies, or pricing.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+          </div>
+          <p class="review">A standalone Hippo logo is only permitted for brand-only content not tied to specific products or quotes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHRASES -->
+  <section id="phrases">
+    <div class="wrap">
+      <p class="eyebrow">Phrases &middot; 7 rules</p>
+      <h2>Phrase-level rules.</h2>
+      <p class="sub">Specific words, phrasing, and naming conventions to use, avoid, or qualify.</p>
+
+      <div class="rules">
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-001</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Use 'Hippo Insurance Services' on first reference in lifecycle emails and transactional content.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+            <div><p class="lbl">Channels</p><p class="val">customer_io</p></div>
+            <div><p class="lbl">Targets</p><div class="chiprow"><span class="chip">Hippo Insurance Services</span></div></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-002</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Identify the sender as 'Hippo Insurance Services' in SMS content; 'Hippo' alone is prohibited.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+            <div><p class="lbl">Channels</p><p class="val">sms</p></div>
+            <div><p class="lbl">Targets</p><div class="chiprow"><span class="chip">Hippo Insurance Services</span></div></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-003</span><span class="type-badge restrict">Restrict</span></div>
+          <p class="rule-title">Use the term 'insurance' rather than 'coverage' in Agency/MGA and transactional writing.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">Body</p></div>
+          </div>
+          <p class="review">'Coverage' is only permitted in general brand marketing where a universal disclaimer is present.</p>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-004</span><span class="type-badge forbid">Forbid</span></div>
+          <p class="rule-title">Prohibit the use of pricing superlatives and absolute pricing claims.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+            <div><p class="lbl">Targets</p><div class="chiprow"><span class="chip">cheap insurance</span><span class="chip">low priced</span><span class="chip">lowest priced</span><span class="chip">lowest rates</span></div></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-005</span><span class="type-badge forbid">Forbid</span></div>
+          <p class="rule-title">Prohibit language implying Hippo Insurance Services underwrites or provides coverage in Agency/MGA and transactional content.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+            <div><p class="lbl">Targets</p><div class="chiprow">
+              <span class="chip">most accurate coverage</span><span class="chip">accurate coverage</span><span class="chip">enhanced coverage</span>
+              <span class="chip">coverage selected by Hippo</span><span class="chip">we select coverage</span><span class="chip">we offer coverage</span>
+              <span class="chip">we provide coverage</span><span class="chip">coverage we provide</span><span class="chip">exclusive insurance coverage</span>
+              <span class="chip">Hippo exclusive</span><span class="chip">insurance coverage you can't get anywhere else</span>
+              <span class="chip">coverage comparison</span><span class="chip">comparing insurance coverages</span>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-006</span><span class="type-badge restrict">Restrict</span></div>
+          <p class="rule-title">Avoid definitive language and broad, unqualified claims unless substantiated and disclaimed.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">All</p></div>
+            <div><p class="lbl">Targets</p><div class="chiprow"><span class="chip">best</span><span class="chip">always</span><span class="chip">guaranteed</span><span class="chip">never</span></div></div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-head"><span class="rule-id">PHR-007</span><span class="type-badge require">Require</span></div>
+          <p class="rule-title">Use exact carrier-specific rating language and include an effective date for AM Best rating references.</p>
+          <div class="rule-meta">
+            <div><p class="lbl">Scope</p><p class="val">Body</p></div>
+            <div><p class="lbl">Only applies when present</p><div class="chiprow"><span class="chip">AM Best</span></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER SECTIONS -->
+  <section class="dark" id="other-sections">
+    <div class="wrap">
+      <p class="eyebrow">Not yet defined</p>
+      <h2>Links, competitors, other.</h2>
+      <p class="lead">No rules have been extracted for these sections yet in the source policy. Check back here, not somewhere else, once they're added.</p>
+    </div>
+  </section>
+
+  <footer class="bar footer">
+    <div class="wrap">
+      <span class="logo" aria-label="Islands">
+        <svg viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Islands">
+          <path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/>
+          <path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/>
+          <path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/>
+          <path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/>
+          <path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/>
+          <path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/>
+          <path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/>
+          <path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="meta">Rendered from the Hippo Compliance Policy &middot; Prepared by Islands for Hippo</span>
+    </div>
+  </footer>
+
+</body>
+</html>
