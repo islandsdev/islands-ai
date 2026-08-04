@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audience & Messaging Guide | Hippo | Islands</title>
+<meta name="description" content="Hippo's priority audiences, persona deep dive, and messaging themes, compiled for anyone writing Hippo copy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg-off:#f6f5f2;
+    --ink:#0a0a0a; --ink-2:#121212; --card:#161615;
+    --border:#e6e4df; --border-dk:#2a2926;
+    --muted:#6b6862; --muted-dk:#a3a09a;
+    --orange:#e0793d; --orange-2:#ef8b4e; --orange-bg:rgba(224,121,61,0.12);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 48px;}
+  a{color:var(--orange);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin:0 0 18px;}
+  h1{font-size:clamp(40px,6.4vw,76px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;}
+  h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:0 0 20px;}
+  h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:0;}
+  .grad{background:linear-gradient(90deg,var(--orange),var(--orange-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .muted{color:var(--muted);}
+  .dark .muted{color:var(--muted-dk);}
+
+  .bar{background:var(--ink);color:var(--bg);}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;gap:16px;}
+  .logo{color:var(--bg);height:34px;display:flex;align-items:center;flex-shrink:0;}
+  .logo svg{height:34px;width:auto;display:block;}
+  .bar-meta{font-size:14px;color:var(--muted-dk);text-align:right;}
+
+  section{padding:clamp(56px,9vw,108px) 0;}
+  .dark{background:var(--ink);color:var(--bg);}
+  .off{background:var(--bg-off);}
+  .lead{font-size:clamp(18px,2.2vw,21px);max-width:680px;margin:22px 0 0;color:var(--muted);}
+  .dark .lead{color:var(--muted-dk);}
+
+  /* persona cards */
+  .personas{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+  .persona-card{border:1px solid var(--border);border-radius:16px;padding:32px;background:var(--bg);}
+  .persona-card .tag{display:inline-block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;}
+  .persona-meta{list-style:none;margin:18px 0 20px;padding:16px 0 0;border-top:1px solid var(--border);
+    display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;font-size:14px;}
+  .persona-meta li span{display:block;}
+  .persona-meta .k{color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;}
+  .persona-meta .v{font-weight:600;margin-top:2px;}
+  .persona-card p.drivers{font-size:15px;color:var(--muted);margin:0 0 18px;}
+  .why-hippo{padding:16px 18px;border-radius:12px;background:var(--orange-bg);font-size:14.5px;line-height:1.5;}
+  .why-hippo .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+
+  /* quote */
+  blockquote{margin:36px 0 0;padding:0 0 0 28px;border-left:3px solid var(--orange);
+    font-size:clamp(19px,2.4vw,24px);font-weight:500;font-style:italic;line-height:1.55;max-width:820px;}
+
+  /* card grid (messaging principles) */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
+  .card{border:1px solid var(--border);border-radius:16px;padding:32px;background:var(--bg);}
+  .dark .card{background:var(--card);border-color:var(--border-dk);}
+  .card h3{margin:0 0 10px;}
+  .card p{margin:0;color:var(--muted);}
+  .dark .card p{color:var(--muted-dk);}
+
+  /* theme accordions */
+  .themes{margin-top:48px;}
+  details.theme{border:1px solid var(--border);border-radius:16px;padding:0;margin-bottom:16px;background:var(--bg);overflow:hidden;}
+  details.theme summary{list-style:none;cursor:pointer;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  details.theme summary::-webkit-details-marker{display:none;}
+  details.theme summary h3{font-size:19px;}
+  details.theme summary .plus{font-size:22px;font-weight:400;color:var(--orange);flex-shrink:0;transition:transform .15s ease;}
+  details.theme[open] summary .plus{transform:rotate(45deg);}
+  .theme-body{padding:0 32px 32px;}
+  .theme-body .meaning{font-style:italic;color:var(--muted);margin:0 0 22px;max-width:760px;}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid var(--border);}
+  .why-grid .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .why-grid p{margin:0;font-size:15px;color:var(--ink);}
+  .sample-lines{list-style:none;margin:0;padding:0;}
+  .sample-lines li{padding:12px 0 12px 20px;border-left:2px solid var(--orange-bg);font-style:italic;font-size:16px;margin-bottom:4px;}
+
+  /* pills */
+  .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+  .pill{display:inline-block;padding:8px 16px;border-radius:999px;background:var(--orange-bg);color:var(--ink);font-size:14px;font-weight:600;}
+  .pillgroup{margin-bottom:28px;}
+  .pillgroup .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+
+  /* companion docs */
+  .docrow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px;}
+  .doc{border:1px solid var(--border-dk);border-radius:14px;padding:22px 24px;background:var(--ink-2);}
+  .doc .lbl{font-size:12px;color:var(--muted-dk);margin-bottom:6px;}
+  .doc .name{font-size:16px;font-weight:700;}
+
+  .footer{padding:44px 0;}
+  .footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .footer .logo{height:26px;} .footer .logo svg{height:26px;}
+  .footer .meta{font-size:14px;color:var(--muted-dk);}
+
+  @media(max-width:900px){
+    .personas{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+    .docrow{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;gap:16px;}
+  }
+  @media(max-width:760px){
+    .wrap{padding:0 24px;}
+    .persona-meta{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <div class="wrap">
+      <span class="logo" aria-label="Islands">
+        <svg viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Islands">
+          <path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/>
+          <path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/>
+          <path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/>
+          <path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/>
+          <path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/>
+          <path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/>
+          <path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/>
+          <path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="bar-meta">Hippo &middot; Audience &amp; Messaging Guide</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="dark">
+    <div class="wrap">
+      <p class="eyebrow">Companion to the Voice &amp; Tone Guide</p>
+      <h1>Know who you're talking to.<br><span class="grad">Know what to say to them.</span></h1>
+      <p class="lead">The Voice &amp; Tone Guide tells you how Hippo sounds. This guide tells you who you're talking to and what to actually say to them. Pick the persona closest to your assignment, lead with their "Why Hippo?" framing, and pull key themes and messaging principles from the matching section.</p>
+    </div>
+  </section>
+
+  <!-- PRIORITY AUDIENCES -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Priority audiences</p>
+      <h2>Three homeowners, three ways in.</h2>
+      <div class="personas">
+
+        <div class="persona-card">
+          <span class="tag">Priority audience</span>
+          <h3>Maximizer Mike / Max</h3>
+          <ul class="persona-meta">
+            <li><span class="k">Market size</span><span class="v">16% (11.5M homes)</span></li>
+            <li><span class="k">Median age</span><span class="v">41</span></li>
+            <li><span class="k">Median HHI</span><span class="v">$119K</span></li>
+            <li><span class="k">Homeowner status</span><span class="v">75% first-time</span></li>
+            <li><span class="k">Tech comfort</span><span class="v">Tech-savvy</span></li>
+          </ul>
+          <p class="drivers">Supporting large households with kids and elders. Actively researching ways to protect and add value to the home. Confident about maintenance and has the resources to do it.</p>
+          <div class="why-hippo"><span class="lbl">Why Hippo?</span>Your partner in continuing to add value to your investment through proactive home protection and home care.</div>
+        </div>
+
+        <div class="persona-card">
+          <span class="tag">Priority audience</span>
+          <h3>Overextended Olivia</h3>
+          <ul class="persona-meta">
+            <li><span class="k">Market size</span><span class="v">28% (20.2M homes)</span></li>
+            <li><span class="k">Median age</span><span class="v">44</span></li>
+            <li><span class="k">Median HHI</span><span class="v">$115K</span></li>
+            <li><span class="k">Homeowner status</span><span class="v">Mostly first-time</span></li>
+            <li><span class="k">Tech comfort</span><span class="v">Tech-savvy</span></li>
+          </ul>
+          <p class="drivers">Needs space for a growing family. Juggling competing demands from work, kids, and upkeep. Wants to invest in maintenance but struggles to keep up and doesn't always have the budget.</p>
+          <div class="why-hippo"><span class="lbl">Why Hippo?</span>Your partner in protecting and caring for your home, with proactive protection that helps you before something happens.</div>
+        </div>
+
+        <div class="persona-card">
+          <span class="tag">Secondary audience</span>
+          <h3>Stable Samantha</h3>
+          <ul class="persona-meta">
+            <li><span class="k">Market size</span><span class="v">24% (17.3M homes)</span></li>
+            <li><span class="k">Median age</span><span class="v">63</span></li>
+            <li><span class="k">Median HHI</span><span class="v">$93K</span></li>
+            <li><span class="k">Homeowner status</span><span class="v">Owned 20+ years</span></li>
+            <li><span class="k">Tech comfort</span><span class="v">Average (64% smart home)</span></li>
+          </ul>
+          <p class="drivers">Sees home through a multigenerational lens. Values stability, wealth-building, and freedom. Confident in maintenance but focused on minor upgrades, not major remodels. Relies on trusted agents and brokers for decisions.</p>
+          <div class="why-hippo"><span class="lbl">Why Hippo?</span>Your partner in preserving and building the value of your home for the next generation through proactive protection.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DEEP DIVE -->
+  <section class="dark">
+    <div class="wrap">
+      <p class="eyebrow">Deep dive</p>
+      <h2>Maximizer Mike, in his own words.</h2>
+      <blockquote>"I'm 41 years old, and I make a comfortable living, probably a little higher than most homeowners. I'm tech-savvy and spend quite a bit of time online... I consider our home our most important investment, so I make an effort to research and educate myself on how best to take care of it. I'm not the kind of person who delays repairs or improvements... The more I do, the more confident I become as a homeowner."</blockquote>
+    </div>
+  </section>
+
+  <!-- MESSAGING PRINCIPLES -->
+  <section class="off">
+    <div class="wrap">
+      <p class="eyebrow">Messaging principles &middot; the how</p>
+      <h2>How to write for Mike.</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Be active and actionable</h3>
+          <p>Meet his readiness with language that feels active and messages that are actionable.</p>
+        </div>
+        <div class="card">
+          <h3>Make it feel effortless</h3>
+          <p>Lean into Hippo's tech-native identity and the ease and convenience of the platform, since Mike expects seamless digital experiences.</p>
+        </div>
+        <div class="card">
+          <h3>Frame the long-term value</h3>
+          <p>Show how Hippo protects a home's value long-term and boosts ROI. Proactive protection and tailored policy options both support this.</p>
+        </div>
+        <div class="card">
+          <h3>Empower with education</h3>
+          <p>Be the partner who boosts his confidence with educational content and resources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY THEMES -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Key themes &middot; the what</p>
+      <h2>Five themes to draw from.</h2>
+      <p class="lead muted">Internal guidelines for crafting copy, not lines to publish verbatim.</p>
+
+      <div class="themes">
+
+        <details class="theme" open>
+          <summary><h3>Ahead of every risk, behind every home</h3><span class="plus">+</span></summary>
+          <div class="theme-body">
+            <p class="meaning">Hippo gives people the information and resources to prevent incidents and avoid claims before they happen.</p>
+            <div class="why-grid">
+              <div><p class="lbl">Why it matters to Mike</p><p>He isn't a procrastinator. He values being an informed, hands-on homeowner and is actively looking to improve and protect his home.</p></div>
+              <div><p class="lbl">Why it matters to Hippo</p><p>This is our core differentiator and master value prop for choosing Hippo over other insurance options.</p></div>
+            </div>
+            <ul class="sample-lines">
+              <li>Fewer incidents. Fewer claims. Less worry. Protection that's designed to be proactive, so you can feel confidently in charge.</li>
+              <li>Clean up after a kitchen remodel. Not after water damage.</li>
+              <li>Others wait for claims. We're in the business of preventing them.</li>
+              <li>A dream home means improvements instead of fixes.</li>
+              <li>Protect your home. And your peace of mind.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="theme">
+          <summary><h3>Smarter approach</h3><span class="plus">+</span></summary>
+          <div class="theme-body">
+            <p class="meaning">Hippo is a tech-native platform led by insurance experts, offering fast, accurate quotes and add-ons beyond the standard policy, the opposite of "set it and forget it" insurance.</p>
+            <div class="why-grid">
+              <div><p class="lbl">Why it matters to Mike</p><p>He uses tech across every part of his life and expects, and pays for, seamless experiences.</p></div>
+              <div><p class="lbl">Why it matters to Hippo</p><p>Distances Hippo from the slow, legacy-monolith perception of insurance and positions the brand as agile and tech-enabled.</p></div>
+            </div>
+            <ul class="sample-lines">
+              <li>Home insurance that's built for today's homeowners. Policy options from top carriers in 60 seconds or less.</li>
+              <li>Get quotes from 70+ carriers, instantly.</li>
+              <li>Your partner for everything home insurance.</li>
+              <li>Built by insurance experts. For today's homeowners.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="theme">
+          <summary><h3>Your home, your way</h3><span class="plus">+</span></summary>
+          <div class="theme-body">
+            <p class="meaning">People can choose the policy that works best for them, including add-ons, based on their unique needs.</p>
+            <div class="why-grid">
+              <div><p class="lbl">Why it matters to Mike</p><p>He's a confident homeowner who wants choices and control, and has the resources for add-ons.</p></div>
+              <div><p class="lbl">Why it matters to Hippo</p><p>Lets us speak to different homeowner situations and emphasize the breadth of Hippo's offerings.</p></div>
+            </div>
+            <ul class="sample-lines">
+              <li>Insurance options for every kind of home. From a one-bedroom bachelor pad to a six-bedroom family home, find the policy that fits your needs.</li>
+              <li>Your home, your way. Instantly get home insurance quotes from over 70 carriers, tailored to you.</li>
+              <li>We deliver the options. You choose your policy.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="theme">
+          <summary><h3>Protecting your home's value, now and in the future</h3><span class="plus">+</span></summary>
+          <div class="theme-body">
+            <p class="meaning">Investing in home insurance and home care with Hippo is a long-term play in preserving the value of the home.</p>
+            <div class="why-grid">
+              <div><p class="lbl">Why it matters to Mike</p><p>He sees his home as his most valuable asset and is looking for the best ways to protect that investment.</p></div>
+              <div><p class="lbl">Why it matters to Hippo</p><p>Stresses the big-picture value of home insurance as a positive ROI driver.</p></div>
+            </div>
+            <ul class="sample-lines">
+              <li>Make sure your most valuable asset stays that way.</li>
+              <li>Protect your home today. Increase its value tomorrow.</li>
+              <li>We're playing the long game. Protect the value of your home long after you've paid off your mortgage.</li>
+              <li>From the first time to a lifetime.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="theme">
+          <summary><h3>A partner for first-time homeowners</h3><span class="plus">+</span></summary>
+          <div class="theme-body">
+            <p class="meaning">The resources and insurance a first-time homeowner needs to protect their investment.</p>
+            <div class="why-grid">
+              <div><p class="lbl">Why it matters to Mike</p><p>He's likely a first-time homeowner (75% of this persona is) but isn't lacking in confidence. He wants resources, tools, and a partner.</p></div>
+              <div><p class="lbl">Why it matters to Hippo</p><p>Speaks directly to the first-time homeowner demo and wins their trust.</p></div>
+            </div>
+            <ul class="sample-lines">
+              <li>First-time homeowners choose Hippo. Educational resources. Seasonal home maintenance checklists. Insurance experts. We have you covered.</li>
+              <li>First home jitters shouldn't be about insurance.</li>
+              <li>New homeowner? No problem.</li>
+              <li>First time homeowners, meet lifelong expertise.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE SUMMARY -->
+  <section class="off">
+    <div class="wrap">
+      <p class="eyebrow">Voice summary for this persona</p>
+      <h2>Maximizer Mike at a glance.</h2>
+      <div class="pillgroup">
+        <p class="lbl">Voice traits</p>
+        <div class="pillrow">
+          <span class="pill">Intentional</span>
+          <span class="pill">Lively</span>
+          <span class="pill">Knowledgeable</span>
+          <span class="pill">Approachable</span>
+        </div>
+      </div>
+      <div class="pillgroup">
+        <p class="lbl">Pillars</p>
+        <div class="pillrow">
+          <span class="pill">Preparedness</span>
+          <span class="pill">Protection</span>
+          <span class="pill">Home ownership</span>
+        </div>
+      </div>
+      <p class="muted" style="max-width:760px;">Some of these messages extend to other audiences with light tweaks. Overextended Olivia and Stable Samantha use the same pillar and theme system with different emphasis: more reassurance and simplicity for Olivia, more legacy and multigenerational framing for Samantha. Build persona-specific message guides the same way as this section when the account calls for it.</p>
+    </div>
+  </section>
+
+  <!-- COMPANION DOCS -->
+  <section class="dark">
+    <div class="wrap">
+      <p class="eyebrow">Keep this handy alongside</p>
+      <h2>The rest of the Hippo copy system.</h2>
+      <div class="docrow">
+        <div class="doc"><p class="lbl">Companion document</p><p class="name">Voice &amp; Tone Guide</p></div>
+        <div class="doc"><p class="lbl">Companion document</p><p class="name">Compliance &amp; Legal Writing Guide</p></div>
+        <div class="doc"><p class="lbl">Companion document</p><p class="name">Copy Swipe File</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bar footer">
+    <div class="wrap">
+      <span class="logo" aria-label="Islands">
+        <svg viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Islands">
+          <path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/>
+          <path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/>
+          <path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/>
+          <path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/>
+          <path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/>
+          <path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/>
+          <path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/>
+          <path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="meta">Compiled July 2026 &middot; Source: Hippo Messaging Guide (Nov 2025) &middot; Prepared by Islands for Hippo</span>
+    </div>
+  </footer>
+
+</body>
+</html>
