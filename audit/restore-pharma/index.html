@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restore Pharmaceuticals AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#121212;
+    --card:#161615;
+    --border:#2a2926;
+    --white:#f6f5f2;
+    --muted:#a3a09a;
+    --orange:#e0793d;
+    --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12);
+    --red:#e8664f;
+    --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a;
+    --amber-bg:rgba(224,176,74,0.12);
+    --green:#7fb88f;
+    --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--white);
+    font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+
+  /* ray background */
+  .rays{
+    background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px);
+    background-position:right;
+  }
+
+  /* top bar */
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+
+  /* hero */
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:42px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:640px;}
+  .method{
+    margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border);
+    border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;
+  }
+
+  /* white stats band */
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+
+  /* score band */
+  .scoreband{
+    padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  }
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%);
+    opacity:0.6;
+  }
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:440px;}
+
+  /* section */
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+
+  /* cards */
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+
+  /* chart */
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+
+  /* blog titles */
+  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+
+  /* data cta */
+  .databox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:30px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .databox h3{font-size:21px; margin-bottom:8px;}
+  .databox p{font-size:13.5px; color:var(--muted); max-width:420px; margin:0;}
+  .btn{display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; white-space:nowrap;}
+  .btn.orange{background:var(--orange); color:#171104;}
+  .btn.outline{border:1px solid var(--orange-soft); color:var(--orange-soft);}
+
+  /* proof strip */
+  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+
+  /* closing pitch */
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+
+  /* light section variant */
+  .lsection{background:#ffffff; color:#15140f;}
+  .lsection h2, .lsection h3{color:#15140f;}
+  .lsection .lede{color:#55524a;}
+  .lsection .muted{color:#7a766c;}
+
+  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection.scoreband .num{color:#c8622a;}
+  .lsection.scoreband .num span{color:#7a766c;}
+  .lsection.scoreband p.desc{color:#3a3830;}
+  .lsection.scoreband .gaugelabels{color:#7a766c;}
+  .lsection.scoreband .gauge .marker{background:#15140f;}
+
+  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .barrow .name{color:#2c2a24;}
+  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+  .lsection .barrow .pct{color:#7a766c;}
+  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+
+  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+  .lsection .blogtitle{color:#15140f;}
+
+  .lsection .databox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .databox h3{color:#15140f;}
+  .lsection .databox p{color:#55524a;}
+
+  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .proofstats .n{color:#15140f;}
+  .lsection .proofstats .l{color:#6f6b60;}
+  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+  .lsection .proofcard .who{color:#7a766c;}
+
+  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .card .label{color:#7a766c;}
+  .lsection .card .stat{color:#15140f;}
+  .lsection .card .body{color:#3a3830;}
+  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+  .lsection .quote b{color:#2c2a24;}
+  .lsection .card .divider{background:#e3ded2;}
+  .lsection .card .why{color:#3a3830;}
+  .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <a href="https://islandshq.xyz" target="_blank" rel="noopener" style="display:flex;align-items:center;color:var(--white);text-decoration:none;">
+        <svg width="96" height="30" viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Islands"><g><path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/><path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/><path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/><path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/><path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/><path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/><path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/><path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/></g></svg>
+      </a>
+      <div class="context-left">AI Visibility Audit &middot; Restore Pharmaceuticals &middot; August 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Search + AI Visibility Audit</div>
+      <h1>The new site is genuinely built for AI.<br>AI still only finds you if the patient <span class="hl">already knows your name</span>.</h1>
+      <p class="sub">Restore serves an llms.txt file and an agents.md file, which is more AI readiness than almost any Canadian pharmacy we audit. So we tested whether it is working. We asked five AI engines sixteen real patient and prescriber questions. Restore was cited with a link seven times, and all seven came from questions that already contained the word "Restore." On the questions a patient in pain actually asks, the ones with no brand name in them, Restore was absent from every single answer.</p>
+      <div class="method">Tested 16 real patient and prescriber questions across ChatGPT, Perplexity, Google AI Overviews, Gemini and Claude. Checked 45 related Google searches with measured monthly search volume. Crawled restorepharmaceuticals.ca and ran a branded search entity check. Snapshot taken August 4, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Search is moving from Google to AI</h2>
+      <p class="lede">SEO alone no longer wins. As search shifts to AI, the businesses that get cited, recommended, and chosen are the ones that treat AI visibility as its own discipline, not an afterthought.</p>
+      <div class="statcols">
+        <div>
+          <div class="num">76.4%</div>
+          <div class="lbl">of businesses struggle to show up in AI search</div>
+          <div class="src">SearchScore, 2026</div>
+        </div>
+        <div>
+          <div class="num">5&times;</div>
+          <div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div>
+          <div class="src">Exposure Ninja, 2026</div>
+        </div>
+        <div>
+          <div class="num">357%</div>
+          <div class="lbl">growth in referral visits generated by AI platforms</div>
+          <div class="src">Similarweb, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband lsection">
+    <div class="wrap inner">
+      <div class="num">2.6<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">Restore's Overall Search + AI Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:52%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for "can a new patient actually find you," whether they ask Google or ask AI. Averaged across 19 measured signals. Below 3, you do not show up by accident. Someone has to close the gap on purpose.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The lab, the formulations and the site are ready. The visibility is bottom of funnel only.</h2>
+      <p class="lede">Five findings. Restore is winning the answers that existing patients ask, losing every answer a new patient asks, and sitting on clinical proof that no engine can currently quote.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">Getting cited by AI</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 of 40</div>
+          <div class="body">Eight of the sixteen questions we tested carried no brand name, the way a patient in pain would actually phrase it. Across five engines that is forty answers. Restore appeared in none of them. Not cited, not linked, not even named in passing.</div>
+          <div class="quote"><b>"Topical COX-2 inhibitors for targeted arthritis relief"</b> &rarr; AAFP, Arthritis.org, Cleveland Clinic and a rival compounding pharmacy were cited. Restore: absent from all five engines.</div>
+          <div class="quote"><b>"What is a NAPRA accredited lab and why does it matter for prescriptions?"</b> &rarr; NAPRA's own site was cited three times over. Restore, a NAPRA-accredited lab, was absent from all five engines.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">AI is already working for Restore at the very bottom of the funnel and nowhere else. A patient who knows the brand gets a clean answer about refills and insurance. A patient with SI joint pain who has never heard of Restore never hears the name at all, which leaves every new patient to be found the hard way: one fax, one clinic, one phone call at a time.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Our keyword gap and writing agents took Blanka from 20 to 132 AI answer appearances in 90 days, a 6.6&times; jump, by targeting the exact questions buyers ask. Same engine, pointed at chronic pain and sports recovery questions instead.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Showing up in Google</span><span class="pill behind">Behind</span></div>
+          <div class="stat">1 of 45</div>
+          <div class="body">Of 45 Google searches tested, Restore holds a position on exactly one: "Restore Pharmaceuticals refill," at rank 4. On three others a named competitor is placed and Restore is nowhere in the top 30.</div>
+          <div class="quote"><b>"prescription pain cream Canada"</b> &rarr; Voltaren owns Google's AI answer box. Restore: not in the top 30. This is a decision-stage search by a Canadian patient ready to buy.</div>
+          <div class="quote"><b>"Restore Pharmaceuticals vs Biofreeze"</b> &rarr; Biofreeze owns Google's AI answer box on the comparison that has your own brand name in it. Restore: not in the top 30.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">The single search Restore wins is the one only existing patients run. Meanwhile an over-the-counter menthol rub is answering the head-to-head question against a prescription-grade formulation, unopposed. A physician or patient doing that comparison is being told your competitor's version of the story.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">GrowTal had no content authority in their category. Ninety days later: 318 keywords ranking in the top 10 and +15% organic traffic by day 30, using the same strategy and keyword gap agents we would point at Canadian topical pain.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Proof in the wrong format</span><span class="pill behind">Behind</span></div>
+          <div class="stat">41 reviews, 4 posts</div>
+          <div class="body">Your 41 Google reviews name the exact conditions the AI engines get asked about: SI joint, hip, Achilles tendon, post-stroke neuropathy, arthritic knees. The published library that an engine can actually cite is four blog entries totalling 1,599 words, and two of those are a news index and a legal safety notice.</div>
+          <div class="quote">A patient review on your homepage reads <b>"My SI joint and hip are finally pain free"</b> after using Lidocaine and Diclofenac patches. The AI prompt <b>"Best topical patches for SI joint and hip pain"</b> was answered with Biofreeze. Restore: absent from all five engines.</div>
+          <div class="quote">The one substantial article, 1,341 words, sits behind a promo module partway down the homepage rather than in the navigation, and its URL says <b>diclofenac-cream-vs-oral-nsaids</b> while its headline is about compounding pharmacies.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">Restore has the clinical outcomes Biofreeze and Rub A535 legally cannot claim, and they are sitting in a review widget that no engine will quote as evidence. The proof is real and already paid for. It just is not in a form anything can lift.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Our Aha agent exists for exactly this: mining a company's own outcomes, formulations and patient wins for the angles worth publishing, then the writing and fact-check agents turn them into pages an engine will cite, in Restore's own clinical voice.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Who AI thinks you are</span><span class="pill behind">Behind</span></div>
+          <div class="stat">4 leaders, 0 readable</div>
+          <div class="body">The homepage says Restore was formed with over 50 years of combined experience by Canadian pharmaceutical leaders. All four appear as photographs with no crawlable bio text, no Person markup and no links out. Off site there is no Wikipedia entry, no Wikidata record, no Crunchbase profile and no press section.</div>
+          <div class="quote">Asked <b>"How to book a consultation with Restore Pharmaceuticals,"</b> the engines pulled from Restore Health Consulting, RestoreHealthROC and RestoreFM. Asked whether Restore is trusted by professional athletes, the cited sources included a funeral home and two Instagram accounts.</div>
+          <div class="quote">Two quick fixes we found while crawling: the pharmacy phone number appears only inside a homepage FAQ accordion, so both the crawl and Google's knowledge graph missed it, and the footer's Instagram and TikTok links still point at Shopify's own accounts rather than Restore's.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">AI cannot reliably tell Restore apart from other businesses called Restore, so a prescriber checking you out mid-decision may get someone else's answer. Your strongest trust asset, a named pharmacist and a named physician behind the formulations, is invisible to the systems now doing the recommending.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Entity work runs alongside the content: named author bylines on every clinical post, Person and Organization markup, a consistent name, address and phone across listings, and the structured records AI models read from. Our backlink agent then builds the off-site authority that makes those records stick.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">The plumbing is built, and empty</span><span class="pill ahead">Ahead, but unused</span></div>
+          <div class="stat">5/5 ready, 0% cited</div>
+          <div class="body">Restore scores 5 out of 5 on AI crawler readiness, serving both an llms.txt and an agents.md file, 5 out of 5 on entity clarity, and 4 out of 5 on extractability and on trust signals. Genuinely strong work. ChatGPT, Google AI Overviews and Gemini still cited Restore zero times out of sixteen questions each.</div>
+          <div class="quote">The homepage has a real question and answer section, "Your Questions, Answered," with no FAQ markup on it. That markup is the single thing AI engines lift answers from most often, and it is a same-day fix.</div>
+          <div class="quote">You built the front door for AI crawlers. There are 1,599 words behind it.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">This is the cheapest gap on the page to close, because Restore is not starting from a technical deficit. It is starting from an empty library. The infrastructure is already waiting, so every week without publishing is a week the plumbing sits idle while Voltaren and PubMed answer your patients' questions.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We connect the stack on day 1, put the first content in review by day 3, and publish on a daily cadence from day 5. Our scoring agent grades structure, schema and internal links on every draft before it ships, so the readiness you already built starts earning citations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Cited Restore With a Link</div>
+        <p class="lede" style="margin-bottom:22px;">Out of the 16 patient and prescriber questions we tested per engine. Every citation shown here came from a question that already named Restore.</p>
+        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:25%;"></div></div><span class="pct">25%</span></div>
+        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="chartnote">One separate issue worth naming, because it works against every citation you do earn: the mobile site scores 54 out of 100 on Google's speed test, with the main content taking 7.0 seconds to appear and the page not fully usable for 14 seconds. That is a build fix rather than a content fix, but a patient in pain will not wait 7 seconds.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">Built from the exact gaps this audit found</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Topical Anesthetic for Skin: What Prescription Strength Actually Changes</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Best Patches for SI Joint and Hip Pain: A Pharmacist's Guide</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Prescription Pain Cream in Canada: How to Get One Without the Wait</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">COX-2 Inhibitor Side Effects: Why Topical Celecoxib Behaves Differently</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">What a NAPRA-Accredited Lab Actually Means for Your Prescription</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">This is the same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6&times;</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4&times;</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Restore</div>
+      <h2>AI is already answering the questions your patients ask.<br>Right now the answer isn't <span class="hl">Restore</span>.</h2>
+      <p>Every question in this audit is a patient in pain or a physician deciding what to prescribe. Restore wins those answers today only when the person already knows the name, which means every new patient still has to be found by hand. The 50 years of experience, the NAPRA-accredited lab and the outcomes sitting in 41 patient reviews are all real. They are simply not written anywhere Google or an AI engine can quote them. That is the entire gap this audit measured, and it is the most fixable one on the list.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener">Book a free consultation &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Restore Pharmaceuticals, August 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
