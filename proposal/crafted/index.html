@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crafted Proposal | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --bg:#0a0a0a;
+ --bg-2:#121212;
+ --card:#161615;
+ --border:#2a2926;
+ --white:#f6f5f2;
+ --muted:#a3a09a;
+ --orange:#e0793d;
+ --orange-soft:#f0a56a;
+ --orange-bg:rgba(224,121,61,0.12);
+ --red:#e8664f;
+ --red-bg:rgba(232,102,79,0.12);
+ --amber:#e0b04a;
+ --amber-bg:rgba(224,176,74,0.12);
+ --green:#7fb88f;
+ --green-bg:rgba(127,184,143,0.12);
+ }
+ *{box-sizing:border-box;}
+ html{scroll-behavior:smooth;}
+ body{
+ margin:0; background:var(--bg); color:var(--white);
+ font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
+ }
+ .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+ h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+ .muted{color:var(--muted);}
+ a{color:var(--orange-soft); text-decoration:none;}
+ .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+ .eyebrow.onwhite{color:var(--orange);}
+
+ /* ray background */
+ .rays{
+ background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px);
+ background-position:right;
+ }
+
+ /* top bar */
+ .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+ .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+ .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+ .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+
+ /* hero */
+ .hero{padding:80px 0 44px; background:var(--bg);}
+ .hero h1{font-size:42px; line-height:1.2;}
+ .hero h1 .hl{color:var(--orange-soft);}
+ .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:640px;}
+ .method{
+ margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border);
+ border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;
+ }
+
+ /* white stats band */
+ .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+ .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+ .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+ .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+ @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+ .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+ .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+ .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+
+ /* score band */
+ .scoreband{
+ padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+ }
+ .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+ .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+ .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+ .scoreband .scoretext{flex:1; min-width:260px;}
+ .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+ background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%);
+ opacity:0.6;
+ }
+ .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+ .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+ .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:440px;}
+
+ /* section */
+ .section{padding:64px 0; background:var(--bg);}
+ .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+ .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+
+ /* cards */
+ .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+ @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+ .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+ .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+ .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+ .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+ .pill.behind{background:var(--red-bg); color:var(--red);}
+ .pill.ahead{background:var(--green-bg); color:var(--green);}
+ .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+ .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+ .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+ .quote b{color:#cfccc4; font-weight:600;}
+ .card .divider{height:1px; background:var(--border); margin:14px 0;}
+ .card .why-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+ .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+ .card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+ .card .how{font-size:13px; color:#cfccc4;}
+
+ /* chart */
+ .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+ .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+ .barrow .name{color:#d8d5cd;}
+ .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+ .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+ .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+ .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+
+ /* blog titles */
+ .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+ .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+ .blogrow:last-child{border-bottom:none;}
+ .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+ .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+
+ /* data cta */
+ .databox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:30px;
+ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+ .databox h3{font-size:21px; margin-bottom:8px;}
+ .databox p{font-size:13.5px; color:var(--muted); max-width:420px; margin:0;}
+ .btn{display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; white-space:nowrap;}
+ .btn.orange{background:var(--orange); color:#171104;}
+ .btn.outline{border:1px solid var(--orange-soft); color:var(--orange-soft);}
+
+ /* proof strip */
+ .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+ @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+ .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+ .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+ .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+ .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+ .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+ .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+ .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+
+ /* closing pitch */
+ .pitch{padding:72px 0; background:var(--bg);}
+ .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+ .pitch h2 .hl{color:var(--orange-soft);}
+ .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+
+ footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+ footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+ footer .fnote{font-size:11.5px; color:var(--muted);}
+
+ /* light section variant */
+ .lsection{background:#ffffff; color:#15140f;}
+ .lsection h2, .lsection h3{color:#15140f;}
+ .lsection .lede{color:#55524a;}
+ .lsection .muted{color:#7a766c;}
+
+ .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+ .lsection.scoreband .num{color:#c8622a;}
+ .lsection.scoreband .num span{color:#7a766c;}
+ .lsection.scoreband p.desc{color:#3a3830;}
+ .lsection.scoreband .gaugelabels{color:#7a766c;}
+ .lsection.scoreband .gauge .marker{background:#15140f;}
+
+ .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .barrow .name{color:#2c2a24;}
+ .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+ .lsection .barrow .pct{color:#7a766c;}
+ .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+
+ .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+ .lsection .blogtitle{color:#15140f;}
+
+ .lsection .databox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .databox h3{color:#15140f;}
+ .lsection .databox p{color:#55524a;}
+
+ .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+ .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .proofstats .n{color:#15140f;}
+ .lsection .proofstats .l{color:#6f6b60;}
+ .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+ .lsection .proofcard .who{color:#7a766c;}
+
+ .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .card .label{color:#7a766c;}
+ .lsection .card .stat{color:#15140f;}
+ .lsection .card .body{color:#3a3830;}
+ .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+ .lsection .quote b{color:#2c2a24;}
+ .lsection .card .divider{background:#e3ded2;}
+ .lsection .card .why{color:#3a3830;}
+ .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+ <div class="topbar">
+ <div class="wrap">
+ <div class="context-right">Islands x Crafted</div>
+ <div class="context-left">Proposal - August 2026</div>
+ </div>
+ </div>
+
+ <div class="hero rays">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:18px;">Proposal</div>
+ <h1>Your next client isn't searching "Crafted."<br>They're asking AI who should design their launch, and it's <span class="hl">naming someone else</span>.</h1>
+ <p class="sub">On our call you said none of this would be lit up yet, no AEO work, no blog, and you were right. Here is what that costs, in numbers: across every buyer question that does not contain the word "Crafted," you are absent from all five AI engines and from the top 30 of Google. Those unbranded questions are exactly where a founder who has never heard of you becomes a client, and right now they are going to Superside and Designjoy instead.</p>
+ <div class="method">We tested 16 real buyer prompts across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related Google searches, and crawled the live site. Snapshot taken August 5, 2026. Every number below traces back to a public, repeatable test.</div>
+ </div>
+ </div>
+
+ <div class="band-white">
+ <div class="wrap">
+ <div class="eyebrow onwhite">The Shift</div>
+ <h2>Search is moving from Google to AI</h2>
+ <p class="lede">SEO alone no longer wins. As search shifts to AI, the businesses that get cited, recommended, and chosen are the ones that treat AI visibility as its own discipline, not an afterthought.</p>
+ <div class="statcols">
+ <div>
+ <div class="num">76.4%</div>
+ <div class="lbl">of businesses struggle to show up in AI search</div>
+ <div class="src">SearchScore, 2026</div>
+ </div>
+ <div>
+ <div class="num">5×</div>
+ <div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div>
+ <div class="src">Exposure Ninja, 2026</div>
+ </div>
+ <div>
+ <div class="num">357%</div>
+ <div class="lbl">growth in referral visits generated by AI platforms</div>
+ <div class="src">Similarweb, 2026</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="scoreband lsection">
+ <div class="wrap inner">
+ <div class="num">2.3<span>/5</span></div>
+ <div class="scoretext">
+ <div class="eyebrow">Crafted's Overall AI + Search Visibility Score</div>
+ <div class="gauge"><div class="marker" style="left:46%;"></div></div>
+ <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+ <p class="desc">One grade for "can a buyer actually find you," whether they ask Google or ask AI. The score is dragged down almost entirely by unbranded discovery: your own name is well covered, everything else is not.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+ <h2>You own your name. You do not yet own the questions that bring in new clients.</h2>
+ <p class="lede">Four findings, all pointing the same way: Crafted shows up when a buyer already knows to ask for it, and disappears the moment they describe the work instead.</p>
+
+ <div class="cards">
+ <div class="card">
+ <div class="top"><span class="label">When AI is asked without your name</span><span class="pill behind">Behind</span></div>
+ <div class="stat">0 of 9</div>
+ <div class="body">Unbranded buyer prompts where any of the five AI engines named Crafted. When someone describes the job instead of typing "Crafted," you are absent from ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, every time.</div>
+ <div class="quote"><b>"Best agencies for fast startup branding"</b> → none of the five engines named Crafted.</div>
+ <div class="quote"><b>"Cost of a full brand identity for an AI startup"</b> → absent from all five engines.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">These are the moments a new client is created: a founder who has the budget and the need but has never heard of you. Right now every one of them is being handed to a competitor before you enter the conversation.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">Our keyword-gap and writing agents took Blanka from 20 to 132 AI-answer appearances in 90 days, a 6.6× jump, by answering the exact questions buyers ask. Same engine, pointed at "branding for AI startups" questions.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">When buyers search Google without your name</span><span class="pill behind">Behind</span></div>
+ <div class="stat">0 of 41</div>
+ <div class="body">Unbranded Google searches where Crafted appears anywhere in the top 30. The only search you win is your own name ("Crafted.so turnaround time"). For everything a buyer types when they do not know the brand, you are nowhere.</div>
+ <div class="quote"><b>"Startup branding agency"</b> (590 searches/mo) → Superside ranks. Crafted: not found.</div>
+ <div class="quote"><b>"Creative as a service"</b> → Superside owns Google's AI answer box; on "on-demand design services," Designjoy owns it. Crafted: not found on either.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">Zero unbranded rankings is why inbound stays quiet. There is no organic front door for a founder who just realized they need a launch video and does not yet know who Crafted is.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">GrowTal had no content authority in their category. Ninety days later: 318 keywords ranking in the top 10 and +15% organic traffic by day 30, from the same strategy and keyword-gap agents we would point at your category.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">The content that isn't there</span><span class="pill behind">Behind</span></div>
+ <div class="stat">0 posts</div>
+ <div class="body">No blog, no guides, no comparison pages. The entire site is six pages: home, about, services, contact, privacy, terms. Confirmed by a full crawl and a separate check of Google's index.</div>
+ <div class="quote"><b>You said it yourself:</b> "all of this is red because we haven't done any GEO work." The analysis just puts a number on it.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">With no articles, there is nothing for Google to rank and nothing for ChatGPT or Perplexity to quote on any unbranded question. Your product pages tell AI who you are once someone asks by name; they cannot win a buyer who is only describing the problem.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We train on your real material, sales calls, product notes, customer wins, so posts sound like Crafted, not generic AI output, and ship on an actual schedule instead of never. Every buyer question becomes a page.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">Who AI thinks you are</span><span class="pill behind">Behind</span></div>
+ <div class="stat">No entity</div>
+ <div class="body">Google shows no Knowledge Panel for Crafted, there is no Crunchbase profile, and no named founder or leadership appears in public sources. To a model deciding whether to cite you, you read as a thin, unverified entity.</div>
+ <div class="quote">A weak entity footprint is a big reason engines skip you on unbranded questions: they are not confident enough about who you are to recommend you unprompted.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">AI engines recommend brands they can verify. Without a clear public identity, you can produce great work and still get passed over for a competitor the model simply knows more about.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">Our backlink and research agents build the off-site signals and interlinked, citable content that make a brand a recognized entity, so the engines have a reason to trust you and name you.</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:0;">
+ <div class="wrap">
+ <div class="chartbox">
+ <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Cited Crafted, Across 16 Test Prompts</div>
+ <p class="lede" style="margin-bottom:22px;">Perplexity looks strong here. The catch is underneath the bars.</p>
+ <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:38%;"></div></div><span class="pct">38%</span></div>
+ <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+ <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:12%;"></div></div><span class="pct">12%</span></div>
+ <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:6%;"></div></div><span class="pct">6%</span></div>
+ <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:6%;"></div></div><span class="pct">6%</span></div>
+ <div class="chartnote">Out of 13 times an AI cited Crafted with a link, 12 came from prompts that already contained the word "Crafted." Only one citation came from a prompt that did not name you, and that was your exact tagline. Strip your name out of the question and the citations nearly vanish. The engines can clearly cite you. They just need something unbranded to cite.</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:0;">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+ <h2 style="font-size:26px; margin-bottom:24px;">Built from the exact unbranded gaps this analysis found</h2>
+ <div class="blogbox">
+ <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Startup Branding Agency: How to Pick One That Ships in Days, Not Months</span></div>
+ <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">What a Full Brand Identity Actually Costs for an AI Startup</span></div>
+ <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Creative as a Service: What It Means and When It Beats a Traditional Agency</span></div>
+ <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">How to Get a Product Launch Video Made in One Week</span></div>
+ <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">The Best Design Agencies for AI-Native Startups, Compared</span></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="proof lsection">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+ <h2 style="font-size:26px; margin-bottom:28px;">This is the same engine, already running elsewhere</h2>
+ <div class="proofgrid">
+ <div class="proofcard">
+ <div class="co">Blanka, private-label beauty</div>
+ <div class="proofstats">
+ <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 → 132 in 90 days</div></div>
+ <div><div class="n">+46%</div><div class="l">website traffic<br>15K → 22K/mo</div></div>
+ <div><div class="n">4×</div><div class="l">backlinks earned<br>202 → 804</div></div>
+ </div>
+ <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+ <div class="who">Karli Leitl, COO, Blanka</div>
+ </div>
+ <div class="proofcard">
+ <div class="co">GrowTal, B2B marketplace</div>
+ <div class="proofstats">
+ <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+ <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+ <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+ </div>
+ <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+ <div class="who">Sarah Little, Operations, GrowTal</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:56px;">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">The Proposal</div>
+ <h2 style="font-size:28px; margin-bottom:10px;">Close the unbranded gap, for $2,000 a month</h2>
+ <p class="lede" style="margin-bottom:28px;">One flat monthly fee. No project-by-project scoping, no traditional agency retainer. We connect to your stack, have the first content in review within days, and publish on a schedule from there.</p>
+
+ <div class="databox" style="margin-bottom:20px;">
+ <div>
+ <div style="font-size:46px; font-weight:800; color:#15140f; line-height:1;">$2,000<span style="font-size:18px; color:#7a766c; font-weight:600;"> / month</span></div>
+ <p style="margin-top:12px;">Done-for-you AEO and SEO content, run by our 12 specialized agents and reviewed by our team before anything ships.</p>
+ </div>
+ </div>
+
+ <div class="blogbox">
+ <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Onboarding on your brand voice, ICP, and the unbranded queries this analysis surfaced</span></div>
+ <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Two to three posts a week, written to win AI answers and Google, published for you</span></div>
+ <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Automatic internal linking plus our backlink network, to build the entity and authority signals AI trusts</span></div>
+ <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">Distribution beyond the blog where it fits: Substack, Medium, and a newsletter</span></div>
+ <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Monthly reporting on rankings, citations, and traffic, looped straight back into strategy</span></div>
+ </div>
+
+ <p class="lede" style="margin-top:24px; margin-bottom:0;">We take on three to four new clients a month to keep the first month high-touch, so onboarding stays hands-on. White-labeling the same engine for your own clients' GEO work is a simple add-on whenever you want it.</p>
+ </div>
+ </div>
+
+ <div class="pitch rays">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:14px;">What This Means For Crafted</div>
+ <h2>Buyers are already asking AI who should design their launch. <br>Right now, it is not naming <span class="hl">Crafted</span>.</h2>
+ <p>You have the product, the 50-designer team, and the sub-48-hour turnaround that would win most of these answers on merit. What is missing is the unbranded surface area, the posts, the comparisons, and the entity signals that let AI and Google recommend you to a founder who does not yet know your name. That is the gap this analysis measured, and it is the one thing standing between the work you ship and the pipeline it should be generating.</p>
+ <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener">Book a free consultation →</a>
+ </div>
+ </div>
+
+ <footer>
+ <div class="wrap">
+ <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Crafted, August 2026</div>
+ </div>
+ </footer>
+
+</body>
+</html>
