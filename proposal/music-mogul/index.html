@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Mogul AI Proposal | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#121212;
+    --card:#161615;
+    --border:#2a2926;
+    --white:#f6f5f2;
+    --muted:#a3a09a;
+    --orange:#e0793d;
+    --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12);
+    --red:#e8664f;
+    --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a;
+    --amber-bg:rgba(224,176,74,0.12);
+    --green:#7fb88f;
+    --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--white);
+    font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+
+  /* ray background */
+  .rays{
+    background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px);
+    background-position:right;
+  }
+
+  /* top bar */
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .logo{height:22px; width:auto; color:var(--white);}
+
+  /* hero */
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:42px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:640px;}
+  .method{
+    margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border);
+    border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;
+  }
+
+  /* white stats band */
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+
+  /* score band */
+  .scoreband{
+    padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  }
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%);
+    opacity:0.6;
+  }
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:440px;}
+
+  /* section */
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+
+  /* cards */
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+
+  /* chart */
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+
+  /* blog titles */
+  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+
+  /* data cta */
+  .databox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:30px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .databox h3{font-size:21px; margin-bottom:8px;}
+  .databox p{font-size:13.5px; color:var(--muted); max-width:420px; margin:0;}
+  .btn{display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; white-space:nowrap;}
+  .btn.orange{background:var(--orange); color:#171104;}
+  .btn.outline{border:1px solid var(--orange-soft); color:var(--orange-soft);}
+
+  /* proof strip */
+  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+
+  /* closing pitch */
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+
+  /* light section variant */
+  .lsection{background:#ffffff; color:#15140f;}
+  .lsection h2, .lsection h3{color:#15140f;}
+  .lsection .lede{color:#55524a;}
+  .lsection .muted{color:#7a766c;}
+
+  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection.scoreband .num{color:#c8622a;}
+  .lsection.scoreband .num span{color:#7a766c;}
+  .lsection.scoreband p.desc{color:#3a3830;}
+  .lsection.scoreband .gaugelabels{color:#7a766c;}
+  .lsection.scoreband .gauge .marker{background:#15140f;}
+
+  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .barrow .name{color:#2c2a24;}
+  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+  .lsection .barrow .pct{color:#7a766c;}
+  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+
+  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+  .lsection .blogtitle{color:#15140f;}
+
+  .lsection .databox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .databox h3{color:#15140f;}
+  .lsection .databox p{color:#55524a;}
+
+  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .proofstats .n{color:#15140f;}
+  .lsection .proofstats .l{color:#6f6b60;}
+  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+  .lsection .proofcard .who{color:#7a766c;}
+
+  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .card .label{color:#7a766c;}
+  .lsection .card .stat{color:#15140f;}
+  .lsection .card .body{color:#3a3830;}
+  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+  .lsection .quote b{color:#2c2a24;}
+  .lsection .card .divider{background:#e3ded2;}
+  .lsection .card .why{color:#3a3830;}
+  .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <svg class="logo" width="128" height="40" viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg"><g><g><path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/></g><g><path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/><path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/><path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/><path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/><path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/><path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/><path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/></g></g></svg>
+      <div class="context-left">Music Mogul AI &middot; Proposal August 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Proposal</div>
+      <h1>A new artist just asked AI who can run their music career.<br>It did not name <span class="hl">Music Mogul</span>.</h1>
+      <p class="sub">On our call you opened ChatGPT and asked it the exact question your future customers ask: what should a new artist use to book gigs, market themselves, and manage their career. It did not name Music Mogul. We ran that test across five AI engines and 45 related searches to see how wide the gap really is. When an artist describes what they need without knowing you exist, ChatGPT names you zero times out of sixteen, and Gemini and Perplexity only for a handful of questions. You built the one tool that does booking, marketing, and management together, and the artists searching for exactly that are not hearing about it.</p>
+      <div class="method">We tested 16 real buyer prompts across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related Google searches, and crawled the live site. Snapshot taken August 5, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Search is moving from Google to AI</h2>
+      <p class="lede">SEO alone no longer wins. As search shifts to AI, the businesses that get cited, recommended, and chosen are the ones that treat AI visibility as its own discipline, not an afterthought.</p>
+      <div class="statcols">
+        <div>
+          <div class="num">76.4%</div>
+          <div class="lbl">of businesses struggle to show up in AI search</div>
+          <div class="src">SearchScore, 2026</div>
+        </div>
+        <div>
+          <div class="num">5&times;</div>
+          <div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div>
+          <div class="src">Exposure Ninja, 2026</div>
+        </div>
+        <div>
+          <div class="num">357%</div>
+          <div class="lbl">growth in referral visits generated by AI platforms</div>
+          <div class="src">Similarweb, 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband lsection">
+    <div class="wrap inner">
+      <div class="num">3.0<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">Music Mogul AI's Overall AI + Search Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:60%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for "can a buyer actually find you," whether they ask Google or ask AI. Your technical foundation is genuinely strong. What holds the score back is unbranded reach: the questions new artists ask before they know your name.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The product is one of a kind. The discovery is not there yet.</h2>
+      <p class="lede">Four findings, all pointing the same way: Music Mogul shows up when someone already knows the name, and goes quiet the moment an artist just describes what they need.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">When AI is asked without your name</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 engines</div>
+          <div class="body">The broad questions a new artist asks before they have ever heard of you, "best AI tools for independent musicians," "how do I automate my marketing," "where do I get coaching," return nothing on any of the five engines.</div>
+          <div class="quote"><b>"Best AI tools for independent music artists"</b> &rarr; none of the five engines named Music Mogul.</div>
+          <div class="quote"><b>"How to automate music marketing as an independent artist"</b> &rarr; absent from all five engines.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">This is the search you ran on our call. A new artist asks what to use to book, market, and manage, and the answer never includes the one tool built to do all three. They settle for something that does a third of the job, or give up.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Our keyword-gap and writing agents took Blanka from 20 to 132 AI-answer appearances in 90 days, a 6.6&times; jump, by answering the exact questions buyers ask. Same engine, pointed at the questions artists ask before they know your name.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">The engines you win aren't the ones buyers start with</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0% on ChatGPT</div>
+          <div class="body">Across all 16 buyer prompts, ChatGPT cited Music Mogul zero times. You surface on Gemini (62%) and Perplexity (56%), but barely on Google's AI Overviews and only 19% on Claude. The engines that already know you are not the ones most new artists open first.</div>
+          <div class="quote">Of the 27 times an AI cited you, 22 came from prompts that already said "Music Mogul." The five that did not came only from Gemini and Perplexity.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">ChatGPT is where most people start. Being invisible there on every question, branded or not, means the widest front door to your product is shut.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We publish the comparison and how-to content ChatGPT reaches for when it answers these questions, so the engine that sends the most buyers finally has a reason to name you.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">When artists search Google without your name</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 of 39</div>
+          <div class="body">Unbranded Google searches where Music Mogul lands anywhere in the top 30. Where a Google AI answer box exists, a competitor owns it, not you.</div>
+          <div class="quote"><b>"Gig booking software"</b> &rarr; GigSalad owns Google's AI answer box. <b>"How to get a booking agent"</b> &rarr; Sonicbids owns it. Music Mogul: not found.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">This category is still small and early in Google, which is the opportunity. You said it yourself: you may be first to market, but you will not be the last. The brand that publishes first owns these searches before the copycats arrive.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">GrowTal had no content authority in their category. Ninety days later: 318 keywords ranking in the top 10 and +15% organic traffic by day 30, from the same agents we would point at yours.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">The content that stalled</span><span class="pill behind">Behind</span></div>
+          <div class="stat">3 posts</div>
+          <div class="body">You started a blog and, as you said on the call, held off to handle the technical build first. Three short posts is nearly nothing for Google to rank or for AI to quote.</div>
+          <div class="quote"><b>You said it yourself:</b> "I had started to, and I kind of held off."</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">Twenty years of Nashville booking knowledge is sitting in your podcasts and calls, not on pages AI can read. Every insight you share on Music Industry Architects or a client call is teaching material for the LLMs that currently goes nowhere an engine can find.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We connect to your Fathom calls, podcasts, and interviews, pull the insights, and publish in your voice on a schedule, so it adds nothing to your plate. Exactly the hand-off you asked for.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Cited Music Mogul, Across 16 Test Prompts</div>
+        <p class="lede" style="margin-bottom:22px;">Gemini and Perplexity carry it. ChatGPT is a blank.</p>
+        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:62%;"></div></div><span class="pct">62%</span></div>
+        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:56%;"></div></div><span class="pct">56%</span></div>
+        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:31%;"></div></div><span class="pct">31%</span></div>
+        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+        <div class="chartnote">22 of the 27 citations came from prompts that already named Music Mogul. The five unbranded citations came only from Gemini and Perplexity, never ChatGPT, Google's AI Overviews, or Claude. On the questions a new artist asks before they know you, the engine most of them open first returns nothing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">Built from the exact unbranded gaps this analysis found</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">How to Book More Shows Without a Booking Agent</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">The Best AI Tools for Independent Musicians, Compared</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">How to Automate Your Music Marketing as an Independent Artist</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">How AI Venue Booking Actually Works, and What It Can't Do</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Run Your Music Like a Business: Booking, Marketing, and Management in One System</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">This is the same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6&times;</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4&times;</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:56px;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The Proposal</div>
+      <h2 style="font-size:28px; margin-bottom:10px;">Hand off the content, for $2,000 a month</h2>
+      <p class="lede" style="margin-bottom:28px;">One flat monthly fee, about 10% of what a traditional SEO agency charges. No project scoping, no added work for you. We connect to your stack, publish the first blog within three days, and run it on a schedule from there.</p>
+
+      <div class="databox" style="margin-bottom:20px;">
+        <div>
+          <div style="font-size:46px; font-weight:800; color:#15140f; line-height:1;">$2,000<span style="font-size:18px; color:#7a766c; font-weight:600;"> / month</span></div>
+          <p style="margin-top:12px;">Done-for-you AEO and SEO content, run by our 12 specialized agents and reviewed by our team before anything ships.</p>
+        </div>
+      </div>
+
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Onboarding on your voice, your artists, and the unbranded questions this analysis surfaced</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Two to three posts a week, written to win AI answers and Google, published to your site for you</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Insights pulled straight from your Fathom calls, podcasts, and interviews, so it adds nothing to your plate</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">Automatic internal linking plus our backlink network to build the authority AI trusts</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Monthly reporting on rankings, citations, and traffic, looped straight back into strategy</span></div>
+      </div>
+
+      <p class="lede" style="margin-top:24px; margin-bottom:0;">We take on three to four new clients a month to keep onboarding high-touch, and you mentioned wanting to move quickly. If you want the August spot, let me know and it is yours.</p>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Music Mogul</div>
+      <h2>Artists are already asking AI who can run their career. <br>Right now it is not sending them to <span class="hl">Music Mogul</span>.</h2>
+      <p>You have the one thing the copycats do not: booking, marketing, and management in a single tool, backed by twenty years in Nashville and a human in every loop. What is missing is the unbranded content that teaches the engines you exist, so that when a new artist asks ChatGPT or Claude how to run their career, the answer is you. You said being first to market matters. This is how you own it before the finance-bro clones catch up.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener">Book a free consultation &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Music Mogul AI, August 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
