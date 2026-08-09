@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golf Ranch USA — Visibility Audit &amp; Location Strategy | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --turf-deep:#14301F;
+  --turf:#2E6B43;
+  --fairway:#7FB069;
+  --chalk:#F5F7F2;
+  --sand:#E8E0CE;
+  --flag:#B33F28;
+  --trace:#E0952B;
+  --ink:#1B2620;
+  --ink-soft:#4A5A50;
+  --rule:rgba(20,48,31,.14);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--chalk);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.62;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+h1,h2,h3,h4,.sig{font-family:Oswald,"Arial Narrow",sans-serif;font-weight:600;letter-spacing:.01em;line-height:1.12;text-transform:none}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ---------- masthead ---------- */
+.mast{background:var(--turf-deep);color:var(--chalk);padding:44px 0 0;position:relative;overflow:hidden}
+.mast .wrap{position:relative;z-index:2}
+.brandrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  font-family:Oswald,sans-serif;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--fairway)}
+.mast h1{font-size:clamp(34px,6.4vw,66px);margin:26px 0 10px;color:#fff;font-weight:700;letter-spacing:-.005em}
+.mast .sub{font-size:clamp(17px,2.2vw,21px);color:#C9D8CD;max-width:42ch;margin:0 0 30px}
+
+/* ---------- hero trace ---------- */
+.tracebox{position:relative;margin:0 -28px;padding:0 28px 34px}
+.tracewrap{position:relative;height:210px}
+.tracewrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.trace-path{fill:none;stroke:var(--trace);stroke-width:2.5;stroke-linecap:round;
+  stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 1.9s cubic-bezier(.22,.75,.3,1) .25s forwards}
+.trace-ball{opacity:0;animation:pop .5s ease-out 1.95s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+.ivsbadge{position:absolute;right:0;bottom:26px;text-align:right}
+.ivsbadge .n{font-family:Oswald,sans-serif;font-size:clamp(54px,10vw,96px);font-weight:700;color:#fff;line-height:.86;display:block}
+.ivsbadge .l{font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--trace)}
+.groundline{position:absolute;left:0;right:0;bottom:24px;height:1px;background:rgba(245,247,242,.22)}
+.yardtick{position:absolute;bottom:24px;width:1px;height:9px;background:rgba(245,247,242,.35)}
+.yardtick span{position:absolute;top:13px;left:50%;transform:translateX(-50%);
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:rgba(245,247,242,.5);white-space:nowrap}
+
+/* ---------- section scaffolding ---------- */
+main{padding:0 0 90px}
+section{padding:58px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.marker{font-family:Oswald,sans-serif;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--turf);display:flex;align-items:center;gap:12px;margin:0 0 14px}
+.marker::after{content:"";flex:1;height:1px;background:var(--rule)}
+h2{font-size:clamp(26px,4vw,40px);margin:0 0 16px;color:var(--turf-deep);max-width:24ch}
+h3{font-size:20px;margin:32px 0 8px;color:var(--turf-deep)}
+h4{font-size:15px;margin:22px 0 6px;color:var(--turf);letter-spacing:.04em}
+p{margin:0 0 16px;max-width:74ch}
+.lede{font-size:20px;line-height:1.55;color:var(--ink-soft);max-width:66ch}
+strong{font-weight:600;color:var(--turf-deep)}
+ul{margin:0 0 18px;padding-left:20px;max-width:74ch}
+li{margin:0 0 8px}
+a{color:var(--turf);text-decoration-thickness:1px;text-underline-offset:2px}
+
+/* ---------- yardage chart (signature) ---------- */
+.yard{margin:26px 0 8px}
+.yard-scale{position:relative;height:22px;margin:0 0 6px 190px;border-bottom:1px solid var(--rule)}
+.yard-scale i{position:absolute;bottom:0;width:1px;height:7px;background:var(--rule)}
+.yard-scale i b{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:400;color:var(--ink-soft)}
+.yrow{display:grid;grid-template-columns:190px 1fr 54px;align-items:center;gap:0;padding:7px 0;border-bottom:1px solid var(--rule)}
+.yrow .lab{font-family:Oswald,sans-serif;font-size:13.5px;color:var(--turf-deep);padding-right:16px}
+.ybar{position:relative;height:15px;background:rgba(20,48,31,.06)}
+.ybar span{position:absolute;left:0;top:0;bottom:0;background:var(--turf)}
+.ybar.w span{background:var(--trace)}
+.ybar.b span{background:var(--flag)}
+.yrow .val{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:right;font-weight:500}
+.yrow.total{border-bottom:2px solid var(--turf-deep);border-top:1px solid var(--turf-deep);margin-top:6px}
+.yrow.total .lab,.yrow.total .val{font-weight:700;color:var(--turf-deep)}
+
+/* ---------- callout ---------- */
+.call{background:#fff;border-left:4px solid var(--turf);padding:22px 26px;margin:26px 0}
+.call.warn{border-left-color:var(--flag)}
+.call.note{border-left-color:var(--trace)}
+.call h4{margin-top:0}
+.call p:last-child{margin-bottom:0}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--rule);margin:28px 0;border:1px solid var(--rule)}
+.stat{background:var(--chalk);padding:18px 18px 16px}
+.stat b{display:block;font-family:Oswald,sans-serif;font-size:30px;font-weight:700;color:var(--turf-deep);line-height:1}
+.stat span{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:7px;line-height:1.4}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;border-collapse:collapse;margin:22px 0;font-size:14.5px}
+.tbl th{font-family:Oswald,sans-serif;font-weight:500;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  text-align:left;color:var(--turf);border-bottom:1.5px solid var(--turf-deep);padding:0 12px 8px 0;vertical-align:bottom}
+.tbl td{padding:10px 12px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl td.n{font-family:"IBM Plex Mono",monospace;text-align:right;white-space:nowrap}
+.tbl th.n{text-align:right}
+.tbl tr:hover td{background:rgba(127,176,105,.09)}
+.pill{font-family:Oswald,sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 7px;border-radius:2px;white-space:nowrap;display:inline-block}
+.p-own{background:var(--fairway);color:#12291B}
+.p-def{background:var(--sand);color:#4A3E20}
+.p-open{background:rgba(179,63,40,.13);color:var(--flag)}
+.p-now{background:var(--trace);color:#3A2405}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ---------- url estate ---------- */
+.estate{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0}
+.loc{background:#fff;border:1px solid var(--rule);padding:14px 15px}
+.loc b{display:block;font-family:Oswald,sans-serif;font-size:15px;color:var(--turf-deep)}
+.loc .cnt{font-family:Oswald,sans-serif;font-size:34px;font-weight:700;color:var(--flag);line-height:1;margin:6px 0 2px}
+.loc small{font-size:12px;color:var(--ink-soft);display:block;line-height:1.35}
+
+/* ---------- structure diagram ---------- */
+pre.tree{background:var(--turf-deep);color:#D8E6DC;font-family:"IBM Plex Mono",monospace;font-size:13px;
+  line-height:1.72;padding:22px 24px;overflow-x:auto;margin:20px 0;border-radius:2px}
+pre.tree b{color:var(--trace);font-weight:500}
+pre.tree i{color:#8FA898;font-style:normal}
+
+/* ---------- progress ---------- */
+.done{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin:24px 0}
+.done div{background:#fff;padding:18px 20px;border-top:3px solid var(--fairway)}
+.done h4{margin:0 0 8px;color:var(--turf-deep);font-size:15px}
+.done p{font-size:14.5px;margin:0;color:var(--ink-soft)}
+.phase{border-left:2px solid var(--rule);padding-left:24px;margin:0 0 4px;position:relative}
+.phase::before{content:"";position:absolute;left:-6px;top:9px;width:10px;height:10px;background:var(--turf);border-radius:50%}
+.phase.next::before{background:var(--trace)}
+.phase.later::before{background:var(--chalk);border:2px solid var(--rule)}
+.phase h4{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.phase h3{margin:2px 0 6px;font-size:19px}
+.phase p{font-size:15px}
+.phase{padding-bottom:22px}
+
+/* ---------- asks ---------- */
+.ask{counter-reset:a;margin:24px 0 0;padding:0;list-style:none;max-width:74ch}
+.ask li{counter-increment:a;position:relative;padding:16px 0 16px 52px;border-top:1px solid var(--rule)}
+.ask li::before{content:counter(a);position:absolute;left:0;top:15px;font-family:Oswald,sans-serif;font-size:22px;
+  font-weight:700;color:var(--trace)}
+.ask b{display:block;font-family:Oswald,sans-serif;font-size:17px;color:var(--turf-deep);margin-bottom:3px;font-weight:600}
+
+footer{background:var(--turf-deep);color:#9FB6A6;padding:38px 0;font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer b{color:var(--chalk);font-family:Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:12px;font-weight:500}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .yard-scale{margin-left:0}
+  .yrow{grid-template-columns:1fr 50px;grid-template-areas:"lab val" "bar bar";gap:2px 8px;padding:11px 0}
+  .yrow .lab{grid-area:lab;padding-right:0}
+  .yrow .val{grid-area:val}
+  .ybar{grid-area:bar}
+  .tracewrap{height:150px}
+  .ivsbadge{bottom:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .trace-path{animation:none;stroke-dashoffset:0}
+  .trace-ball{animation:none;opacity:1}
+}
+@media print{
+  body{background:#fff}
+  section{page-break-inside:avoid;border-bottom:1px solid #ccc}
+  .mast{background:#14301F !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+<style>
+.badge{font-family:Oswald,sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.split{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin:30px 0;
+  background:var(--turf-deep);color:var(--chalk);padding:26px 24px}
+.split .n{font-family:Oswald,sans-serif;font-size:clamp(34px,6vw,52px);font-weight:700;line-height:1;color:#fff}
+.split .l{font-family:Oswald,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fairway);margin-top:6px;display:block}
+.split .mid{font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--trace);text-align:center;line-height:1.5}
+.defect{display:grid;grid-template-columns:34px 1fr;gap:0 16px;padding:15px 0;border-bottom:1px solid var(--rule);align-items:start}
+.defect .r{font-family:Oswald,sans-serif;font-size:19px;font-weight:700;color:var(--flag);line-height:1.2}
+.defect b{display:block;font-family:Oswald,sans-serif;font-size:16px;color:var(--turf-deep);font-weight:600;margin-bottom:3px}
+.defect p{font-size:14.5px;margin:0;color:var(--ink-soft)}
+@media (max-width:760px){.split{grid-template-columns:1fr;text-align:center;gap:10px}}
+</style>
+
+<style>
+.tbl.reg td{vertical-align:top;padding-top:12px;padding-bottom:12px}
+.tbl.reg tr:hover td{background:rgba(127,176,105,.07)}
+.dep{display:block;font-size:12px;color:var(--flag);margin-top:5px;font-style:italic}
+.copywrap{position:relative;margin:20px 0 8px}
+.copybtn{position:absolute;top:12px;right:12px;z-index:2;font-family:Oswald,sans-serif;font-size:11.5px;
+  letter-spacing:.13em;text-transform:uppercase;background:var(--trace);color:#3A2405;border:0;
+  padding:8px 14px;border-radius:2px;cursor:pointer}
+.copybtn:hover{background:#F0B255}
+.copybtn.done{background:var(--fairway);color:#12291B}
+.copybtn:focus-visible{outline:2px solid var(--chalk);outline-offset:2px}
+.payload{background:var(--turf-deep);color:#CFE0D5;font-family:"IBM Plex Mono",monospace;font-size:11px;
+  line-height:1.65;padding:22px 20px;max-height:340px;overflow:auto;white-space:pre;border-radius:2px;margin:0}
+@media (max-width:760px){
+  .copybtn{position:static;display:block;width:100%;margin-bottom:10px}
+  .payload{font-size:10px;max-height:260px}
+}
+@media print{.payload{max-height:none;font-size:7.5px}.copybtn{display:none}}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="brandrow">
+      <span>Islands &nbsp;·&nbsp; Golf Ranch USA</span>
+      <span>Visibility Audit &amp; Location Strategy &nbsp;·&nbsp; 09 Aug 2026</span>
+    </div>
+    <h1>You win every question<br>with your name in it.</h1>
+    <p class="sub">And almost none of the questions without one. Here is what the data says, the eight defects shipping right now, and the location-by-location plan for the next 90 days.</p>
+
+    <div class="tracebox">
+      <div class="tracewrap">
+        <svg viewBox="0 0 900 210" preserveAspectRatio="none" aria-hidden="true">
+          <path class="trace-path" d="M 8 200 C 180 40, 420 6, 590 62 C 690 96, 730 140, 748 186"/>
+          <circle class="trace-ball" cx="748" cy="188" r="5.5" fill="#fff"/>
+        </svg>
+        <div class="groundline"></div>
+        <div class="yardtick" style="left:0%"><span>0</span></div>
+        <div class="yardtick" style="left:20%"><span>20</span></div>
+        <div class="yardtick" style="left:40%"><span>40</span></div>
+        <div class="yardtick" style="left:60%"><span>60</span></div>
+        <div class="yardtick" style="left:80%"><span>80</span></div>
+        <div class="yardtick" style="left:99.7%"><span>100</span></div>
+        <div class="ivsbadge">
+          <span class="n">44.4</span>
+          <span class="l">Visibility score on non-branded demand</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<!-- 01 -->
+<section>
+  <div class="marker">01 — The headline</div>
+  <h2>A discovery problem, not a brand problem</h2>
+  <p class="lede">We put 22 buyer questions through five AI answer engines and 45 search targets through Google. The results split cleanly along one line, and that line explains everything else in this document.</p>
+
+  <div class="split">
+    <div><span class="n">69%</span><span class="l">Cited when the question names you — 55 of 80</span></div>
+    <div class="mid">the same<br>company</div>
+    <div><span class="n">17%</span><span class="l">Cited when it doesn't — 1 of 6</span></div>
+  </div>
+
+  <p>Ask an engine "is the Ranch Pass worth it" and Golf Ranch is cited, with a link, almost every time. Ask it "where should I practise golf near me" and Golf Ranch is absent in three of your four metros. The brand content is genuinely good. The discovery layer underneath it is broken.</p>
+
+  <div class="stats">
+    <div class="stat"><b>69,880</b><span>Measured monthly searches in your category</span></div>
+    <div class="stat"><b>1.6%</b><span>Of that demand where you rank page one</span></div>
+    <div class="stat"><b>#21</b><span>Position for "golf driving range near me" — 60,500/mo</span></div>
+    <div class="stat"><b>8</b><span>Live defects shipping to customers right now</span></div>
+  </div>
+
+  <p>That one term, <strong>"golf driving range near me"</strong>, is 87% of all measured demand in your category, and you sit on page three of it.</p>
+
+  <div class="call">
+    <h4>The one-sentence version</h4>
+    <p>Golf Ranch has excellent answer content and a broken local footprint, so engines describe you beautifully to people who already know you, and cannot find you for people who don't.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="marker">02 — Scorecard</div>
+  <h2>Where each signal lands on the range</h2>
+  <p>Nineteen signals scored 0 to 5, weighted into three pillars, plus the measured citation share for each engine. Read it like a yardage chart: how far each shot actually carried.</p>
+
+  <div class="yard">
+    <div class="yard-scale">
+      <i style="left:0%"><b>0</b></i><i style="left:20%"><b>20</b></i><i style="left:40%"><b>40</b></i>
+      <i style="left:60%"><b>60</b></i><i style="left:80%"><b>80</b></i><i style="left:100%"><b>100</b></i>
+    </div>
+    <div class="yrow"><span class="lab">Perplexity citations</span><span class="ybar"><span style="width:94%"></span></span><span class="val">94</span></div>
+    <div class="yrow"><span class="lab">Cadence &amp; freshness</span><span class="ybar"><span style="width:80%"></span></span><span class="val">80</span></div>
+    <div class="yrow"><span class="lab">Quotable proof density</span><span class="ybar"><span style="width:80%"></span></span><span class="val">80</span></div>
+    <div class="yrow"><span class="lab">Answer extractability</span><span class="ybar"><span style="width:80%"></span></span><span class="val">80</span></div>
+    <div class="yrow"><span class="lab">Claude citations</span><span class="ybar"><span style="width:75%"></span></span><span class="val">75</span></div>
+    <div class="yrow"><span class="lab">Gemini citations</span><span class="ybar w"><span style="width:69%"></span></span><span class="val">69</span></div>
+    <div class="yrow"><span class="lab">Crawlability</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">Site architecture depth</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">Internal linking</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">Metadata hygiene</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">Entity clarity</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">FAQ / structured answers</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">Comparison ownership</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">Authority &amp; E-E-A-T</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">AI-crawler readiness</span><span class="ybar w"><span style="width:60%"></span></span><span class="val">60</span></div>
+    <div class="yrow"><span class="lab">ChatGPT citations</span><span class="ybar w"><span style="width:56%"></span></span><span class="val">56</span></div>
+    <div class="yrow"><span class="lab">Google AI Overviews</span><span class="ybar b"><span style="width:50%"></span></span><span class="val">50</span></div>
+    <div class="yrow"><span class="lab">Content volume</span><span class="ybar b"><span style="width:40%"></span></span><span class="val">40</span></div>
+    <div class="yrow"><span class="lab">Schema coverage</span><span class="ybar b"><span style="width:20%"></span></span><span class="val">20</span></div>
+    <div class="yrow"><span class="lab">Non-branded discovery</span><span class="ybar b"><span style="width:17%"></span></span><span class="val">17</span></div>
+    <div class="yrow total"><span class="lab">Visibility score</span><span class="ybar"><span style="width:44.4%"></span></span><span class="val">44.4</span></div>
+  </div>
+
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Pillar</th><th>What it measures</th><th class="n">Score</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td><strong>SEO</strong></td><td>Classic search foundation: crawling, structure, metadata, schema</td><td class="n">53.1</td><td>Held down by broken structured data and a fragmented URL estate, not by a lack of effort.</td></tr>
+      <tr><td><strong>GEO</strong></td><td>How ready the content is to be quoted by an AI answer</td><td class="n">66.0</td><td>Your strongest pillar. The FAQs, the proof stats and the answer-first blocks do real work.</td></tr>
+      <tr><td><strong>AEO</strong></td><td>Whether engines actually cite you, measured across five engines</td><td class="n">66.9 <span style="color:var(--ink-soft);font-weight:400">branded</span><br>20.0 <span style="color:var(--ink-soft);font-weight:400">non-branded</span></td><td>Perplexity 94%, Claude 75%, Gemini 69%, ChatGPT 56%, Google AI Overviews 50% on branded questions. One in six on category questions.</td></tr>
+      <tr><td><strong>Composite</strong></td><td>0.25 SEO + 0.35 GEO + 0.40 AEO</td><td class="n">63.1 / <strong>44.4</strong></td><td>The first number is how well you are described. The second is whether you are found.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="call">
+    <h4>Use 44.4</h4>
+    <p>New customers do not search your name. The higher figure measures how well engines describe a brand someone has already heard of. Only the lower one grows the business.</p>
+  </div>
+
+  <p>Google AI Overviews is your weakest engine at 50%, and commercially the most important, because it sits directly above the search results your customers already use. It is also the engine most tightly coupled to local business signals, which is exactly where the gaps are.</p>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="marker">03 — Live defects</div>
+  <h2>Eight things shipping right now</h2>
+  <p>All directly observed on the live site. Ranked by severity. The first four are hours of work, and several are pure data entry.</p>
+
+  <div class="defect"><span class="r">1</span><div><b>Broken template tag on all five lesson pages</b><p>Every <span class="mono">/lessons/[city]</span> page renders an unresolved <span class="mono">{location}</span> placeholder in visible copy, with a generic sitewide title, no meta description and no structured data. Broken text is reaching both customers and Google.</p></div></div>
+  <div class="defect"><span class="r">2</span><div><b>Empty phone and map fields in your schema</b><p><span class="mono">telephone</span> and <span class="mono">hasMap</span> are blank on all seven location pages. This is the single biggest local-search gap you have: "near me" results are assembled from exactly these fields.</p></div></div>
+  <div class="defect"><span class="r">3</span><div><b>Structured data points at a URL that doesn't resolve</b><p>The JSON-LD <span class="mono">url</span> field references <span class="mono">/location/</span> (singular) while pages serve from <span class="mono">/locations/</span> (plural). You are telling engines your canonical page is a broken link. Broken markup is worse than no markup, because engines act on what they read.</p></div></div>
+  <div class="defect"><span class="r">4</span><div><b>Two Glendale pages sharing one address</b><p>Your newest and best-funded location is split against itself. Consolidate to one canonical page, 301 the other, and keep the "formerly Desert Mirage" landmark content on the survivor.</p></div></div>
+  <div class="defect"><span class="r">5</span><div><b>Both blog posts missing title tags entirely</b><p>The title exists only as an on-page heading. This is why a crawler sees almost no blog content despite daily publishing.</p></div></div>
+  <div class="defect"><span class="r">6</span><div><b>Shoal Creek collides with an unrelated golf course</b><p>The page competes with the public Shoal Creek Golf Course and is addressed as Kansas City, MO. In our citation probe, Perplexity confused it with Shoal Creek in Birmingham, Alabama. Engines cannot tell the three apart.</p></div></div>
+  <div class="defect"><span class="r">7</span><div><b>Conflicting Ranch Pass pricing</b><p><span class="mono">/ranch-pass</span> and <span class="mono">/new-ranch-pass</span> disagree with each other. Conflicting facts on your highest-intent commercial page.</p></div></div>
+  <div class="defect"><span class="r">8</span><div><b>The same three testimonials on all six location pages</b><p>Julie Romero, Tommy Le and Kyle Koch appear verbatim on every location. Duplicate content, at exactly the moment a thin-content update is rolling.</p></div></div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="marker">04 — The traffic drop</div>
+  <h2>Three causes, not one</h2>
+  <p>Organic sessions down roughly 65%, Search Console clicks down roughly 15%. The start date is reported as 23 June by your team and around 28 June in our tracking. That six-day discrepancy matters and should be pinned down first.</p>
+
+  <h3>1. Measurement</h3>
+  <p>In July we consolidated two competing GA4 properties, removed duplicate tags that were inflating pageviews, fixed cross-domain tracking and excluded internal test traffic. Every one of those fixes <em>reduces</em> the reported number without a single visitor going anywhere. A 50-point gap between two metrics measuring nearly the same thing is unlikely to be all real traffic loss.</p>
+
+  <h3>2. Google's June 2026 spam update</h3>
+  <p>Google's status dashboard confirms a spam update rolling out 23 to 24 June and completing 26 June, targeting thin, unoriginal and scaled content. Your exposure is specific: five broken template pages, fifteen indexed thank-you pages, a duplicate Glendale page, and three testimonials repeated across six locations. That is the profile these updates target. A core update running 21 May to 2 June may also have been building instability beforehand.</p>
+
+  <h3>3. The URL restructure reaching production early</h3>
+  <p>The site is currently serving location pages from <span class="mono">/locations/</span> while its own structured data still points at <span class="mono">/location/</span>, and the sitemap has lost thirteen URLs inside a week. Older lesson-page paths (<span class="mono">/lessons-coaches/</span>, <span class="mono">/lesson/</span>) are still surfacing in search snippets alongside the current ones.</p>
+
+  <div class="call warn">
+    <h4>The first question to answer</h4>
+    <p>Phase 1 of the restructure was scheduled to sit on staging, with internal linking and redirect migration following on 14 and 15 August. The evidence on the live site suggests the new hierarchy is already in production, ahead of its redirects.</p>
+    <p>If that is what happened, it explains the template bug, the structured data pointing at dead URLs, the shrinking sitemap, the fragmented lesson-page history, and a meaningful share of the traffic decline, all at once. <strong>Confirm this with the dev team before anything else in this document gets actioned.</strong></p>
+  </div>
+
+  <p>These three are not mutually exclusive. The likeliest reading is that all three contributed, in roughly that order of size.</p>
+
+  <h4>How we settle it this week</h4>
+  <ul>
+    <li>Confirm whether the <span class="mono">/locations/</span> hierarchy is live on production, and exactly what shipped between 21 and 30 June.</li>
+    <li>Plot Search Console clicks against GA4 sessions from 1 June, marked with the date each tracking fix went live.</li>
+    <li>Segment Search Console branded against non-branded. Our expectation: branded roughly flat, non-branded carrying the decline.</li>
+    <li>Check Coverage for "Crawled – currently not indexed" and "Duplicate, Google chose different canonical" on the thin and lesson pages.</li>
+  </ul>
+  <p class="mono" style="font-size:13.5px;color:var(--ink-soft)">Tracked as GOLF-73 · joint data review Tuesday 12 August, 10:00 ET</p>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="marker">05 — Root causes</div>
+  <h2>Five things suppressing local discovery</h2>
+
+  <h3>1. Google cannot place your six locations</h3>
+  <p>No published phone number or street address anywhere on the site or in Google's knowledge graph. Empty schema fields. No Knowledge Panel on a branded search, no Wikidata record, no company LinkedIn page, no Crunchbase entry. For a six-site physical business this is the highest-severity structural finding in the audit, and the most plausible reason you sit at position 21 on a 60,500-a-month term you should own in six metros.</p>
+
+  <h3>2. Structured data exists but is broken</h3>
+  <p>Location pages carry <span class="mono">SportsActivityLocation</span> markup with its most important fields empty and its canonical URL pointing nowhere. Elsewhere there is nothing: no <span class="mono">FAQPage</span> despite genuinely good FAQ content on the homepage, <span class="mono">/ranch-pass</span> and <span class="mono">/toptracer-tech</span>; no <span class="mono">Event</span> markup despite the Golf Ranch Classic and the 2v2 leagues; no <span class="mono">Offer</span> markup despite bucket pricing. This is the cheapest fix in the document with the widest blast radius, because you already have the content these tags describe.</p>
+
+  <h3>3. Too slow on mobile to survive a "near me" search</h3>
+  <div class="stats">
+    <div class="stat"><b>37</b><span>Mobile performance /100</span></div>
+    <div class="stat"><b>15.7s</b><span>Largest Contentful Paint</span></div>
+    <div class="stat"><b>7.7s</b><span>First Contentful Paint</span></div>
+    <div class="stat"><b>18.7s</b><span>Time to interactive</span></div>
+  </div>
+  <p>Someone standing in a car park searching "driving range near me" is on a phone, on cellular, deciding in seconds. A 15.7-second main-content paint means a meaningful share of those sessions end before anything appears. Layout stability is perfect, so this is payload and blocking scripts rather than design, which makes it tractable.</p>
+
+  <h3>4. Every location's authority is split across a dozen URLs</h3>
+  <p>Covered in the next section.</p>
+
+  <h3>5. The brand's real credibility lives entirely off the site</h3>
+  <p>Blue Jeans Golf, founded in 2021 by Devin Charhon and Michael Canfield, both ex-Topgolf. A $20M Series B in September 2025 led by Old Tom Capital and Creator Sports Capital, plus a $15M debt facility. Coverage in Forbes, Sports Business Journal and Golf Digest. A target of 10 to 12 locations by the end of 2026.</p>
+  <p><strong>Almost none of this appears on golfranch.com.</strong> No founder is named, no head office is published, there is no press or stats page. Search engines and AI models weigh exactly these signals when deciding whether a business is authoritative. This is the cheapest credibility win available, and it requires no new facts, only publishing the ones you already have.</p>
+</section>
+
+<!-- 06 -->
+<section>
+  <div class="marker">06 — The URL estate</div>
+  <h2>93 pages, 43 of them about six places</h2>
+  <p>We inventoried every URL on the site. Just under half are location-specific, scattered across seven different path patterns with no single canonical home for any location.</p>
+
+  <div class="estate">
+    <div class="loc"><b>Glendale</b><div class="cnt">17</div><small>URLs competing</small></div>
+    <div class="loc"><b>Grand Prairie</b><div class="cnt">8</div><small>URLs competing</small></div>
+    <div class="loc"><b>Richardson</b><div class="cnt">7</div><small>URLs competing</small></div>
+    <div class="loc"><b>Lee's Summit</b><div class="cnt">4</div><small>URLs competing</small></div>
+    <div class="loc"><b>Shoal Creek</b><div class="cnt">4</div><small>URLs competing</small></div>
+    <div class="loc"><b>Brookfield</b><div class="cnt">3</div><small>URLs competing</small></div>
+  </div>
+
+  <p>Glendale alone lives at <span class="mono">/glendale</span>, <span class="mono">/glendale-arizona-golf-course</span>, <span class="mono">/golf-courses/glendale</span>, <span class="mono">/golf-courses/glendale-arizona-golf-course</span>, <span class="mono">/location/glendale</span>, <span class="mono">/location/glendale-arizona-golf-course</span>, <span class="mono">/lesson/glendale</span> and <span class="mono">/memberships/arizona/glendale</span>. Eight pages describing one driving range in Arizona. Google has to pick one to rank and has no signal telling it which, so in practice it dilutes all of them.</p>
+
+  <p>Meanwhile Brookfield has three URLs and Lee's Summit four. Your newest location has five times the page footprint of your Connecticut site, and it is the one market where engines do not cite you for local Toptracer queries. That imbalance is not strategy, it is accumulation, and it maps almost exactly onto which locations win local queries and which don't.</p>
+
+  <h4>Also indexed, and shouldn't be</h4>
+  <ul>
+    <li><strong>Fifteen thank-you pages.</strong> Two of them (<span class="mono">/thank-you/what-to-expect-at-golfranch</span> and <span class="mono">/thank-you/what-makes-golf-ranch-worth-the-trip</span>) are real marketing content buried where nobody will find it.</li>
+    <li><strong>Build artefacts.</strong> <span class="mono">-full-header</span>, <span class="mono">-no-header</span>, <span class="mono">-copy</span>, <span class="mono">/ranchpass-location-tempate</span> (typo included), <span class="mono">/careers-old</span>.</li>
+    <li><strong>Split duplicates.</strong> <span class="mono">/privacy</span> and <span class="mono">/privacy-policy</span>; <span class="mono">/lesson/grand-prairie</span> and <span class="mono">/lessons/grand-prairie-texas</span>.</li>
+  </ul>
+  <p>Roughly a quarter of the crawlable site is pages nobody should ever land on. Every one consumes crawl attention that should be going to pages that sell buckets.</p>
+</section>
+
+<!-- 07 -->
+<section>
+  <div class="marker">07 — The strategy</div>
+  <h2>Six local businesses that share a brand</h2>
+  <p class="lede">Golf Ranch is currently built as one national website that mentions six cities. It should be built as six local businesses that share a brand, a template and a domain. This is the central recommendation of the audit.</p>
+
+  <p>Nobody searches for a national driving range chain. They search for somewhere to hit balls tonight, twenty minutes from where they are standing. Every ranking signal that decides that search — proximity, Business Profile completeness, local reviews, address consistency, city-specific content — is scored per location, not per brand. A single blended site cannot compete on any of them, which is exactly what the data shows.</p>
+
+  <h3>Architecture: one domain, six city hubs</h3>
+<pre class="tree"><b>/glendale-az/</b>                    <i>← canonical location home</i>
+   <b>/glendale-az/lessons/</b>          <i>instructors, pricing, booking</i>
+   <b>/glendale-az/clinics/</b>          <i>Women's 101, Men's 101, 102 series</i>
+   <b>/glendale-az/ranch-pass/</b>       <i>membership, local pricing</i>
+   <b>/glendale-az/events/</b>           <i>corporate, leagues, the Classic</i>
+   <b>/glendale-az/free-bucket/</b>      <i>local offer, local form</i>
+
+<b>/grand-prairie-tx/</b>   <b>/richardson-tx/</b>   <b>/lees-summit-mo/</b>
+<b>/shoal-creek-mo/</b>     <b>/brookfield-ct/</b>
+</pre>
+
+  <p><strong>Subfolders, not subdomains, and not six separate sites.</strong> Every link, mention and citation Golf Ranch has ever earned accrues to one domain. Six separate domains, or six subdomains, would each start from zero authority and each need their own link-building programme. With organic already under pressure, splitting the domain would be self-inflicted damage. Subfolders let Glendale inherit the authority Brookfield earned while still giving each city its own indexable, locally-optimised home. It is also reversible; a domain split is not.</p>
+
+  <div class="call warn">
+    <h4>Sequencing matters here</h4>
+    <p>Because a restructure appears to be mid-flight already, finish and stabilise the current migration before starting this one. Two overlapping URL changes with incomplete redirects is how a site loses another 30%.</p>
+  </div>
+
+  <h3>What every location hub must carry</h3>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Element</th><th>Why it is non-negotiable</th></tr></thead>
+    <tbody>
+      <tr><td>Name, address and phone in HTML text, not an image</td><td>The single biggest gap in the audit. This is what "near me" runs on</td></tr>
+      <tr><td><span class="mono">LocalBusiness</span> + <span class="mono">GolfCourse</span> schema, fully populated</td><td>Ties the page to a physical place engines can put on a map</td></tr>
+      <tr><td>Opening hours, including seasonal and holiday variation</td><td>Feeds the "open now" filter, which is how evening searches are made</td></tr>
+      <tr><td>Bay count, covered or heated status, Toptracer confirmation</td><td>The specific facts people compare between two local ranges</td></tr>
+      <tr><td>Bucket sizes and prices, per location</td><td>Your pricing is currently invisible to engines, and "how much is a bucket" is asked constantly</td></tr>
+      <tr><td>Named instructors with credentials and photos</td><td>Experience and expertise signals. Also the thing that sells lessons</td></tr>
+      <tr><td>Real, location-specific reviews</td><td>Replaces the three testimonials currently repeated across all six pages</td></tr>
+      <tr><td>Directions from two or three local landmarks</td><td>Genuinely useful, and it earns the local vocabulary engines match against</td></tr>
+      <tr><td>A city FAQ with <span class="mono">FAQPage</span> schema</td><td>Reuse the format already working on <span class="mono">/ranch-pass</span>, localised two or three questions per city</td></tr>
+      <tr><td>A location-specific free bucket offer and form</td><td>Makes attribution work and gives each market a measurable conversion path</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Compete against the range down the road, not Topgolf nationally</h3>
+  <p>Benchmarking against Topgolf, Five Iron and PGA Tour Superstore is flattering and useless. You will not outrank them on national terms, and you do not need to, because nobody chooses a driving range nationally. Here is who you are actually losing to, market by market.</p>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Metro</th><th>Real local competition</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grand Prairie, TX</strong></td><td>Topgolf</td><td>Opened a venue in Grand Prairie itself in January 2026, co-located with your site. Your most urgent competitive situation</td></tr>
+      <tr><td><strong>Richardson, TX</strong></td><td>2-1-Fore Golf, Sherrill Park, HSR Golf, Five Iron</td><td>2-1-Fore opened over winter with dedicated local press. Your best-performing location, now under direct attack</td></tr>
+      <tr><td><strong>Kansas City / Shoal Creek, MO</strong></td><td>Smiley's Golf, Martin City Golf Center, Dugout Edge, First Tee KC</td><td>You do not appear at all in local recommendation threads for "best driving range Kansas City"</td></tr>
+      <tr><td><strong>Lee's Summit, MO</strong></td><td>Shamrock Hills, AMP Performance Golf</td><td>No review data found for this location on any platform</td></tr>
+      <tr><td><strong>Glendale, AZ</strong></td><td>Bellair Golf Park, Topgolf Glendale</td><td>Not cited for "where can I use Toptracer in Glendale"</td></tr>
+      <tr><td><strong>Brookfield, CT</strong></td><td>Golf Lounge 18, Richter Park</td><td>Your strongest market. You own it today</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Topgolf now operates in three of your four metros and has passed 100 US venues. X-Golf has roughly 138 franchise locations across three of your four.</p>
+
+  <div class="call note">
+    <h4>One window is still open</h4>
+    <p>No competitor has published "Golf Ranch alternative" or "[Competitor] vs Golf Ranch" content. Nobody has claimed that ground. It closes as the Series B expansion makes you a target worth attacking.</p>
+  </div>
+
+  <h3>Per-location priorities</h3>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Location</th><th>Current state</th><th>Fix</th><th class="n">Priority</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grand Prairie</strong></td><td>Only site with a full Maps place-link and coordinates; lessons page partially works</td><td>Fix the template, add local testimonials, urgent competitive response to Topgolf's opening</td><td class="n"><span class="pill p-open">Critical</span></td></tr>
+      <tr><td><strong>Shoal Creek</strong></td><td>Name collision with an unrelated course; addressed as Kansas City; broken lessons page</td><td>Add disambiguating copy, populate the schema, fix the lessons page</td><td class="n"><span class="pill p-open">Critical</span></td></tr>
+      <tr><td><strong>Glendale</strong></td><td>Two near-duplicate pages on one address, 17 URLs in total</td><td>Consolidate with a 301, preserve the Desert Mirage content, populate the schema</td><td class="n"><span class="pill p-open">Critical</span></td></tr>
+      <tr><td><strong>Richardson</strong></td><td>Best organic and AI performer; Ranch Pass pricing conflict</td><td>Fix the pricing duplication, add local testimonials, content to hold off 2-1-Fore</td><td class="n"><span class="pill p-now">High</span></td></tr>
+      <tr><td><strong>Lee's Summit</strong></td><td>No review data on any platform; broken lessons page</td><td>Populate the schema, run a review campaign, fix the lessons page</td><td class="n"><span class="pill p-now">High</span></td></tr>
+      <tr><td><strong>Brookfield</strong></td><td>Schema shell present but empty; no unique local content</td><td>Populate the schema, add local testimonials and Fairfield County landmarks</td><td class="n"><span class="pill p-now">High</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>How we will run it</h4>
+  <ul>
+    <li><strong>Six competitive sets, not one</strong>, each scored against the businesses that actually appear in that metro's answers.</li>
+    <li><strong>Rankings and AI citations tracked per location</strong>, so Brookfield's win stops hiding Glendale's gap inside a blended average.</li>
+    <li><strong>A per-location scorecard</strong> in reporting, so you can see which sites earn discovery and which are being carried.</li>
+    <li><strong>A local content track</strong> alongside the national one, tied to real local hooks: "Best golf practice near Grand Prairie's EpicCentral", "Golf Ranch vs Topgolf Glendale: what's actually different".</li>
+  </ul>
+  <p><strong>Expect per-location scores to read lower than the blended figure.</strong> The blended number is flattered by branded queries. That is the point of the exercise, not a regression.</p>
+</section>
+
+<!-- 08 -->
+<section>
+  <div class="marker">08 — The demand</div>
+  <h2>What's on the table</h2>
+  <p>Forty-five targets tracked, of which 13 have measured US search volume totalling 69,880 a month. Here is where you stand on the ones that matter.</p>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Target</th><th class="n">Monthly</th><th class="n">Position</th><th>Stage</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>golf driving range near me</td><td class="n">60,500</td><td class="n">21</td><td>Awareness</td><td><span class="pill p-open">Open</span></td></tr>
+      <tr><td>golf gift cards</td><td class="n">4,400</td><td class="n">—</td><td>Decision</td><td><span class="pill p-now">Chase</span></td></tr>
+      <tr><td>beginner golf tips</td><td class="n">1,300</td><td class="n">—</td><td>Awareness</td><td><span class="pill p-open">Open</span></td></tr>
+      <tr><td>golf practice facilities</td><td class="n">1,300</td><td class="n">32</td><td>Awareness</td><td><span class="pill p-open">Open</span></td></tr>
+      <tr><td>golf ball tracking app</td><td class="n">590</td><td class="n">—</td><td>Awareness</td><td><span class="pill p-open">Open</span></td></tr>
+      <tr><td>covered driving range</td><td class="n">590</td><td class="n">4</td><td>Consideration</td><td><span class="pill p-def">Defend</span></td></tr>
+      <tr><td>Toptracer driving range</td><td class="n">320</td><td class="n">—</td><td>Consideration</td><td><span class="pill p-open">Open</span></td></tr>
+      <tr><td>premium golf mats</td><td class="n">320</td><td class="n">—</td><td>Awareness</td><td><span class="pill p-open">Open</span></td></tr>
+      <tr><td>Shoal Creek driving range</td><td class="n">320</td><td class="n">1</td><td>Decision</td><td><span class="pill p-own">Own</span></td></tr>
+      <tr><td>golf range Brookfield CT</td><td class="n">140</td><td class="n">1</td><td>Decision</td><td><span class="pill p-own">Own</span></td></tr>
+      <tr><td>Golf Ranch locations</td><td class="n">50</td><td class="n">1</td><td>Decision</td><td><span class="pill p-own">Own</span></td></tr>
+      <tr><td>golf ranch classic</td><td class="n">30</td><td class="n">AI box</td><td>Consideration</td><td><span class="pill p-own">Own</span></td></tr>
+      <tr><td>golf lessons Richardson TX</td><td class="n">20</td><td class="n">4</td><td>Decision</td><td><span class="pill p-def">Defend</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Read the shape of that table rather than the rows. Everything you own is a term with your own name in it, or the name of a town where you are the only option. Everything above 1,000 searches a month is open. The terms you rank first for total roughly 1,150 searches a month between them.</p>
+
+  <div class="call">
+    <h4>Three that deserve immediate attention</h4>
+    <p><strong>Golf gift cards — 4,400/mo, and you have a gift cards page.</strong> Decision-stage, revenue-direct, a rival ranks seventh and nobody owns the space. The page exists, it just isn't built to compete. Fastest revenue win in the audit.</p>
+    <p><strong>"Golf driving range near me" — 60,500/mo, position 21.</strong> Not winnable nationally, entirely winnable as six local results. This is what the location strategy is for.</p>
+    <p><strong>"Golf Ranch alternative" — unclaimed by anyone, including competitors.</strong> Own the frame before someone else does.</p>
+  </div>
+</section>
+
+<!-- 09 -->
+<section>
+  <div class="marker">09 — Work delivered</div>
+  <h2>What we've built since we started</h2>
+  <p>The bulk of the last stretch went into foundations: the unglamorous work that makes everything after it measurable. That is now done.</p>
+  <div class="done">
+    <div><h4>Measurement rebuilt end to end</h4><p>Two competing GA4 properties consolidated into one source of truth, duplicate tags inflating pageviews cleared, cross-domain tracking fixed, internal test traffic excluded, tag manager container cleaned, Meta Pixel rebuilt with full conversion events, Search Console connected with the sitemap submitted, consent mode live.</p></div>
+    <div><h4>Every lead form now reports</h4><p>Free Bucket, Lessons, Ranch Pass, Contact and Glendale all send conversions to Google Ads. We repaired the broken Ads conversion tracking, added a dedicated Lessons conversion event, wired booking, coaching and location tracking, and added newsletter tracking. You can now see which spend produces which lead.</p></div>
+    <div><h4>Content engine live</h4><p>Two hubs stood up, Golf Tips for players and Driving Range Guys for owners, with publishing automated from the production pipeline straight into Webflow and calls to action in place on both.</p></div>
+    <div><h4>Clinic pages and booking fixed</h4><p>Grand Prairie Men's and Women's 101 pages built, register buttons pointed at the correct booking URLs, club rental pricing corrected, instructor bio updated, sold-out slots marked, and the Glendale free-bucket form bugs resolved.</p></div>
+    <div><h4>Restructure phase one complete</h4><p>The new page hierarchy is built, the 102-series URL convention is locked, and location page titles, headings and subheads have been corrected. Phases two through seven run through to 28 August.</p></div>
+    <div><h4>Conversion groundwork</h4><p>Free Bucket page audited for conversion, enhanced data-layer events added across all forms, and an interest link added below the time-slot popup to capture demand for sold-out sessions.</p></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section>
+  <div class="marker">10 — What happens next</div>
+  <h2>The next 90 days</h2>
+
+  <div class="phase">
+    <h4>This week · 11–15 August</h4>
+    <h3>Settle the numbers, stop the bleeding</h3>
+    <p>Confirm whether the new URL hierarchy is live on production. Reconcile Search Console against Analytics and split branded from non-branded, so we know the real size of the decline. Joint session with your HubSpot team Tuesday at 10:00 ET. In parallel, and independent of the diagnosis: fix the lessons template bug, populate phone and map fields across all seven location pages, correct the schema URL path, consolidate the two Glendale pages with a 301, and add title tags to both blog posts. A designer joins Wednesday on brand, user experience and conversion. The backlink programme starts now, included in your plan.</p>
+  </div>
+
+  <div class="phase next">
+    <h4>Weeks 2–4 · to 28 August</h4>
+    <h3>Finish the restructure, claim the local footprint</h3>
+    <p>Restructure phases two through seven ship on schedule: internal linking, redirect migration, sitemap cleanup, staging QA, production release, post-launch validation. Every retired URL gets a redirect. This is the highest-risk moment in the plan and it will be QA'd twice. Alongside it: claim and complete Google Business Profiles for all six locations, audit address consistency across directories, remove the thank-you pages and build artefacts from the index, add FAQ schema to Ranch Pass and Toptracer Tech, resolve the Ranch Pass pricing conflict, launch per-location review campaigns to replace the duplicated testimonials, and rebuild the Free Bucket page for conversion. Twenty blog posts land by 31 August. Lake Shore and Sugar Creek Women's 101 pages go live by 21 August.</p>
+  </div>
+
+  <div class="phase later">
+    <h4>September</h4>
+    <h3>Location hubs go live</h3>
+    <p>Build and launch the six city hubs on the template above, one market at a time, starting with Grand Prairie given Topgolf's January opening, then Glendale. City-level FAQ with schema on every location page. Per-location competitive sets replace the national benchmark. The 102-series clinic pages ship. Attack the gift cards term and the localised Toptracer queries. Mobile performance work begins: at 37 out of 100 this is a meaningful revenue lever on its own. Publish a press and stats page consolidating the Series B, member count and growth figures currently scattered across third-party coverage.</p>
+  </div>
+
+  <div class="phase later">
+    <h4>October and beyond</h4>
+    <h3>Compound</h3>
+    <p>A local content track running per market. Comparison pages built against the specific alternatives in each city, plus the unclaimed "Golf Ranch alternative" page. Local link-building per metro: chambers of commerce, sports and recreation directories, community press. A monthly citation probe across all five engines, re-run against both branded and non-branded prompts, so the score in this document becomes a tracked line rather than a snapshot. Entity work continues: Wikidata, LinkedIn, press footprint.</p>
+  </div>
+</section>
+
+<!-- 11 -->
+<section>
+  <div class="marker">11 — What we need from you</div>
+  <h2>Five decisions</h2>
+  <p>None of these are blockers today, but each one gets more expensive the longer it waits.</p>
+  <ol class="ask">
+    <li><b>Google Business Profile admin for all six locations</b>This is the ask that matters most. Address consistency across the web is the highest-value fix available and we cannot touch it without access. It is also the fastest lever on real foot traffic, given how thin the on-site local content currently is. We need whoever manages your Yelp and directory listings as well.</li>
+    <li><b>Confirmed address, phone, hours and bay count for each site</b>Including seasonal hours. It sounds trivial. It is the input to the single biggest gap in this audit.</li>
+    <li><b>A straight answer from the dev team on the restructure</b>Is the new URL hierarchy live on production, and what shipped between 21 and 30 June? This determines whether we are fixing a migration or an algorithm hit, and they need very different responses.</li>
+    <li><b>HubSpot tracking access</b>Needed before Tuesday's session so we can close the loop between traffic, leads and revenue rather than reporting on the first two.</li>
+    <li><b>Approve the location-hub architecture</b>Section 7 depends on a yes. If there is a preference for separate sites per location, we should talk it through before September. Our recommendation is against it, and the reasoning is in that section.</li>
+  </ol>
+</section>
+
+<section id="register">
+  <div class="marker">12 &mdash; Work register</div>
+  <h2>Every single thing that needs doing</h2>
+  <p class="lede">Fifty-one items, each with an acceptance criterion, an owner and a link to the existing Linear ticket where one exists. Sequenced by dependency, not by preference.</p>
+  <div class="stats">
+    <div class="stat"><b>51</b><span>Actionable items</span></div>
+    <div class="stat"><b>19</b><span>P0 &mdash; this week or it blocks something</span></div>
+    <div class="stat"><b>32</b><span>Not yet in Linear</span></div>
+    <div class="stat"><b>19</b><span>Existing tickets to refine</span></div>
+  </div>
+  <p>The single most important row is <strong>AUD-01</strong>. Until we know whether the URL restructure is live on production, we do not know whether we are repairing a migration or recovering from an algorithm hit, and those need different responses. Everything in weeks 2 to 4 is downstream of that answer.</p>
+  <h3>Gate · before anything else</h3>
+  <p>These decide what the rest of the plan actually is. Nothing in W2 should start until AUD-01 is answered.</p>
+  <div class="scroll"><table class="tbl reg">
+    <thead><tr><th>ID</th><th>Task</th><th>Done when</th><th>Linear</th><th>Owner</th><th class="n">Pri</th></tr></thead><tbody>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-01</td><td><strong>Confirm whether the new URL hierarchy is live on production</strong><br><span class="pill p-now" style="margin-top:5px">Diagnostic</span><br><span class="dep">Gates AUD-02, AUD-20 and all of W2</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Written answer from dev on: is /locations/ serving in prod, and what shipped 21-30 June. Deploy log attached.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-02</td><td><strong>Reconcile Search Console clicks against GA4 sessions, 1 June to date</strong><br><span class="pill p-now" style="margin-top:5px">Diagnostic</span><br><span class="dep">Needs AUD-04</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One chart, both series, annotated with the date each July tracking fix went live. Written call on how much of the -65% is real.</td><td><span class="mono" style="font-size:12.5px">GOLF-73</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-03</td><td><strong>Split Search Console traffic branded vs non-branded</strong><br><span class="pill p-now" style="margin-top:5px">Diagnostic</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Two series from 1 June. Confirms or kills the hypothesis that branded is flat and non-branded carries the decline.</td><td><span class="mono" style="font-size:12.5px">GOLF-73</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-04</td><td><strong>Get Google Business Profile admin for all six locations</strong><br><span class="pill p-now" style="margin-top:5px">Access</span><br><span class="dep">Blocks AUD-21, AUD-22, AUD-23</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Islands has admin on all 6 GBP listings. Highest-value unblock in the engagement.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Ali</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-05</td><td><strong>Collect confirmed NAP, hours and bay count per location</strong><br><span class="pill p-now" style="margin-top:5px">Access</span><br><span class="dep">Blocks AUD-11, AUD-12, AUD-30 to AUD-35</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One sheet: legal name, street address, phone, regular + seasonal hours, bay count, covered/heated, Toptracer yes/no, per site.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Ali</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-06</td><td><strong>Get HubSpot tracking access before Tuesday&#x27;s session</strong><br><span class="pill p-now" style="margin-top:5px">Access</span><br><span class="dep">Blocks AUD-07</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Islands can read HubSpot tracking and attribute leads to source.</td><td><span class="mono" style="font-size:12.5px">GOLF-68 / GOLF-71</span></td><td style="white-space:nowrap">Ali</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-07</td><td><strong>Joint HubSpot + GA data review</strong><br><span class="pill p-now" style="margin-top:5px">Diagnostic</span><br><span class="dep">Needs AUD-06</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Traffic, leads and revenue in one view. Tue 12 Aug 10:00 ET.</td><td><span class="mono" style="font-size:12.5px">GOLF-70</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P0</strong></td></tr>
+    </tbody></table></div>
+  <h3>This week · 11-15 August</h3>
+  <p>Ships regardless of what the diagnosis turns up. All directly observed defects.</p>
+  <div class="scroll"><table class="tbl reg">
+    <thead><tr><th>ID</th><th>Task</th><th>Done when</th><th>Linear</th><th>Owner</th><th class="n">Pri</th></tr></thead><tbody>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-08</td><td><strong>Fix the unresolved {location} template tag on all 5 lesson pages</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span></td><td style="font-size:13.5px;color:var(--ink-soft)">No literal {location} string renders anywhere. Each page has a unique title and meta description.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-09</td><td><strong>Populate telephone and hasMap in JSON-LD on all 7 location pages</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span><br><span class="dep">Needs AUD-05</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Both fields non-empty and correct on every location page. Validates in Rich Results Test.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-10</td><td><strong>Correct the JSON-LD url field from /location/ to the resolving path</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Structured data url matches the live canonical on all 7 pages. No 404 on any declared canonical.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-11</td><td><strong>Consolidate the two Glendale pages into one canonical, 301 the other</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span><br><span class="dep">Needs AUD-01</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One Glendale location page. Old URL 301s. &#x27;Formerly Desert Mirage&#x27; content preserved on the survivor.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-12</td><td><strong>Add title tags to both blog posts</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span><br><span class="dep">Gates AUD-45</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Both posts have unique HTML title elements, not just an on-page H1.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-13</td><td><strong>Add disambiguating copy to the Shoal Creek page</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Page copy distinguishes it from the public Shoal Creek Golf Course and from Shoal Creek, Alabama. City framing decision made.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-14</td><td><strong>Resolve the /ranch-pass vs /new-ranch-pass pricing conflict</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One canonical pricing page. The other 301s or is removed. No contradictory prices live.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-15</td><td><strong>Replace the three duplicated testimonials with location-specific proof</strong><br><span class="pill p-open" style="margin-top:5px">Defect</span><br><span class="dep">Needs AUD-23 for volume</span></td><td style="font-size:13.5px;color:var(--ink-soft)">No testimonial appears on more than one location page. Placeholder copy removed where real reviews aren&#x27;t ready.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-16</td><td><strong>Publish NAP in crawlable HTML text on every location page</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-05</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Name, street address and phone visible as text, not an image, on all 6 location pages.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-17</td><td><strong>Confirm the blog hub is discoverable and indexable</strong><br><span class="pill p-now" style="margin-top:5px">Diagnostic</span><br><span class="dep">Related to AUD-12</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Published posts appear in the sitemap and are crawlable. Resolves why a crawl sees almost no blog corpus.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-18</td><td><strong>Fix Free Bucket form lead-source tracking</strong><br><span class="pill p-def" style="margin-top:5px">Measure</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Lead source attributed correctly on every Free Bucket submission.</td><td><span class="mono" style="font-size:12.5px">GOLF-67</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-19</td><td><strong>Designer onboarded on brand, UX and CRO</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Designer has the audit, the brand brief and a prioritised CRO list.</td><td><span class="mono" style="font-size:12.5px">GOLF-75</span></td><td style="white-space:nowrap">Tyler</td><td class="n"><strong>P1</strong></td></tr>
+    </tbody></table></div>
+  <h3>Weeks 2-4 · to 28 August</h3>
+  <p>Finish the restructure, claim the local footprint.</p>
+  <div class="scroll"><table class="tbl reg">
+    <thead><tr><th>ID</th><th>Task</th><th>Done when</th><th>Linear</th><th>Owner</th><th class="n">Pri</th></tr></thead><tbody>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-20</td><td><strong>Complete restructure phases 2-7 with full redirect coverage</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-01</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Every one of the 43 location-scoped URLs either resolves or 301s to its new home. Zero orphaned redirects. QA&#x27;d twice.</td><td><span class="mono" style="font-size:12.5px">GOLF-30 / 50 / 51 / 52 / 53 / 54 / 55</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-21</td><td><strong>Claim and complete Google Business Profiles for all six locations</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span><br><span class="dep">Needs AUD-04, AUD-05</span></td><td style="font-size:13.5px;color:var(--ink-soft)">All 6 verified, categorised, with hours, photos, attributes and correct NAP.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-22</td><td><strong>Audit NAP consistency across third-party directories</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span><br><span class="dep">Needs AUD-04</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Inventory of every listing with a mismatched name, address or phone, plus corrections filed.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-23</td><td><strong>Launch a per-location review generation campaign</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span><br><span class="dep">Needs AUD-04</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Post-visit review request live at all 6 sites. Baseline review count recorded per location.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-24</td><td><strong>Noindex the 15 thank-you pages and rescue the two real content pages</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Thank-you pages out of the index. what-to-expect and what-makes-golf-ranch-worth-the-trip relocated to real URLs.</td><td><span class="mono" style="font-size:12.5px">GOLF-52</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-25</td><td><strong>Remove build artefacts from the index</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span></td><td style="font-size:13.5px;color:var(--ink-soft)">-full-header, -no-header, -copy, ranchpass-location-tempate and careers-old removed or noindexed.</td><td><span class="mono" style="font-size:12.5px">GOLF-52</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-26</td><td><strong>Resolve split duplicates</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One privacy page. One lessons path per city. Losers 301 to winners.</td><td><span class="mono" style="font-size:12.5px">GOLF-51</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-27</td><td><strong>Add FAQPage schema to Ranch Pass, Toptracer Tech and the homepage</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span></td><td style="font-size:13.5px;color:var(--ink-soft)">All three validate in Rich Results Test against the FAQ content already on the pages.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-28</td><td><strong>Add Event schema to the Golf Ranch Classic and the 2v2 leagues</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Each event carries name, date, venue and offer. Validates clean.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P2</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-29</td><td><strong>Add Offer schema to bucket pricing</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span><br><span class="dep">Needs AUD-05</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Bucket sizes and prices machine-readable per location.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P2</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-30</td><td><strong>Rebuild the Free Bucket page for conversion</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Rebuilt against the CRO audit. Baseline conversion rate recorded before launch.</td><td><span class="mono" style="font-size:12.5px">GOLF-27</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-31</td><td><strong>Ship Lake Shore and Sugar Creek Women&#x27;s 101 pages</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Both live on the CMS-friendly clinic template.</td><td><span class="mono" style="font-size:12.5px">GOLF-23 / GOLF-19</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-32</td><td><strong>Stand up per-location tracking and reporting</strong><br><span class="pill p-def" style="margin-top:5px">Measure</span><br><span class="dep">Needs AUD-20</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Rankings, citations and conversions segmented by location, not blended.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-33</td><td><strong>Build six per-location measurement packs</strong><br><span class="pill p-def" style="margin-top:5px">Measure</span><br><span class="dep">Needs AUD-32</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One pack per location with its own local competitor set. Brand-level signals inherited, not duplicated.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Tyler</td><td class="n"><strong>P1</strong></td></tr>
+    </tbody></table></div>
+  <h3>September</h3>
+  <p>Location hubs and the content that lives on them.</p>
+  <div class="scroll"><table class="tbl reg">
+    <thead><tr><th>ID</th><th>Task</th><th>Done when</th><th>Linear</th><th>Owner</th><th class="n">Pri</th></tr></thead><tbody>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-34</td><td><strong>Build the location hub template</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-05, AUD-20</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One template carrying all ten required elements: NAP, schema, hours, bays, pricing, instructors, reviews, directions, FAQ, local offer.</td><td><span class="mono" style="font-size:12.5px">GOLF-29</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-35</td><td><strong>Launch the Grand Prairie hub first</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-34</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Live, indexed, fully populated. First because Topgolf opened in Grand Prairie in January.</td><td><span class="mono" style="font-size:12.5px">GOLF-29</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-36</td><td><strong>Launch the Glendale hub</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-34, AUD-11</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Live and indexed. Resolves the worst URL fragmentation on the site.</td><td><span class="mono" style="font-size:12.5px">GOLF-29</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-37</td><td><strong>Launch Richardson, Shoal Creek, Lee&#x27;s Summit and Brookfield hubs</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-34</span></td><td style="font-size:13.5px;color:var(--ink-soft)">All four live and indexed on the same template.</td><td><span class="mono" style="font-size:12.5px">GOLF-29</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-38</td><td><strong>Write city-level FAQ content for all six locations</strong><br><span class="pill p-own" style="margin-top:5px">Content</span><br><span class="dep">Needs AUD-34</span></td><td style="font-size:13.5px;color:var(--ink-soft)">2-3 localised questions per city covering parking, hours, group bookings and lessons, marked up with FAQPage schema.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-39</td><td><strong>Rebuild the gift cards page to compete</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Page targets a 4,400/mo decision-stage term where a rival ranks 7th and nobody owns the space.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P0</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-40</td><td><strong>Localise the Toptracer page per market</strong><br><span class="pill p-own" style="margin-top:5px">Content</span><br><span class="dep">Needs AUD-34</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Toptracer availability confirmed per location and targetable on &#x27;[city] Toptracer&#x27; queries.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-41</td><td><strong>Publish a press and stats page</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Consolidates Series B, founders, member count and growth figures currently only in third-party press.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-42</td><td><strong>Remediate mobile Core Web Vitals</strong><br><span class="pill p-open" style="margin-top:5px">Perf</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Performance from 37 toward 70+. LCP under 4s. Payload and blocking scripts addressed, not design.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Jonel</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-43</td><td><strong>Ship the 102-series clinic pages</strong><br><span class="pill p-def" style="margin-top:5px">Structure</span><br><span class="dep">Needs AUD-31</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Live on the locked URL convention.</td><td><span class="mono" style="font-size:12.5px">GOLF-24</span></td><td style="white-space:nowrap">Gabriel</td><td class="n"><strong>P2</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-44</td><td><strong>Build the &#x27;Golf Ranch alternative&#x27; page</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Claims a commercial-intent term currently unclaimed by anyone, including competitors.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    </tbody></table></div>
+  <h3>October and beyond</h3>
+  <p>Compounding work. Only durable once W1-W3 are done.</p>
+  <div class="scroll"><table class="tbl reg">
+    <thead><tr><th>ID</th><th>Task</th><th>Done when</th><th>Linear</th><th>Owner</th><th class="n">Pri</th></tr></thead><tbody>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-45</td><td><strong>Run the blog programme against a fixed foundation</strong><br><span class="pill p-own" style="margin-top:5px">Content</span><br><span class="dep">Gated by AUD-12, AUD-17</span></td><td style="font-size:13.5px;color:var(--ink-soft)">20 posts by 31 Aug, then sustained cadence. Every post has a title tag and is indexed.</td><td><span class="mono" style="font-size:12.5px">GOLF-72</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-46</td><td><strong>Publish per-metro Topgolf comparison pages</strong><br><span class="pill p-own" style="margin-top:5px">Content</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One per metro where Topgolf competes directly: DFW, Kansas City, Phoenix.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-47</td><td><strong>Run a local content track per market</strong><br><span class="pill p-own" style="margin-top:5px">Content</span><br><span class="dep">Needs AUD-34</span></td><td style="font-size:13.5px;color:var(--ink-soft)">One piece per metro tied to a real local hook, not brand-generic content.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P2</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-48</td><td><strong>Build local citations and links per metro</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Chambers of commerce, sports directories and community press in each of the 4 metros.</td><td><span class="mono" style="font-size:12.5px">GOLF-76</span></td><td style="white-space:nowrap">Tyler</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-49</td><td><strong>Establish Wikidata and LinkedIn company entities</strong><br><span class="pill p-def" style="margin-top:5px">Entity</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Both live and consistent with on-site NAP and brand naming.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Marina</td><td class="n"><strong>P2</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-50</td><td><strong>Re-run the citation probe monthly across all five engines</strong><br><span class="pill p-def" style="margin-top:5px">Measure</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Branded and non-branded prompt sets both re-run. Score becomes a tracked line, not a snapshot.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Mina</td><td class="n"><strong>P1</strong></td></tr>
+    <tr><td class="mono" style="font-size:12.5px;white-space:nowrap">AUD-51</td><td><strong>Verify or retire the &#x27;1,500+ five-star reviews&#x27; claim</strong><br><span class="pill p-def" style="margin-top:5px">Measure</span><br><span class="dep">Needs AUD-23</span></td><td style="font-size:13.5px;color:var(--ink-soft)">Either sourced to countable third-party platforms, or removed from AI-facing content.</td><td><span class="pill p-open">NEW</span></td><td style="white-space:nowrap">Tyler</td><td class="n"><strong>P1</strong></td></tr>
+    </tbody></table></div>
+  <h3>Handoff</h3>
+  <p>The same fifty-one rows as newline-delimited JSON, one object per line, for loading straight into Linear. <span class="mono">linear</span> holds the existing ticket to refine, or is <span class="mono">null</span> where a ticket needs creating. <span class="mono">depends_on</span> carries the sequencing.</p>
+  <div class="copywrap">
+    <button class="copybtn" onclick="copyReg(this)">Copy all 51 rows</button>
+    <pre class="payload" id="regjson">{&quot;id&quot;: &quot;AUD-01&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Diagnostic&quot;, &quot;title&quot;: &quot;Confirm whether the new URL hierarchy is live on production&quot;, &quot;acceptance&quot;: &quot;Written answer from dev on: is /locations/ serving in prod, and what shipped 21-30 June. Deploy log attached.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Gates AUD-02, AUD-20 and all of W2&quot;}
+{&quot;id&quot;: &quot;AUD-02&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Diagnostic&quot;, &quot;title&quot;: &quot;Reconcile Search Console clicks against GA4 sessions, 1 June to date&quot;, &quot;acceptance&quot;: &quot;One chart, both series, annotated with the date each July tracking fix went live. Written call on how much of the -65% is real.&quot;, &quot;linear&quot;: &quot;GOLF-73&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-04&quot;}
+{&quot;id&quot;: &quot;AUD-03&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Diagnostic&quot;, &quot;title&quot;: &quot;Split Search Console traffic branded vs non-branded&quot;, &quot;acceptance&quot;: &quot;Two series from 1 June. Confirms or kills the hypothesis that branded is flat and non-branded carries the decline.&quot;, &quot;linear&quot;: &quot;GOLF-73&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-04&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Access&quot;, &quot;title&quot;: &quot;Get Google Business Profile admin for all six locations&quot;, &quot;acceptance&quot;: &quot;Islands has admin on all 6 GBP listings. Highest-value unblock in the engagement.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Ali&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Blocks AUD-21, AUD-22, AUD-23&quot;}
+{&quot;id&quot;: &quot;AUD-05&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Access&quot;, &quot;title&quot;: &quot;Collect confirmed NAP, hours and bay count per location&quot;, &quot;acceptance&quot;: &quot;One sheet: legal name, street address, phone, regular + seasonal hours, bay count, covered/heated, Toptracer yes/no, per site.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Ali&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Blocks AUD-11, AUD-12, AUD-30 to AUD-35&quot;}
+{&quot;id&quot;: &quot;AUD-06&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Access&quot;, &quot;title&quot;: &quot;Get HubSpot tracking access before Tuesday&#x27;s session&quot;, &quot;acceptance&quot;: &quot;Islands can read HubSpot tracking and attribute leads to source.&quot;, &quot;linear&quot;: &quot;GOLF-68 / GOLF-71&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Ali&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Blocks AUD-07&quot;}
+{&quot;id&quot;: &quot;AUD-07&quot;, &quot;wave&quot;: &quot;W0&quot;, &quot;bucket&quot;: &quot;Diagnostic&quot;, &quot;title&quot;: &quot;Joint HubSpot + GA data review&quot;, &quot;acceptance&quot;: &quot;Traffic, leads and revenue in one view. Tue 12 Aug 10:00 ET.&quot;, &quot;linear&quot;: &quot;GOLF-70&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-06&quot;}
+{&quot;id&quot;: &quot;AUD-08&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Fix the unresolved {location} template tag on all 5 lesson pages&quot;, &quot;acceptance&quot;: &quot;No literal {location} string renders anywhere. Each page has a unique title and meta description.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-09&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Populate telephone and hasMap in JSON-LD on all 7 location pages&quot;, &quot;acceptance&quot;: &quot;Both fields non-empty and correct on every location page. Validates in Rich Results Test.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-05&quot;}
+{&quot;id&quot;: &quot;AUD-10&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Correct the JSON-LD url field from /location/ to the resolving path&quot;, &quot;acceptance&quot;: &quot;Structured data url matches the live canonical on all 7 pages. No 404 on any declared canonical.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-11&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Consolidate the two Glendale pages into one canonical, 301 the other&quot;, &quot;acceptance&quot;: &quot;One Glendale location page. Old URL 301s. &#x27;Formerly Desert Mirage&#x27; content preserved on the survivor.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-01&quot;}
+{&quot;id&quot;: &quot;AUD-12&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Add title tags to both blog posts&quot;, &quot;acceptance&quot;: &quot;Both posts have unique HTML title elements, not just an on-page H1.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Gates AUD-45&quot;}
+{&quot;id&quot;: &quot;AUD-13&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Add disambiguating copy to the Shoal Creek page&quot;, &quot;acceptance&quot;: &quot;Page copy distinguishes it from the public Shoal Creek Golf Course and from Shoal Creek, Alabama. City framing decision made.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-14&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Resolve the /ranch-pass vs /new-ranch-pass pricing conflict&quot;, &quot;acceptance&quot;: &quot;One canonical pricing page. The other 301s or is removed. No contradictory prices live.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-15&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Defect&quot;, &quot;title&quot;: &quot;Replace the three duplicated testimonials with location-specific proof&quot;, &quot;acceptance&quot;: &quot;No testimonial appears on more than one location page. Placeholder copy removed where real reviews aren&#x27;t ready.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-23 for volume&quot;}
+{&quot;id&quot;: &quot;AUD-16&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Publish NAP in crawlable HTML text on every location page&quot;, &quot;acceptance&quot;: &quot;Name, street address and phone visible as text, not an image, on all 6 location pages.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-05&quot;}
+{&quot;id&quot;: &quot;AUD-17&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Diagnostic&quot;, &quot;title&quot;: &quot;Confirm the blog hub is discoverable and indexable&quot;, &quot;acceptance&quot;: &quot;Published posts appear in the sitemap and are crawlable. Resolves why a crawl sees almost no blog corpus.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Related to AUD-12&quot;}
+{&quot;id&quot;: &quot;AUD-18&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Measure&quot;, &quot;title&quot;: &quot;Fix Free Bucket form lead-source tracking&quot;, &quot;acceptance&quot;: &quot;Lead source attributed correctly on every Free Bucket submission.&quot;, &quot;linear&quot;: &quot;GOLF-67&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-19&quot;, &quot;wave&quot;: &quot;W1&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Designer onboarded on brand, UX and CRO&quot;, &quot;acceptance&quot;: &quot;Designer has the audit, the brand brief and a prioritised CRO list.&quot;, &quot;linear&quot;: &quot;GOLF-75&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Tyler&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-20&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Complete restructure phases 2-7 with full redirect coverage&quot;, &quot;acceptance&quot;: &quot;Every one of the 43 location-scoped URLs either resolves or 301s to its new home. Zero orphaned redirects. QA&#x27;d twice.&quot;, &quot;linear&quot;: &quot;GOLF-30 / 50 / 51 / 52 / 53 / 54 / 55&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-01&quot;}
+{&quot;id&quot;: &quot;AUD-21&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Claim and complete Google Business Profiles for all six locations&quot;, &quot;acceptance&quot;: &quot;All 6 verified, categorised, with hours, photos, attributes and correct NAP.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-04, AUD-05&quot;}
+{&quot;id&quot;: &quot;AUD-22&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Audit NAP consistency across third-party directories&quot;, &quot;acceptance&quot;: &quot;Inventory of every listing with a mismatched name, address or phone, plus corrections filed.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-04&quot;}
+{&quot;id&quot;: &quot;AUD-23&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Launch a per-location review generation campaign&quot;, &quot;acceptance&quot;: &quot;Post-visit review request live at all 6 sites. Baseline review count recorded per location.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-04&quot;}
+{&quot;id&quot;: &quot;AUD-24&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Noindex the 15 thank-you pages and rescue the two real content pages&quot;, &quot;acceptance&quot;: &quot;Thank-you pages out of the index. what-to-expect and what-makes-golf-ranch-worth-the-trip relocated to real URLs.&quot;, &quot;linear&quot;: &quot;GOLF-52&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-25&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Remove build artefacts from the index&quot;, &quot;acceptance&quot;: &quot;-full-header, -no-header, -copy, ranchpass-location-tempate and careers-old removed or noindexed.&quot;, &quot;linear&quot;: &quot;GOLF-52&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-26&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Resolve split duplicates&quot;, &quot;acceptance&quot;: &quot;One privacy page. One lessons path per city. Losers 301 to winners.&quot;, &quot;linear&quot;: &quot;GOLF-51&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-27&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Add FAQPage schema to Ranch Pass, Toptracer Tech and the homepage&quot;, &quot;acceptance&quot;: &quot;All three validate in Rich Results Test against the FAQ content already on the pages.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-28&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Add Event schema to the Golf Ranch Classic and the 2v2 leagues&quot;, &quot;acceptance&quot;: &quot;Each event carries name, date, venue and offer. Validates clean.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P2&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-29&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Add Offer schema to bucket pricing&quot;, &quot;acceptance&quot;: &quot;Bucket sizes and prices machine-readable per location.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P2&quot;, &quot;depends_on&quot;: &quot;Needs AUD-05&quot;}
+{&quot;id&quot;: &quot;AUD-30&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Rebuild the Free Bucket page for conversion&quot;, &quot;acceptance&quot;: &quot;Rebuilt against the CRO audit. Baseline conversion rate recorded before launch.&quot;, &quot;linear&quot;: &quot;GOLF-27&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-31&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Ship Lake Shore and Sugar Creek Women&#x27;s 101 pages&quot;, &quot;acceptance&quot;: &quot;Both live on the CMS-friendly clinic template.&quot;, &quot;linear&quot;: &quot;GOLF-23 / GOLF-19&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-32&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Measure&quot;, &quot;title&quot;: &quot;Stand up per-location tracking and reporting&quot;, &quot;acceptance&quot;: &quot;Rankings, citations and conversions segmented by location, not blended.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-20&quot;}
+{&quot;id&quot;: &quot;AUD-33&quot;, &quot;wave&quot;: &quot;W2&quot;, &quot;bucket&quot;: &quot;Measure&quot;, &quot;title&quot;: &quot;Build six per-location measurement packs&quot;, &quot;acceptance&quot;: &quot;One pack per location with its own local competitor set. Brand-level signals inherited, not duplicated.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Tyler&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-32&quot;}
+{&quot;id&quot;: &quot;AUD-34&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Build the location hub template&quot;, &quot;acceptance&quot;: &quot;One template carrying all ten required elements: NAP, schema, hours, bays, pricing, instructors, reviews, directions, FAQ, local offer.&quot;, &quot;linear&quot;: &quot;GOLF-29&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-05, AUD-20&quot;}
+{&quot;id&quot;: &quot;AUD-35&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Launch the Grand Prairie hub first&quot;, &quot;acceptance&quot;: &quot;Live, indexed, fully populated. First because Topgolf opened in Grand Prairie in January.&quot;, &quot;linear&quot;: &quot;GOLF-29&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: &quot;Needs AUD-34&quot;}
+{&quot;id&quot;: &quot;AUD-36&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Launch the Glendale hub&quot;, &quot;acceptance&quot;: &quot;Live and indexed. Resolves the worst URL fragmentation on the site.&quot;, &quot;linear&quot;: &quot;GOLF-29&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-34, AUD-11&quot;}
+{&quot;id&quot;: &quot;AUD-37&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Launch Richardson, Shoal Creek, Lee&#x27;s Summit and Brookfield hubs&quot;, &quot;acceptance&quot;: &quot;All four live and indexed on the same template.&quot;, &quot;linear&quot;: &quot;GOLF-29&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-34&quot;}
+{&quot;id&quot;: &quot;AUD-38&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Write city-level FAQ content for all six locations&quot;, &quot;acceptance&quot;: &quot;2-3 localised questions per city covering parking, hours, group bookings and lessons, marked up with FAQPage schema.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-34&quot;}
+{&quot;id&quot;: &quot;AUD-39&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Rebuild the gift cards page to compete&quot;, &quot;acceptance&quot;: &quot;Page targets a 4,400/mo decision-stage term where a rival ranks 7th and nobody owns the space.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P0&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-40&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Localise the Toptracer page per market&quot;, &quot;acceptance&quot;: &quot;Toptracer availability confirmed per location and targetable on &#x27;[city] Toptracer&#x27; queries.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-34&quot;}
+{&quot;id&quot;: &quot;AUD-41&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Publish a press and stats page&quot;, &quot;acceptance&quot;: &quot;Consolidates Series B, founders, member count and growth figures currently only in third-party press.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-42&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Perf&quot;, &quot;title&quot;: &quot;Remediate mobile Core Web Vitals&quot;, &quot;acceptance&quot;: &quot;Performance from 37 toward 70+. LCP under 4s. Payload and blocking scripts addressed, not design.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Jonel&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-43&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Structure&quot;, &quot;title&quot;: &quot;Ship the 102-series clinic pages&quot;, &quot;acceptance&quot;: &quot;Live on the locked URL convention.&quot;, &quot;linear&quot;: &quot;GOLF-24&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Gabriel&quot;, &quot;priority&quot;: &quot;P2&quot;, &quot;depends_on&quot;: &quot;Needs AUD-31&quot;}
+{&quot;id&quot;: &quot;AUD-44&quot;, &quot;wave&quot;: &quot;W3&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Build the &#x27;Golf Ranch alternative&#x27; page&quot;, &quot;acceptance&quot;: &quot;Claims a commercial-intent term currently unclaimed by anyone, including competitors.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-45&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Run the blog programme against a fixed foundation&quot;, &quot;acceptance&quot;: &quot;20 posts by 31 Aug, then sustained cadence. Every post has a title tag and is indexed.&quot;, &quot;linear&quot;: &quot;GOLF-72&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Gated by AUD-12, AUD-17&quot;}
+{&quot;id&quot;: &quot;AUD-46&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Publish per-metro Topgolf comparison pages&quot;, &quot;acceptance&quot;: &quot;One per metro where Topgolf competes directly: DFW, Kansas City, Phoenix.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-47&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Content&quot;, &quot;title&quot;: &quot;Run a local content track per market&quot;, &quot;acceptance&quot;: &quot;One piece per metro tied to a real local hook, not brand-generic content.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P2&quot;, &quot;depends_on&quot;: &quot;Needs AUD-34&quot;}
+{&quot;id&quot;: &quot;AUD-48&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Build local citations and links per metro&quot;, &quot;acceptance&quot;: &quot;Chambers of commerce, sports directories and community press in each of the 4 metros.&quot;, &quot;linear&quot;: &quot;GOLF-76&quot;, &quot;is_new&quot;: false, &quot;owner&quot;: &quot;Tyler&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-49&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Entity&quot;, &quot;title&quot;: &quot;Establish Wikidata and LinkedIn company entities&quot;, &quot;acceptance&quot;: &quot;Both live and consistent with on-site NAP and brand naming.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Marina&quot;, &quot;priority&quot;: &quot;P2&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-50&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Measure&quot;, &quot;title&quot;: &quot;Re-run the citation probe monthly across all five engines&quot;, &quot;acceptance&quot;: &quot;Branded and non-branded prompt sets both re-run. Score becomes a tracked line, not a snapshot.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Mina&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: null}
+{&quot;id&quot;: &quot;AUD-51&quot;, &quot;wave&quot;: &quot;W4&quot;, &quot;bucket&quot;: &quot;Measure&quot;, &quot;title&quot;: &quot;Verify or retire the &#x27;1,500+ five-star reviews&#x27; claim&quot;, &quot;acceptance&quot;: &quot;Either sourced to countable third-party platforms, or removed from AI-facing content.&quot;, &quot;linear&quot;: null, &quot;is_new&quot;: true, &quot;owner&quot;: &quot;Tyler&quot;, &quot;priority&quot;: &quot;P1&quot;, &quot;depends_on&quot;: &quot;Needs AUD-23&quot;}</pre>
+  </div>
+  <script>
+function copyReg(btn){
+  var t=document.getElementById('regjson').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var o=btn.textContent; btn.textContent='Copied'; btn.classList.add('done');
+    setTimeout(function(){btn.textContent=o;btn.classList.remove('done');},1800);
+  });
+}
+</script>
+</section>
+
+<!-- method -->
+<section>
+  <div class="marker">13 &mdash; Method &amp; caveats</div>
+  <h2>How this was measured</h2>
+  <p style="font-size:15.5px">Full site inventory, technical signals, structured data and entity footprint captured by crawl and direct HTML inspection in the first week of August 2026. Citation results are measured, not modelled: 22 buyer questions run against ChatGPT, Perplexity, Google AI Overviews, Gemini and Claude — 16 branded, producing 55 cited-with-link results across 80 question-engine pairs, and 6 non-branded category questions, of which one surfaced Golf Ranch. Search volumes are 12-month US averages. Positions are Google top-30; a dash means not placed in the top 30. The visibility score weights SEO at 25%, GEO at 35% and AEO at 40% across nineteen signals.</p>
+
+  <h4>Flagged rather than asserted</h4>
+  <ul>
+    <li>Whether the lessons template bug is server-side, and so visible to Googlebot, or a client-side issue the renderer resolves differently. A JS-rendering crawl or Search Console will settle it.</li>
+    <li>Index counts and historical ranking trend. A <span class="mono">site:</span> query was blocked by robots restrictions and archive lookups returned no usable date, so Search Console Coverage is the fastest path.</li>
+    <li>Estimated traffic or pipeline value. Keyword-aggregator quota was exhausted mid-audit, and we would rather present nothing than an unverified number.</li>
+    <li>The "1,500+ five-star reviews" claim, which is currently sourced only from your own homepage. Third-party platforms show 18 to 25 reviews per location where found, and no review data at all for Lee's Summit or Glendale. The aggregate figure may well be right, but it should not go into AI-facing content until it can be sourced, because a proof point an engine cannot corroborate becomes a liability.</li>
+    <li>The traffic decline itself, until Search Console and Analytics are reconciled as described in section 4.</li>
+  </ul>
+  <p style="font-size:15.5px">Everything in sections 3 and 5 is directly observed and safe to act on today.</p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Islands</b><br>Prepared for Golf Ranch USA · 9 August 2026</div>
+    <div><b>Next review</b><br>Post-restructure validation, week of 25 August</div>
+  </div>
+</footer>
+
+</body>
+</html>
