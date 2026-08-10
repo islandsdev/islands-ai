@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golf Ranch USA — Project Progress Report | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a; --muted:#5c5a57; --border:#e4e2dc; --orange:#e0793d;
+  --bg:#ffffff; --bg-off:#f6f5f2; --card:#161615;
+  --green:#1a7a43; --red:#b33020; --blue:#1e40af;
+  --muted-dk:#a3a09a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,sans-serif;font-size:11pt;line-height:1.58;-webkit-font-smoothing:antialiased;}
+
+/* TOP BAR */
+.topbar{background:var(--ink);padding:0;}
+.topbar-inner{max-width:1080px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.logo{color:#fff;display:flex;align-items:center;}
+.logo svg{height:28px;width:auto;}
+.topbar-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dk);}
+
+/* COVER */
+.cover{background:var(--ink);color:#fff;padding:56px 48px 52px;border-top:1px solid #1e1e1c;}
+.cover-inner{max-width:1080px;margin:0 auto;}
+.cover-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:20px;}
+.cover h1{font-size:clamp(36px,5vw,58px);font-weight:800;letter-spacing:-.025em;line-height:1.04;color:#fff;margin-bottom:12px;}
+.cover h1 span{background:linear-gradient(90deg,var(--orange),#ef8b4e);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cover-sub{font-size:13pt;color:var(--muted-dk);margin-bottom:36px;max-width:60ch;}
+.cover-meta{display:grid;grid-template-columns:repeat(4,auto);gap:0;border-top:1px solid #2a2926;padding-top:28px;width:fit-content;gap:40px;}
+.cover-meta-item b{display:block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:4px;}
+.cover-meta-item span{font-size:11pt;color:#d8d5cf;}
+
+/* BODY */
+.body-wrap{max-width:1080px;margin:0 auto;padding:0 48px 80px;}
+
+/* SECTIONS */
+.section{padding:40px 0;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.section-shaded{background:var(--bg-off);margin:0 -48px;padding:40px 48px;}
+.section-dark{background:var(--ink);color:#fff;margin:0 -48px;padding:40px 48px;}
+
+.eyebrow{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:block;}
+h2{font-size:22pt;font-weight:800;letter-spacing:-.02em;line-height:1.08;margin-bottom:12px;}
+h3{font-size:13pt;font-weight:700;letter-spacing:-.01em;margin-bottom:8px;margin-top:32px;}
+h3:first-child{margin-top:0;}
+p{margin-bottom:12px;color:var(--muted);font-size:10.5pt;max-width:84ch;}
+p.dark{color:var(--ink);}
+p strong{color:var(--ink);}
+p:last-child{margin-bottom:0;}
+ul{margin:12px 0 16px 18px;color:var(--muted);font-size:10.5pt;}
+ul li{margin-bottom:6px;}
+
+/* TLDR STATS */
+.tldr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:20px 0 28px;}
+.tldr-stat{background:var(--bg);padding:18px 20px;}
+.tldr-stat b{display:block;font-size:28pt;font-weight:800;letter-spacing:-.025em;line-height:1;color:var(--ink);margin-bottom:6px;}
+.tldr-stat span{font-size:9pt;color:var(--muted);line-height:1.4;}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--orange);background:rgba(224,121,61,.08);padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;}
+.callout.warn{border-left-color:var(--red);background:rgba(179,48,32,.07);}
+.callout p{font-size:10pt;color:var(--ink);margin:0;}
+.callout p + p{margin-top:8px;}
+.callout strong{color:var(--ink);}
+
+/* TRACK HEADER */
+.track-header{margin:28px 0 6px;}
+.track-header .track-name{font-size:11pt;font-weight:800;letter-spacing:-.01em;color:var(--ink);}
+.track-header .track-owner{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-left:10px;}
+.track-desc{font-size:10.5pt;color:var(--muted);margin-bottom:12px;max-width:84ch;}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;margin:10px 0 24px;}
+table{width:100%;border-collapse:collapse;font-size:9.5pt;}
+th{font-size:8pt;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);padding:0 12px 9px 0;text-align:left;white-space:nowrap;}
+td{padding:10px 12px 10px 0;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45;}
+tr:last-child td{border-bottom:none;}
+.tc{font-family:ui-monospace,monospace;font-size:8.5pt;font-weight:700;color:var(--blue);white-space:nowrap;}
+.to{font-size:9pt;color:var(--muted);white-space:nowrap;}
+.tg{font-size:9pt;color:var(--muted);white-space:nowrap;}
+
+/* PILLS */
+.pill{display:inline-block;font-size:7.5pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+.done-p{background:rgba(26,122,67,.12);color:var(--green);}
+.prog-p{background:rgba(224,121,61,.12);color:var(--orange);}
+.p0-p{background:rgba(179,48,32,.13);color:var(--red);}
+.todo-p{background:rgba(10,10,10,.08);color:#444;}
+
+/* PHASE DIVIDER */
+.phase-div{font-size:10pt;font-weight:700;color:var(--ink);padding:10px 0 4px;border-top:2px solid var(--ink);margin-top:28px;letter-spacing:-.005em;}
+
+/* CAT BAND */
+.cat-band{background:var(--ink);color:#fff;padding:11px 0;margin:40px -48px 0;}
+.cat-band-inner{padding:0 48px;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);}
+
+/* FOOTER */
+.footer{background:var(--ink);color:var(--muted-dk);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;font-size:9.5pt;margin-top:0;}
+.footer-logo{color:#fff;display:flex;align-items:center;}
+.footer-logo svg{height:22px;width:auto;}
+
+@media print{
+  html,body{font-size:9.5pt;}
+  .topbar{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .cat-band{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .section-shaded{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .tldr-stat{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .callout{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .pill{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .body-wrap{padding:0 36px 40px;}
+  .topbar-inner,.cover-inner{padding:0 36px;}
+  .cat-band,.cat-band-inner{padding-left:36px;padding-right:36px;}
+  .footer{padding:20px 36px;}
+  .section-shaded,.section-dark{margin:0 -36px;padding-left:36px;padding-right:36px;}
+  h2{font-size:18pt;}
+  .tldr-stat b{font-size:22pt;}
+  table{page-break-inside:auto;}
+  tr{page-break-inside:avoid;}
+}
+
+/* Logo SVG shorthand */
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="logo">
+      <svg viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/><path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/><path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/><path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/><path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/><path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/><path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/><path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/></svg>
+    </span>
+    <span class="topbar-label">Islands &nbsp;·&nbsp; AI Content Agency</span>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Project Progress Report</div>
+    <h1>Golf Ranch USA<br><span>August 2026</span></h1>
+    <p class="cover-sub" style="color:#a3a09a;margin-top:8px;">A full account of what's been built, what's in flight, and what's next — as of August 9, 2026.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><b>Prepared by</b><span>Islands</span></div>
+      <div class="cover-meta-item"><b>Client</b><span>Golf Ranch USA</span></div>
+      <div class="cover-meta-item"><b>Report date</b><span>August 9, 2026</span></div>
+      <div class="cover-meta-item"><b>Period</b><span>Start — present</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="body-wrap">
+
+<!-- TL;DR -->
+<div class="section">
+  <span class="eyebrow">TL;DR</span>
+  <h2>Where things stand.</h2>
+  <p class="dark">The analytics foundation is rebuilt and measuring correctly. The content engine is live and publishing daily with no approval gate, and 20 posts are committed for August. A designer joins Wednesday to revamp brand, UX and CRO. The backlink programme starts now, included in the plan. The site restructure is mid-flight across seven phases through August 28.</p>
+  <p><strong>Two things need your attention this week.</strong> First, Search Console shows organic sessions down about 66% while clicks are down about 15% since late June — a gap that large between two metrics measuring nearly the same thing usually means part of the decline is measurement, not lost traffic. We are reconciling both sources before we accept the headline number. Second, we need to confirm whether the new URL hierarchy has reached production ahead of its redirects.</p>
+
+  <div class="tldr-stats">
+    <div class="tldr-stat"><b>39</b><span>Tickets completed since engagement start</span></div>
+    <div class="tldr-stat"><b>13</b><span>Tickets in progress right now</span></div>
+    <div class="tldr-stat"><b>20</b><span>Blog posts committed for August</span></div>
+    <div class="tldr-stat"><b>Aug 28</b><span>Site restructure completion target</span></div>
+  </div>
+
+  <div class="callout warn" style="margin-top:4px;">
+    <p><strong>The one question that gates the rest of the plan.</strong> Phase 1 of the restructure was built and signed off on staging. Evidence on the live site suggests the new <strong>/locations/</strong> hierarchy may already be serving in production, ahead of Phase 2 internal linking and Phase 3 redirects, which are due August 14 and 15.</p>
+    <p>If that is what happened, it would explain several things at once: the template defects on lesson pages, structured data pointing at URLs that no longer resolve, and part of the traffic decline. It changes the remediation path substantially, so <strong>GOLF-77 is being answered first and everything in weeks two to four sits behind it.</strong></p>
+  </div>
+
+  <h3 style="margin-top:28px;">On the traffic number</h3>
+  <p>In July we consolidated two competing GA4 properties, cleared duplicate tags that were inflating pageviews, fixed cross-domain tracking and excluded internal test traffic. Every one of those corrections <em>reduces</em> the reported figure without a single visitor going anywhere.</p>
+  <p>The start date also needs pinning down: your team reports June 23, our tracking shows around June 28. Both the size and the start of the decline are under active investigation this week, and we would rather give you a number we can stand behind than a fast one.</p>
+</div>
+
+<!-- WHAT WE'VE BUILT -->
+<div class="cat-band"><div class="cat-band-inner">01 — What We've Built</div></div>
+
+<!-- Analytics -->
+<div class="section">
+  <div class="track-header">
+    <span class="track-name">Analytics &amp; tracking</span>
+    <span class="track-owner">Mina</span>
+  </div>
+  <p class="track-desc"><strong>Measurement rebuilt end to end.</strong> Two competing GA4 properties consolidated into one source of truth, duplicate tags inflating pageviews cleared, cross-domain tracking fixed, internal test traffic excluded, GTM container cleaned, Meta Pixel rebuilt with full conversion events, Search Console connected with sitemap submitted, consent mode live. Every lead form — Free Bucket, Lessons, Ranch Pass, Contact and Glendale — now sends conversions to Google Ads. Broken Ads conversion tracking repaired, Lessons conversion event added, newsletter and booking tracking live. You can now see which spend produces which lead.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work completed</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-4</td><td>Fixed inflated pageviews and duplicate tags</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-5</td><td>Resolved dual GA4 properties — single source of truth</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-6</td><td>Fixed cross-domain tracking and excluded test traffic</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-9</td><td>GTM container cleanup</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-8</td><td>Rebuilt Meta Pixel with full conversion events</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-7</td><td>All lead forms sending to Google Ads (Free Bucket, Lessons, Ranch Pass, Contact, Glendale)</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-56</td><td>Fixed broken Google Ads conversions (GTM change broke tracking Jul 28)</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-59</td><td>Created Google Ads conversion event for Lessons</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-11</td><td>Bookings, coaching and location tracking live</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-61</td><td>Removed old GTM from HubSpot</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-32</td><td>GA4 set up across all Golf Ranch pages</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-33</td><td>Google Search Console set up and sitemap submitted</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-60</td><td>Newsletter subscribe tracking live</td><td class="to">Mina</td></tr>
+        <tr><td class="tc">GOLF-13</td><td>Secondary engagement and consent mode</td><td class="to">Mina</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Website -->
+<div class="section section-shaded">
+  <div class="track-header">
+    <span class="track-name">Website &amp; clinic pages</span>
+    <span class="track-owner">Jonel + Gabriel</span>
+  </div>
+  <p class="track-desc"><strong>Site, pages and booking flows.</strong> Two blog hubs launched. Grand Prairie Men's and Women's 101 clinic pages built. Sold-out logic in place across active slots. CTA components on both hubs. Location pages updated with corrected titles, H1s and subheads. Multiple bug fixes across forms and booking flows. Phase 1 of the seven-phase restructure complete on staging.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work completed</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-1</td><td>Two-hub blog live — B2C Golf Tips and B2B Driving Range Guys</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-2</td><td>B2C Golf Tips hub (/blog/tips)</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-3</td><td>B2B Driving Range Guys hub (/owner)</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-20</td><td>GP Men's 101 clinic page (Jul 28 start)</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-21</td><td>GP Women's 101 clinic page — Aug 5 Wed group</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-22</td><td>GP Women's 101 clinic pages — Aug 17 Mon groups</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-62</td><td>CTA component on both blog hubs</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-47</td><td>Interest link added below time-slot popup for sold-out sessions</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-48</td><td>Men's Clinic pricing copy updated</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-15</td><td>Instructor bio updated</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-16</td><td>Club rental price corrected ($5 to $10)</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-17</td><td>Register buttons wired to correct Acuity checkout URLs</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-18</td><td>Men's Clinic promo banner added on Grand Prairie location page</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-63</td><td>Sept 16 6:45pm slot marked sold out</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-44</td><td>Aug 17 6:45pm slot marked sold out</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-26</td><td>Free Bucket page CRO audit complete</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-45</td><td>Enhanced dataLayer push events across all forms (SHA-256 hashed PII)</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-57</td><td>Form bugs fixed on /free-bucket-glendale (dropdowns and TCPA copy)</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-49</td><td>Phase 1 site restructure — new page hierarchy built on staging <em>(production status under confirmation — see GOLF-77)</em></td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-36</td><td>102-series URL convention locked and documented</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-65</td><td>Location pages — title tags fixed, H1s and subheads updated</td><td class="to">Jonel</td></tr>
+        <tr><td class="tc">GOLF-69</td><td>Tyler briefed — Nik stepping back from draft approvals, feedback only going forward</td><td class="to">Ali</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout" style="margin-top:4px;">
+    <p><strong>One deliberate reversal. GOLF-64</strong> — the B2B Driving Range Guys hub built under GOLF-3 has been temporarily hidden from the live site. It went up before there was enough owner-audience content behind it to justify a hub, and thin sections are exactly what the June algorithm update targeted. The build is intact and unhidden the moment the content pipeline has depth to fill it. We revisit September 1.</p>
+  </div>
+</div>
+
+<!-- Content Pipeline -->
+<div class="section">
+  <div class="track-header">
+    <span class="track-name">Content pipeline</span>
+    <span class="track-owner">Marina</span>
+  </div>
+  <p class="track-desc"><strong>Automated publishing live.</strong> Golf Ranch split into two distinct content ventures. n8n connected to Webflow with separate routing for each hub. Content goes live on schedule with no approval gate. 20 posts committed for August.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work completed</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-46</td><td>Golf Ranch split into two content ventures (B2C and B2B)</td><td class="to">Marina</td></tr>
+        <tr><td class="tc">GOLF-58</td><td>n8n connected to Webflow — Golf Tips and Owner routes automated</td><td class="to">Marina</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- IN PROGRESS -->
+<div class="cat-band"><div class="cat-band-inner">02 — In Progress</div></div>
+
+<div class="section section-shaded">
+  <div class="track-header">
+    <span class="track-name">Site restructure, phases 2–7</span>
+    <span class="track-owner">Jonel + Gabriel</span>
+  </div>
+  <p class="track-desc">Phase 1 complete, with its production status being confirmed under GOLF-77. Phases 2 to 7 run through end of August. <strong>This is the highest-risk moment in the plan</strong> — every retired URL gets a redirect, and it will be QA'd twice before production release.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work</th><th>Owner</th><th>Target</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-30</td><td>Site restructure master</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 28</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-50</td><td>Phase 2: internal linking — nav, footer, CMS to canonical URLs</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 14</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-51</td><td>Phase 3: redirect migration — one-hop 301s from retired URLs</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 15</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-52</td><td>Phase 4: sitemap cleanup — noindex utility and test pages</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 18</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-53</td><td>Phase 5: staging QA — crawl, verify 200/301/404, forms and campaign routes</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 20</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-54</td><td>Phase 6: production release</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 22</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-55</td><td>Phase 7: post-launch validation — re-crawl, GSC reindex, monitor</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 25</td><td><span class="pill prog-p">In Progress</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="phase-div">Clinic pages, analytics and defect fixes</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work</th><th>Owner</th><th>Target</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-19</td><td>CMS-friendly clinic page template in Webflow</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 13</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-25</td><td>Sold-out flip logic standardised across all clinic pages</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 13</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-23</td><td>LS/SC Women's 101 clinic pages</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 21</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-67</td><td>Fix Free Bucket form lead source tracking — misattributed as direct traffic</td><td class="to">Mina</td><td class="tg">Aug 13</td><td><span class="pill p0-p">P0 Defect</span></td></tr>
+        <tr><td class="tc">GOLF-73</td><td>Site health deep dive — reconcile GSC against GA4, split branded vs non-branded</td><td class="to">Mina</td><td class="tg">Aug 15</td><td><span class="pill prog-p">In Progress</span></td></tr>
+        <tr><td class="tc">GOLF-72</td><td>August content: 20 posts by Aug 31 — 1/day, 2/day if needed, no approval gate</td><td class="to">Tyler + Marina</td><td class="tg">Aug 31</td><td><span class="pill prog-p">In Progress</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- STILL TO DO -->
+<div class="cat-band"><div class="cat-band-inner">03 — Still To Do</div></div>
+
+<div class="section">
+  <div class="phase-div" style="margin-top:0;">Immediate — this week</div>
+  <p style="margin-bottom:12px;">Blockers and P0 actions. The first three unblock everything else.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work</th><th>Owner</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-77</td><td><strong>Confirm whether the new /locations/ hierarchy is live on production or staging</strong> — gates all of weeks 2–4</td><td class="to">Jonel</td><td class="tg">Aug 11</td></tr>
+        <tr><td class="tc">GOLF-83</td><td><strong>Google Business Profile admin access for all 6 locations</strong> — highest-value unblock available</td><td class="to">Ali</td><td class="tg">Aug 11</td></tr>
+        <tr><td class="tc">GOLF-84</td><td>Collect confirmed NAP, hours and bay count per location — blocks schema population</td><td class="to">Ali</td><td class="tg">Aug 11</td></tr>
+        <tr><td class="tc">GOLF-71</td><td>Nik to provide HubSpot tracking access before Tuesday meeting</td><td class="to">Nik</td><td class="tg">Aug 11</td></tr>
+        <tr><td class="tc">GOLF-68</td><td>Nik Bando and Connor HubSpot access for growth@islands.xyz</td><td class="to">Ali</td><td class="tg">Aug 11</td></tr>
+        <tr><td class="tc">GOLF-70</td><td>Joint HubSpot and GA data review — George, Mina, Ali — Tuesday 10:00 ET</td><td class="to">Mina + Ali</td><td class="tg">Aug 12</td></tr>
+        <tr><td class="tc">GOLF-78</td><td>Fix {location} template tag on all 5 lesson pages — broken text reaching customers and Google</td><td class="to">Gabriel</td><td class="tg">Aug 12</td></tr>
+        <tr><td class="tc">GOLF-80</td><td>Add title tags to all published blog posts — currently missing entirely</td><td class="to">Gabriel</td><td class="tg">Aug 12</td></tr>
+        <tr><td class="tc">GOLF-79</td><td>Correct JSON-LD url field from /location/ (404s) to /locations/ (resolves)</td><td class="to">Gabriel</td><td class="tg">Aug 12</td></tr>
+        <tr><td class="tc">GOLF-81</td><td>Consolidate two Glendale pages with 301 — preserve Desert Mirage content</td><td class="to">Jonel</td><td class="tg">Aug 13</td></tr>
+        <tr><td class="tc">GOLF-82</td><td>Resolve Ranch Pass pricing conflict (/ranch-pass vs /new-ranch-pass disagree)</td><td class="to">Jonel</td><td class="tg">Aug 13</td></tr>
+        <tr><td class="tc">GOLF-85</td><td>Populate telephone and hasMap in JSON-LD on all 7 location pages (needs GOLF-84 first)</td><td class="to">Gabriel</td><td class="tg">Aug 15</td></tr>
+        <tr><td class="tc">GOLF-74</td><td>Full site audit — TOFU investigation and strategy, from Wednesday Aug 13</td><td class="to">Ali + Mina</td><td class="tg">Aug 15</td></tr>
+        <tr><td class="tc">GOLF-75</td><td>Designer in — brand revamp, UX overhaul, CRO improvements, starting Wed Aug 13</td><td class="to">Ali</td><td class="tg">Aug 13</td></tr>
+        <tr><td class="tc">GOLF-76</td><td>Backlink programme — brand mentions via Islands exchange network, included in plan</td><td class="to">Islands</td><td class="tg">Ongoing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="phase-div">Weeks 2–4 — to August 28</div>
+  <p style="margin-bottom:12px;">Finish the restructure, claim the local footprint.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work</th><th>Owner</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-86</td><td>Fix Shoal Creek page — disambiguate from KC course and Birmingham AL collision</td><td class="to">Gabriel</td><td class="tg">Aug 20</td></tr>
+        <tr><td class="tc">GOLF-87</td><td>Replace duplicate testimonials — same 3 names on all 6 location pages</td><td class="to">Jonel</td><td class="tg">Aug 22</td></tr>
+        <tr><td class="tc">GOLF-88</td><td>Add FAQPage schema to Ranch Pass, Toptracer Tech, homepage</td><td class="to">Gabriel</td><td class="tg">Aug 20</td></tr>
+        <tr><td class="tc">GOLF-89</td><td>Add Event schema for Golf Ranch Classic and 2v2 leagues</td><td class="to">Gabriel</td><td class="tg">Aug 25</td></tr>
+        <tr><td class="tc">GOLF-90</td><td>Add Offer schema for bucket pricing across location pages</td><td class="to">Gabriel</td><td class="tg">Aug 22</td></tr>
+        <tr><td class="tc">GOLF-91</td><td>Remove 15 indexed thank-you pages and build artefacts — rescue 2 with real content first</td><td class="to">Jonel</td><td class="tg">Aug 22</td></tr>
+        <tr><td class="tc">GOLF-92</td><td>Audit NAP consistency across Yelp, Apple Maps, Bing and directories</td><td class="to">Mina</td><td class="tg">Aug 20</td></tr>
+        <tr><td class="tc">GOLF-95</td><td>Claim and complete Google Business Profiles for all 6 locations</td><td class="to">Ali</td><td class="tg">Aug 22</td></tr>
+        <tr><td class="tc">GOLF-97</td><td>Approve location-hub architecture (subfolder strategy) — gates September build</td><td class="to">Ali</td><td class="tg">Aug 20</td></tr>
+        <tr><td class="tc">GOLF-27</td><td>Rebuild Free Bucket page for lead conversion (CRO)</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 28</td></tr>
+        <tr><td class="tc">GOLF-29</td><td>Build updated golf instruction pages per location</td><td class="to">Jonel + Gabriel</td><td class="tg">Aug 21</td></tr>
+        <tr><td class="tc">GOLF-96</td><td>Launch per-location review campaigns across all 6 locations</td><td class="to">Ali</td><td class="tg">Sep 1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="phase-div">September — location hubs, CRO and growth</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ticket</th><th>Work</th><th>Owner</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td class="tc">GOLF-99</td><td>Build 6 city location hubs — /glendale-az/, /grand-prairie-tx/ and siblings (Grand Prairie first)</td><td class="to">Jonel + Gabriel</td><td class="tg">Sep 30</td></tr>
+        <tr><td class="tc">GOLF-98</td><td>Mobile performance — target 70+ from current 37/100 (15.7s LCP)</td><td class="to">Jonel + Gabriel</td><td class="tg">Sep 30</td></tr>
+        <tr><td class="tc">GOLF-24</td><td>Build 102-series clinic pages</td><td class="to">Jonel + Gabriel</td><td class="tg">Sep 11</td></tr>
+        <tr><td class="tc">GOLF-93</td><td>Per-location competitive tracking — 6 markets vs real local competitors</td><td class="to">Mina</td><td class="tg">Sep 1</td></tr>
+        <tr><td class="tc">GOLF-94</td><td>Monthly AI citation probe — 5 engines, branded and non-branded, per location</td><td class="to">Mina</td><td class="tg">Sep 15</td></tr>
+        <tr><td class="tc">GOLF-100</td><td>Build press and stats page — Series B, founders, Forbes and Golf Digest coverage</td><td class="to">Ali</td><td class="tg">Sep 15</td></tr>
+        <tr><td class="tc">GOLF-101</td><td>Optimise gift cards page for "golf gift cards" (4,400/mo, decision stage)</td><td class="to">Ali</td><td class="tg">Sep 15</td></tr>
+        <tr><td class="tc">GOLF-102</td><td>Create "Golf Ranch alternative" comparison page — unclaimed by any competitor</td><td class="to">Ali</td><td class="tg">Sep 15</td></tr>
+        <tr><td class="tc">GOLF-103</td><td>Local content per city — competitive hooks per market</td><td class="to">Ali + Content</td><td class="tg">Oct 1</td></tr>
+        <tr><td class="tc">GOLF-104</td><td>Entity work — Wikidata, LinkedIn company page, Crunchbase</td><td class="to">Ali</td><td class="tg">Sep 30</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /body-wrap -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="footer-logo">
+    <svg viewBox="0 0 128 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/><path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/><path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/><path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/><path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/><path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/><path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/><path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/></svg>
+  </span>
+  <span>Islands &nbsp;·&nbsp; Golf Ranch USA Project Progress Report &nbsp;·&nbsp; August 9, 2026 &nbsp;·&nbsp; islandshq.xyz</span>
+</div>
+
+</body>
+</html>
