@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manhattan Mental Health Counseling AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+    --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+  .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:40px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:648px;}
+  .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+  .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+  .lsection{background:#ffffff; color:#15140f;}
+  .lsection h2, .lsection h3{color:#15140f;}
+  .lsection .lede{color:#55524a;}
+  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection.scoreband .num{color:#c8622a;}
+  .lsection.scoreband .num span{color:#7a766c;}
+  .lsection.scoreband p.desc{color:#3a3830;}
+  .lsection.scoreband .gaugelabels{color:#7a766c;}
+  .lsection.scoreband .gauge .marker{background:#15140f;}
+  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .barrow .name{color:#2c2a24;}
+  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+  .lsection .barrow .pct{color:#7a766c;}
+  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+  .lsection .blogtitle{color:#15140f;}
+  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .proofstats .n{color:#15140f;}
+  .lsection .proofstats .l{color:#6f6b60;}
+  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+  .lsection .proofcard .who{color:#7a766c;}
+  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .card .label{color:#7a766c;}
+  .lsection .card .stat{color:#15140f;}
+  .lsection .card .body{color:#3a3830;}
+  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+  .lsection .quote b{color:#2c2a24;}
+  .lsection .card .divider{background:#e3ded2;}
+  .lsection .card .why{color:#3a3830;}
+  .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="context-right">Islands x Manhattan Mental Health Counseling</div>
+      <div class="context-left">AI Visibility Audit - August 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+      <h1>You've built one of the most thorough therapy sites in New York.<br>So why does ChatGPT still send New Yorkers to <span class="hl">Talkspace</span>?</h1>
+      <p class="sub">Over 200 pages, 110 in-depth articles, and proper medical schema. You've done the work almost no local practice does, and it shows: Perplexity and Google's AI cite you on about half the questions we tested. But on ChatGPT, the biggest engine, you show up in just 1 of 16, and national apps like Talkspace and BetterHelp take the spot instead. We measured exactly how you show up across five AI engines and forty-five searches.</p>
+      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 13, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Search is moving from Google to AI</h2>
+      <p class="lede">SEO alone no longer wins. As search shifts to AI, the practices that get cited, recommended, and chosen are the ones that treat AI visibility as its own discipline. For a therapy practice, that is increasingly where the first "find me a therapist" search happens.</p>
+      <div class="statcols">
+        <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+        <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+        <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband lsection">
+    <div class="wrap inner">
+      <div class="num">3.6<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">MMHC's Overall AI + Search Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:72%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for whether a patient can find you, in Google or in AI. At 3.6 you're near the top of what we measure, well ahead of most practices on the fundamentals. The gap now is specific: one engine, and the head-term searches national apps still own.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The foundation is excellent. The gap is narrow, specific, and winnable.</h2>
+      <p class="lede">Four findings: one place you already win outright, two visibility gaps to close, and one technical drag on a site that's otherwise strong.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">Where you already win</span><span class="pill ahead">Ahead</span></div>
+          <div class="stat">50% on Perplexity</div>
+          <div class="body">On the questions closest to booking, AI already names you: "online therapists in NYC that take Cigna," "Mandarin-speaking therapist in Manhattan," "executive therapist for work stress in NYC." That's the payoff of 110 articles and real medical schema.</div>
+          <div class="quote"><b>"How does online CBT therapy work for anxiety in NYC?"</b> &rarr; you're cited by name.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">You win exactly where you're specific: New York, insurance, and specialized care. That's a moat the national apps can't easily copy, and it's the traffic most likely to become a booked session.</div>
+          <div class="how-lbl">How Islands builds on it</div>
+          <div class="how">We protect and widen this lead. Our reporting agent tracks which prompts you already win and feeds that back into what gets published next, so the advantage compounds.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">The ChatGPT gap</span><span class="pill behind">Behind</span></div>
+          <div class="stat">1 of 16</div>
+          <div class="body">The biggest engine cites you in just 1 of 16 questions (6%), against 50% on Perplexity. When a New Yorker opens ChatGPT and asks for a therapist, you're almost never in the answer.</div>
+          <div class="quote"><b>"Therapists in NYC who specialize in BPD and depression"</b> &rarr; Psychology Today and a hospital got cited. Not you.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">ChatGPT is where the most first-time "find me a therapist" searches now start. Your depth is real, ChatGPT just hasn't connected it to these questions yet, so those searches convert for someone else.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Our writing and scoring agents tune content to how each engine picks its sources. For Blanka that lifted AI-answer appearances from 20 to 132 in 90 days, a 6.6&times; jump.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">National apps own the head terms</span><span class="pill behind">Behind</span></div>
+          <div class="stat">246K/mo, not you</div>
+          <div class="body">On the huge educational searches your patients type first, "splitting," "how to stop a panic attack," "claustrophobia," BetterHelp and Talkspace own Google's AI answer box and you're absent, even though you've written on many of these.</div>
+          <div class="quote"><b>"splitting"</b> (246,000 searches/mo) &rarr; BetterHelp owns the AI Overview. MMHC: not found.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">These top-of-funnel searches are how someone first discovers a practice. Right now a national app intercepts them before your New York and insurance advantage ever comes up.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">GrowTal went from no ranking authority to 318 keywords in Google's top 10 in 90 days. We'd structure and interlink your existing posts to win the head terms you've already written about.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Speed is quietly capping it</span><span class="pill behind">Behind</span></div>
+          <div class="stat">9.8s load</div>
+          <div class="body">Your mobile pages take about 10 seconds to load their main content and close to 20 to become fully usable (61/100 on Google's speed test). On a site this strong, that's the single biggest technical drag.</div>
+          <div class="quote">The content and schema are excellent. Speed is the bottleneck, not the substance.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">Slow pages cost you in Google rankings and in the AI Overviews you're chasing, and they cost you patients who bounce before the page even loads.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">A focused technical pass clears the load-time drag, so the depth you've already built finally gets read and ranked at full strength.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Actually Cited MMHC</div>
+        <p class="lede" style="margin-bottom:22px;">Out of the 16 buyer questions we tested per engine.</p>
+        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:50%;"></div></div><span class="pct">50%</span></div>
+        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:44%;"></div></div><span class="pct">44%</span></div>
+        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:44%;"></div></div><span class="pct">44%</span></div>
+        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:38%;"></div></div><span class="pct">38%</span></div>
+        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:6%;"></div></div><span class="pct">6%</span></div>
+        <div class="chartnote">The good news: your content and schema are stronger than almost any local practice we audit, which is why four engines cite you. The single outlier is ChatGPT (1 of 16), the engine where the most new therapy searches now begin. Closing that one gap is the highest-leverage move on this page.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">Built from the exact gaps this audit found</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Best Online Therapists in NYC That Take Cigna (and How to Verify Your Benefits)</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Therapists in NYC Who Specialize in BPD and Depression</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Is Online Therapy as Effective as In-Person? What the Research Says</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">How to Stop a Panic Attack the Moment It Starts</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Does Healthfirst Cover Mental Health Counseling in New York?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Manhattan Mental Health Counseling</div>
+      <h2>You've done the work almost no practice does.<br>AI just hasn't caught up on the one engine that matters most: <span class="hl">ChatGPT</span>.</h2>
+      <p>110 articles, real medical schema, and you already win the New York and insurance questions that lead to booked sessions. The gap is specific and winnable: ChatGPT cites you once out of sixteen, the national apps own the big educational searches, and a slow-loading site is quietly holding back work that's otherwise excellent.</p>
+      <p>This free audit is the map. The natural next step is a deeper technical pass and a content plan built to win ChatGPT on the New York and insurance searches you already half-own everywhere else. Either way, you walk away with the data.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a free consultation &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Manhattan Mental Health Counseling, August 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
