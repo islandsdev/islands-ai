@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenteonix AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+    --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+  .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:42px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:640px;}
+  .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+  .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+  .lsection{background:#ffffff; color:#15140f;}
+  .lsection h2, .lsection h3{color:#15140f;}
+  .lsection .lede{color:#55524a;}
+  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection.scoreband .num{color:#c8622a;}
+  .lsection.scoreband .num span{color:#7a766c;}
+  .lsection.scoreband p.desc{color:#3a3830;}
+  .lsection.scoreband .gaugelabels{color:#7a766c;}
+  .lsection.scoreband .gauge .marker{background:#15140f;}
+  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .barrow .name{color:#2c2a24;}
+  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+  .lsection .barrow .pct{color:#7a766c;}
+  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+  .lsection .blogtitle{color:#15140f;}
+  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .proofstats .n{color:#15140f;}
+  .lsection .proofstats .l{color:#6f6b60;}
+  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+  .lsection .proofcard .who{color:#7a766c;}
+  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .card .label{color:#7a766c;}
+  .lsection .card .stat{color:#15140f;}
+  .lsection .card .body{color:#3a3830;}
+  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+  .lsection .quote b{color:#2c2a24;}
+  .lsection .card .divider{background:#e3ded2;}
+  .lsection .card .why{color:#3a3830;}
+  .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="context-right">Islands x Zenteonix</div>
+      <div class="context-left">AI Visibility Audit - August 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+      <h1>You win in the room.<br>The internet just hasn't caught up: it still thinks you're <span class="hl">Zetronix</span>.</h1>
+      <p class="sub">You build the systems, and you sell face to face, which works. Nothing here changes that. But the handshake has a second half now: people look you up afterward, and more of them ask ChatGPT than Google. Right now that check comes back thin. You've published nothing yet, so ChatGPT and Claude have nothing to cite, and Google's own info box lists you as "Zetronix," an unrelated electronics company. Here is exactly how that looks across five AI engines.</p>
+      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site, using our conversation to shape what we looked for. Snapshot taken August 13, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Search is moving from Google to AI</h2>
+      <p class="lede">SEO alone no longer wins. As search shifts to AI, the businesses that get cited, recommended, and chosen are the ones that give the engines something real to quote. For a relationship-first business, that is how you back up the handshake at scale.</p>
+      <div class="statcols">
+        <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+        <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+        <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband lsection">
+    <div class="wrap inner">
+      <div class="num">2.4<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">Zenteonix's Overall AI + Search Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:48%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for whether a buyer can find you, in Google or in AI. This measures online discoverability, the thing you've intentionally not chased because you win in person. The point of this page is simply to show what it would look like if you ever wanted the internet to back you up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The foundation is built. There's just nothing on top of it yet.</h2>
+      <p class="lede">Four findings: one thing you did better than most, and three that all trace back to the same fact, you haven't published anything.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">What you already did right</span><span class="pill ahead">Ahead</span></div>
+          <div class="stat">94/100 speed</div>
+          <div class="body">You built this the right way. The site loads in about 3 seconds on mobile, and you added llms.txt and agents.md, the files that tell AI crawlers how to read you. Most businesses we audit, including much larger ones, skip both.</div>
+          <div class="quote">Fast, clean, and crawler-ready. The plumbing is done.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">Nothing technical is standing between you and getting found. That is usually the expensive, tedious part, and it is already handled.</div>
+          <div class="how-lbl">How Islands builds on it</div>
+          <div class="how">A ready foundation means content starts working almost immediately. There's no cleanup phase, we'd point the engine straight at what you actually do.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Nothing to quote yet</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 posts</div>
+          <div class="body">The whole site is 9 pages with no blog or articles. Because of that, ChatGPT and Claude cite Zenteonix in 0 of 16 buyer questions. There is simply nothing for them to pull from.</div>
+          <div class="quote">The engines that lean on published content, ChatGPT and Claude, returned you zero times. The ones that read Google's basic listing found you about half the time.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">When a referral or someone you met at a site visit looks you up later, there's nothing there to confirm the conversation. The trust you built in person doesn't get backed up online.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Even a light, steady publishing cadence gives the engines something real to cite. That's the whole job our content engine does, done for you, without adding to your plate.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">AI thinks you're someone else</span><span class="pill behind">Behind</span></div>
+          <div class="stat">"Zetronix"</div>
+          <div class="body">Google's Knowledge Panel for your brand shows "Zetronix," an unrelated electronics company. In AI answers about you, the engines mix in Zetronix, Zentek, and Zetron alongside the real Zenteonix.</div>
+          <div class="quote"><b>"What is Zenteonix and how do they help small businesses?"</b> &rarr; the answer pulls in Zetronix and other lookalikes, diluting who you actually are.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">The one time AI does talk about you, it's partly crediting a different company. A clear, published identity is what tells the engines which "Zen" is really you.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Content in your own name, plus a visible founder story, disambiguates you fast. Once there's a real body of Zenteonix writing, the lookalikes fall away.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Your questions, answered by strangers</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 of 16</div>
+          <div class="body">For the questions your clients actually ask AI, "how to automate lead response," "operations coaching for exhausted owners," "scale without hiring," random blogs and even EOS and Trainual get cited. Never Zenteonix.</div>
+          <div class="quote"><b>"Operations coaching for successful but exhausted owners"</b> &rarr; EOS Worldwide got cited. Not you, even though that's your exact pitch.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">These are the people you'd most want walking in already knowing your name. Right now AI hands them to someone else at the very moment they're looking.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We target the exact questions your buyers ask, in your voice, so you become the answer instead of the runner-up.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Actually Cited Zenteonix</div>
+        <p class="lede" style="margin-bottom:22px;">Out of the 16 buyer questions we tested per engine.</p>
+        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:50%;"></div></div><span class="pct">50%</span></div>
+        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:44%;"></div></div><span class="pct">44%</span></div>
+        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:44%;"></div></div><span class="pct">44%</span></div>
+        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+        <div class="chartnote">The pattern is clean: the engines that read Google's basic listing (AI Overviews, Perplexity, Gemini) find your name about half the time, but ChatGPT and Claude, which lean on published content and reputation, cite you zero times. That gap starts closing the moment you publish something real.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">The newsletter you mentioned, pointed at what you do</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">How to Answer Every Inbound Lead in Under 30 Seconds, Without Hiring Anyone</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">The Owner-Operator's Guide to Scaling Without Adding Headcount</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Sales-to-Crew Handoffs: The Quiet Leak Costing You Jobs</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">Are You Paying for Software You Don't Actually Use? How to Tell</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">What an Operations Audit Is, and When Your Business Actually Needs One</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Zenteonix</div>
+      <h2>You don't need to chase SEO.<br>But when someone you've met looks you up, it helps if the internet <span class="hl">backs you up</span>.</h2>
+      <p>You win the way the best operators do: on the phone, walking in the door, sitting in the waiting room while your kid gets braces. Nothing here changes that. But people check you out afterward now, and more of them ask ChatGPT than Google. Today that check comes back thin, or credits Zetronix.</p>
+      <p>You mentioned wanting to start a newsletter. That's exactly the move. A steady, simple cadence in your voice gives AI something real to cite, clears up the Zetronix mixup, and lets you build the same trust at scale that you build in person. Our engine runs that for you, done-for-you, so it happens without landing on your plate. And for the clients you send our way, this page is the demo of what they'd get.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Grab time with us &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Zenteonix, August 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
