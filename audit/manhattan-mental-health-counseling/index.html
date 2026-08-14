@@ -29,9 +29,9 @@
   .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
   .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
   .hero{padding:80px 0 44px; background:var(--bg);}
-  .hero h1{font-size:40px; line-height:1.2;}
+  .hero h1{font-size:39px; line-height:1.2;}
   .hero h1 .hl{color:var(--orange-soft);}
-  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:648px;}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:650px;}
   .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
   .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
   .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
@@ -82,6 +82,20 @@
   .blogrow:last-child{border-bottom:none;}
   .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
   .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+  .databox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:30px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .databox h3{font-size:21px; margin-bottom:8px;}
+  .databox p{font-size:13.5px; color:var(--muted); max-width:440px; margin:0;}
+  .btn{display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; white-space:nowrap;}
+  .btn.orange{background:var(--orange); color:#171104;}
+  .priceband{background:var(--bg-2); padding:60px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .pricegrid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;}
+  @media (max-width:680px){ .pricegrid{grid-template-columns:1fr;} }
+  .pricecard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:26px;}
+  .pricecard .pname{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .pricecard .pprice{font-size:32px; font-weight:800; color:var(--white); margin-bottom:4px;}
+  .pricecard .pprice span{font-size:15px; color:var(--muted); font-weight:600;}
+  .pricecard .pbody{font-size:13px; color:#cfccc4; margin-top:10px;}
+  .pricenote{font-size:12.5px; color:var(--muted); margin-top:18px; font-style:italic;}
   .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
   @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
@@ -116,6 +130,9 @@
   .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
   .lsection .blogrow{border-bottom:1px solid #e3ded2;}
   .lsection .blogtitle{color:#15140f;}
+  .lsection .databox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .databox h3{color:#15140f;}
+  .lsection .databox p{color:#55524a;}
   .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
   .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
   .lsection .proofstats .n{color:#15140f;}
@@ -145,9 +162,9 @@
   <div class="hero rays">
     <div class="wrap">
       <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
-      <h1>You've built one of the most thorough therapy sites in New York.<br>So why does ChatGPT still send New Yorkers to <span class="hl">Talkspace</span>?</h1>
-      <p class="sub">Over 200 pages, 110 in-depth articles, and proper medical schema. You've done the work almost no local practice does, and it shows: Perplexity and Google's AI cite you on about half the questions we tested. But on ChatGPT, the biggest engine, you show up in just 1 of 16, and national apps like Talkspace and BetterHelp take the spot instead. We measured exactly how you show up across five AI engines and forty-five searches.</p>
-      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 13, 2026. Every number below traces back to a public, repeatable test.</div>
+      <h1>Your organic leads fell from 150 a month to 30.<br>Here's where they went, and how you win them <span class="hl">back</span>.</h1>
+      <p class="sub">You told us SEO was your main lead source for years, then this spring it cratered. The demand didn't disappear, it moved: New Yorkers now ask ChatGPT, Perplexity, and Google's AI for a therapist, and right now those engines rarely name you. You're not starting from zero, though. You have 200-plus pages, real medical schema, and a domain most practices would envy. This is about pointing all of it at the engines that now decide who gets found. We measured exactly where you stand across five AI engines and forty-five searches.</p>
+      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 13, 2026. Every number below traces back to a public, repeatable test, and the full workbook is linked near the bottom.</div>
     </div>
   </div>
 
@@ -155,7 +172,7 @@
     <div class="wrap">
       <div class="eyebrow onwhite">The Shift</div>
       <h2>Search is moving from Google to AI</h2>
-      <p class="lede">SEO alone no longer wins. As search shifts to AI, the practices that get cited, recommended, and chosen are the ones that treat AI visibility as its own discipline. For a therapy practice, that is increasingly where the first "find me a therapist" search happens.</p>
+      <p class="lede">This is the shift you felt in your lead numbers. As search moves to AI, the practices that get cited, recommended, and chosen are the ones that treat AI visibility as its own discipline. It is the channel that replaced the SEO traffic you lost.</p>
       <div class="statcols">
         <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
         <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
@@ -171,7 +188,7 @@
         <div class="eyebrow">MMHC's Overall AI + Search Visibility Score</div>
         <div class="gauge"><div class="marker" style="left:72%;"></div></div>
         <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
-        <p class="desc">One grade for whether a patient can find you, in Google or in AI. At 3.6 you're near the top of what we measure, well ahead of most practices on the fundamentals. The gap now is specific: one engine, and the head-term searches national apps still own.</p>
+        <p class="desc">One grade for whether a patient can find you, in Google or in AI. At 3.6 you're near the top of what we measure, your foundation is genuinely strong, which is why the drop hurts so much. The gap is specific: AI citations, the exact channel now replacing the organic search you lost.</p>
       </div>
     </div>
   </div>
@@ -179,56 +196,56 @@
   <div class="section lsection">
     <div class="wrap">
       <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
-      <h2>The foundation is excellent. The gap is narrow, specific, and winnable.</h2>
-      <p class="lede">Four findings: one place you already win outright, two visibility gaps to close, and one technical drag on a site that's otherwise strong.</p>
+      <h2>The foundation is excellent. The leaks are specific and fixable.</h2>
+      <p class="lede">Four findings: one place you already win, the two gaps that explain most of the drop, and one technical drag on a site that's otherwise strong.</p>
 
       <div class="cards">
         <div class="card">
           <div class="top"><span class="label">Where you already win</span><span class="pill ahead">Ahead</span></div>
           <div class="stat">50% on Perplexity</div>
-          <div class="body">On the questions closest to booking, AI already names you: "online therapists in NYC that take Cigna," "Mandarin-speaking therapist in Manhattan," "executive therapist for work stress in NYC." That's the payoff of 110 articles and real medical schema.</div>
+          <div class="body">On the questions closest to booking, AI already names you: "online therapists in NYC that take Cigna," "Mandarin-speaking therapist in Manhattan," "executive therapist for work stress in NYC." That's the payoff of your content depth and real medical schema.</div>
           <div class="quote"><b>"How does online CBT therapy work for anxiety in NYC?"</b> &rarr; you're cited by name.</div>
           <div class="divider"></div>
           <div class="why-lbl">Why it matters</div>
-          <div class="why">You win exactly where you're specific: New York, insurance, and specialized care. That's a moat the national apps can't easily copy, and it's the traffic most likely to become a booked session.</div>
+          <div class="why">You win exactly where you're specific: New York, insurance, and specialized care. That's a moat the national apps can't easily copy, and it's the beachhead we'd expand from.</div>
           <div class="how-lbl">How Islands builds on it</div>
-          <div class="how">We protect and widen this lead. Our reporting agent tracks which prompts you already win and feeds that back into what gets published next, so the advantage compounds.</div>
+          <div class="how">We protect and widen this lead, tracking which prompts you already win and feeding that back into what gets published next, so the advantage compounds.</div>
         </div>
 
         <div class="card">
           <div class="top"><span class="label">The ChatGPT gap</span><span class="pill behind">Behind</span></div>
           <div class="stat">1 of 16</div>
-          <div class="body">The biggest engine cites you in just 1 of 16 questions (6%), against 50% on Perplexity. When a New Yorker opens ChatGPT and asks for a therapist, you're almost never in the answer.</div>
+          <div class="body">You've run this test yourself and come up empty. The data agrees: ChatGPT cited you in 1 of 16 buyer questions (6%), against 50% on Perplexity. When a New Yorker asks the biggest engine for a therapist, you're almost never in the answer.</div>
           <div class="quote"><b>"Therapists in NYC who specialize in BPD and depression"</b> &rarr; Psychology Today and a hospital got cited. Not you.</div>
           <div class="divider"></div>
           <div class="why-lbl">Why it matters</div>
-          <div class="why">ChatGPT is where the most first-time "find me a therapist" searches now start. Your depth is real, ChatGPT just hasn't connected it to these questions yet, so those searches convert for someone else.</div>
+          <div class="why">You said you want LLMs to become a main source of leads, and today they send you about seven or eight a month. ChatGPT is where the most first-time therapy searches now begin, so this one gap is where the biggest recovery sits.</div>
           <div class="how-lbl">How Islands closes it</div>
           <div class="how">Our writing and scoring agents tune content to how each engine picks its sources. For Blanka that lifted AI-answer appearances from 20 to 132 in 90 days, a 6.6&times; jump.</div>
         </div>
 
         <div class="card">
-          <div class="top"><span class="label">National apps own the head terms</span><span class="pill behind">Behind</span></div>
+          <div class="top"><span class="label">Where the SEO leads went</span><span class="pill behind">Behind</span></div>
           <div class="stat">246K/mo, not you</div>
-          <div class="body">On the huge educational searches your patients type first, "splitting," "how to stop a panic attack," "claustrophobia," BetterHelp and Talkspace own Google's AI answer box and you're absent, even though you've written on many of these.</div>
+          <div class="body">On the huge educational searches that used to feed you, "splitting," "how to stop a panic attack," "claustrophobia," BetterHelp and Talkspace now own Google's AI answer box and you're absent, even though you've written on many of these.</div>
           <div class="quote"><b>"splitting"</b> (246,000 searches/mo) &rarr; BetterHelp owns the AI Overview. MMHC: not found.</div>
           <div class="divider"></div>
           <div class="why-lbl">Why it matters</div>
-          <div class="why">These top-of-funnel searches are how someone first discovers a practice. Right now a national app intercepts them before your New York and insurance advantage ever comes up.</div>
+          <div class="why">When Google's algorithm shifted and AI Overviews expanded this spring, these top-of-funnel terms stopped sending you clicks and started routing them to national apps and answer boxes. That is a big part of the 150-to-30 drop.</div>
           <div class="how-lbl">How Islands closes it</div>
-          <div class="how">GrowTal went from no ranking authority to 318 keywords in Google's top 10 in 90 days. We'd structure and interlink your existing posts to win the head terms you've already written about.</div>
+          <div class="how">GrowTal went from no ranking authority to 318 keywords in Google's top 10 in 90 days. We'd restructure and interlink your existing posts to win these head terms back.</div>
         </div>
 
         <div class="card">
-          <div class="top"><span class="label">Speed is quietly capping it</span><span class="pill behind">Behind</span></div>
+          <div class="top"><span class="label">The execution bottleneck</span><span class="pill behind">Behind</span></div>
           <div class="stat">9.8s load</div>
-          <div class="body">Your mobile pages take about 10 seconds to load their main content and close to 20 to become fully usable (61/100 on Google's speed test). On a site this strong, that's the single biggest technical drag.</div>
-          <div class="quote">The content and schema are excellent. Speed is the bottleneck, not the substance.</div>
+          <div class="body">You said the hard part isn't the strategy, it's shipping it to the site. It shows: your mobile pages take about 10 seconds to load their main content and close to 20 to become usable (61/100 on Google's speed test), plus missing schema and alt tags across service pages.</div>
+          <div class="quote">The insight is abundant. The execution against it is where the leaks are, exactly what you told us.</div>
           <div class="divider"></div>
           <div class="why-lbl">Why it matters</div>
-          <div class="why">Slow pages cost you in Google rankings and in the AI Overviews you're chasing, and they cost you patients who bounce before the page even loads.</div>
+          <div class="why">Slow, half-optimized pages cost you in Google rankings and the AI Overviews you're chasing, and they cost patients who bounce before the page loads. This is the "done, fast, and done well" work you said you need most.</div>
           <div class="how-lbl">How Islands closes it</div>
-          <div class="how">A focused technical pass clears the load-time drag, so the depth you've already built finally gets read and ranked at full strength.</div>
+          <div class="how">We connect directly to WordPress and do the technical pass ourselves: speed, schema, alt tags, and service-page builds, so the work actually ships instead of sitting in a doc.</div>
         </div>
       </div>
     </div>
@@ -244,7 +261,7 @@
         <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:44%;"></div></div><span class="pct">44%</span></div>
         <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:38%;"></div></div><span class="pct">38%</span></div>
         <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:6%;"></div></div><span class="pct">6%</span></div>
-        <div class="chartnote">The good news: your content and schema are stronger than almost any local practice we audit, which is why four engines cite you. The single outlier is ChatGPT (1 of 16), the engine where the most new therapy searches now begin. Closing that one gap is the highest-leverage move on this page.</div>
+        <div class="chartnote">This is the encouraging part: you're already halfway there on four of the five engines. That's your content depth and schema working. ChatGPT (1 of 16) is the outlier, and it's the engine where the most new therapy searches begin. Turning LLMs into a main lead source starts by closing that one gap.</div>
       </div>
     </div>
   </div>
@@ -260,6 +277,39 @@
         <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">How to Stop a Panic Attack the Moment It Starts</span></div>
         <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Does Healthfirst Cover Mental Health Counseling in New York?</span></div>
       </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="databox">
+        <div>
+          <h3>See every number behind this page</h3>
+          <p>This page is the highlight reel. The full workbook has all 16 prompts and 45 searches we tested, the competitor-by-competitor citation grid, the technical signals, and the ranked content plan.</p>
+        </div>
+        <a class="btn orange" href="https://docs.google.com/spreadsheets/d/18piG341-cW1m6tpDKZ9mOhh80DiUvCJZ/edit?usp=sharing&ouid=103447445653114888140&rtpof=true&sd=true" target="_blank" rel="noopener">Open the full workbook &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="priceband">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What It Costs</div>
+      <h2 style="font-size:26px; margin-bottom:8px;">Done-for-you, priced for outcomes</h2>
+      <p class="lede" style="font-size:14px; color:#a3a09a; max-width:560px; margin-bottom:8px;">Two parts: the content engine that earns citations, and the technical execution that ships it to your site. This audit itself is free.</p>
+      <div class="pricegrid">
+        <div class="pricecard">
+          <div class="pname">Content engine</div>
+          <div class="pprice">$2,000<span>/month</span></div>
+          <div class="pbody">Done-for-you blog and AEO content, human-reviewed and published straight to WordPress. Covers unlimited content; we recommend starting at three posts a week and can scale to five at no extra cost as it works. This is the flat monthly fee.</div>
+        </div>
+        <div class="pricecard">
+          <div class="pname">Technical + analytics</div>
+          <div class="pprice">$75<span>/hour blended</span></div>
+          <div class="pbody">The execution layer: speed and schema fixes, alt tags and meta, service-page builds, and attribution setup so you can see where leads come from. One blended rate across designer, developer, and strategist, tracked with weekly timesheets against a budget we agree on.</div>
+        </div>
+      </div>
+      <div class="pricenote">The initial audit and the attribution review are free. You only pay for implementation, and you can take any of it in-house if you'd rather. No long-term retainer required.</div>
     </div>
   </div>
 
@@ -295,10 +345,10 @@
   <div class="pitch rays">
     <div class="wrap">
       <div class="eyebrow" style="margin-bottom:14px;">What This Means For Manhattan Mental Health Counseling</div>
-      <h2>You've done the work almost no practice does.<br>AI just hasn't caught up on the one engine that matters most: <span class="hl">ChatGPT</span>.</h2>
-      <p>110 articles, real medical schema, and you already win the New York and insurance questions that lead to booked sessions. The gap is specific and winnable: ChatGPT cites you once out of sixteen, the national apps own the big educational searches, and a slow-loading site is quietly holding back work that's otherwise excellent.</p>
-      <p>This free audit is the map. The natural next step is a deeper technical pass and a content plan built to win ChatGPT on the New York and insurance searches you already half-own everywhere else. Either way, you walk away with the data.</p>
-      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a free consultation &rarr;</a>
+      <h2>You built this practice on SEO. The channel changed.<br>The playbook to win it back is one you already <span class="hl">believe in</span>.</h2>
+      <p>You have the domain, the 200-plus pages, and ten years of SEO instinct. What you're missing is the execution to ship it and the AEO layer that turns all of it into citations. That's the whole job: our agents research, write, and publish straight to WordPress with a human review, our team does the technical fixes you don't have time to ship, and our backlink network gets other brands referencing you so AI treats you as the authority.</p>
+      <p>The goal you named, being the name AI recommends when a New Yorker looks for a therapist, is very much in reach from where you already stand. This audit is the baseline. The proposal is the plan.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener">Book a call with us &rarr;</a>
     </div>
   </div>
 
