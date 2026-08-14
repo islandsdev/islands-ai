@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Alliance AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+    --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+  .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:41px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:648px;}
+  .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+  .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+  .lsection{background:#ffffff; color:#15140f;}
+  .lsection h2, .lsection h3{color:#15140f;}
+  .lsection .lede{color:#55524a;}
+  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection.scoreband .num{color:#c8622a;}
+  .lsection.scoreband .num span{color:#7a766c;}
+  .lsection.scoreband p.desc{color:#3a3830;}
+  .lsection.scoreband .gaugelabels{color:#7a766c;}
+  .lsection.scoreband .gauge .marker{background:#15140f;}
+  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .barrow .name{color:#2c2a24;}
+  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+  .lsection .barrow .pct{color:#7a766c;}
+  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+  .lsection .blogtitle{color:#15140f;}
+  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .proofstats .n{color:#15140f;}
+  .lsection .proofstats .l{color:#6f6b60;}
+  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+  .lsection .proofcard .who{color:#7a766c;}
+  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .card .label{color:#7a766c;}
+  .lsection .card .stat{color:#15140f;}
+  .lsection .card .body{color:#3a3830;}
+  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+  .lsection .quote b{color:#2c2a24;}
+  .lsection .card .divider{background:#e3ded2;}
+  .lsection .card .why{color:#3a3830;}
+  .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="context-right">Islands x Growth Alliance</div>
+      <div class="context-left">AI Visibility Audit - August 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+      <h1>You build pipeline for a living.<br>Here's the pipeline your own site is <span class="hl">leaving on the table</span>.</h1>
+      <p class="sub">Your category gets about 107,000 searches a month, and across the 45 we checked, Growth Alliance doesn't appear once. The good news: neither does anyone else, really. Winning by Design, Skaled, Go Nimbly, the field is wide open, because almost nobody in RevOps has published for AI yet. For an agency whose whole job is demand, that's a rare first-mover window. We measured it across five AI engines and forty-five searches.</p>
+      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 13, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Search is moving from Google to AI</h2>
+      <p class="lede">SEO alone no longer wins. As search shifts to AI, the companies that get cited, recommended, and chosen are the ones that publish real answers for the engines to quote. For a GTM agency, being the one AI names is the most on-brand pipeline there is.</p>
+      <div class="statcols">
+        <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+        <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+        <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband lsection">
+    <div class="wrap inner">
+      <div class="num">2.9<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">Growth Alliance's Overall AI + Search Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:58%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for whether a buyer can find you, in Google or in AI. The readiness pieces are already strong, which is why this isn't lower. What pulls it down is simply supply: there's almost no published content yet for the engines to pull from.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The setup is done right. The shelves are just empty.</h2>
+      <p class="lede">Four findings: one thing you've already nailed, and three that all trace back to the same fix, publishing content into a category nobody has claimed yet.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">The setup is done right</span><span class="pill ahead">Ahead</span></div>
+          <div class="stat">273% ROI, 40+ builds</div>
+          <div class="body">The signals AI needs to trust you are already there: an llms.txt file, a clean FAQ, a sharp "how we're different" section, and hard proof like 273% client ROI and 40+ engagements. Most consultancies we audit don't have half of this.</div>
+          <div class="quote">When an engine does find you, it has strong, quotable material to work with. The substance isn't the problem.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">You've done the tedious readiness work most firms skip, so there's no cleanup phase. The only thing missing is volume for the engines to read.</div>
+          <div class="how-lbl">How Islands builds on it</div>
+          <div class="how">A ready foundation means content starts working almost immediately. We'd point the engine straight at your category instead of fixing basics first.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Nothing to quote yet</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 indexed posts</div>
+          <div class="body">As of our crawl there's no sitemap and nothing from the blog in Google's index, so the posts you've just started aren't discoverable yet, and there's nothing for ChatGPT, Perplexity, or Claude to cite.</div>
+          <div class="quote">A brand-new blog with no sitemap, no schema, and no interlinking is invisible: the posts exist, but nothing tells the engines they're there. Every citation gap below traces back to this.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">Personality-driven posts are the right instinct, but a standalone post with nothing pointing to it stays isolated. It needs the wiring around it to actually get picked up.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We handle the sitemap, schema, and interlinking, then publish on a real cadence, done for you, so the writing you're already doing finally compounds.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">A category nobody owns</span><span class="pill behind">Behind</span></div>
+          <div class="stat">107K/mo, 0 owned</div>
+          <div class="body">Across 45 buyer searches in your space, from "outbounding" (18,100/mo) to "MEDDPICC" (12,100), Growth Alliance appears nowhere. But the field is barely contested: Winning by Design, Skaled, and Go Nimbly rank on only a handful, and most terms have no clear winner at all.</div>
+          <div class="quote">That's about 107,000 searches a month in your category, and almost none of it is claimed by anyone.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">This is your exact ICP searching at the moment they need you. In a category this uncontested, the first firm to publish real answers becomes the default AI recommendation, and it's much cheaper to win now than after a rival wakes up.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">GrowTal went from no ranking authority to 318 keywords in Google's top 10 in 90 days. We'd point the same keyword-gap and writing agents straight at your open category.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Your buyers are getting other answers</span><span class="pill behind">Behind</span></div>
+          <div class="stat">The money queries</div>
+          <div class="body">On the highest-intent, ready-to-buy questions, AI is naming competitors instead of you: "best RevOps consultants for mid-market B2B" returns Revenue.io, "benefits of fractional RevOps leadership" returns Skaled, and "cost of a fractional Head of Growth vs full-time" returns GrowTal.</div>
+          <div class="quote"><b>"Best RevOps consultants for mid-market B2B"</b> &rarr; Revenue.io got the citation. Growth Alliance: absent.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">These are the bottom-of-funnel questions that turn into discovery calls. Right now each one is a call being routed to a competitor at the exact moment of decision.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">GrowTal, the firm winning that fractional-growth query, is in our content network. Join it and firms like that link to you instead, so you inherit authority on the queries you should own.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Actually Cited Growth Alliance</div>
+        <p class="lede" style="margin-bottom:22px;">Out of the 16 buyer questions we tested per engine.</p>
+        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:12%;"></div></div><span class="pct">12%</span></div>
+        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:12%;"></div></div><span class="pct">12%</span></div>
+        <div class="chartnote">Notice the pattern: every engine is low, and they're all clustered together. No AI has a fix on you yet, which is exactly what you'd expect from a strong site with almost nothing published. This is a supply problem, not a trust problem, and it's the fastest kind to fix.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">Built from the open, high-intent gaps this audit found</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">What Is a 90-Day Revenue Sprint (and When Your Team Actually Needs One)</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Fractional RevOps Leadership vs. a Full-Time Hire: The Real Cost Breakdown</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">The Best RevOps Consultants for Mid-Market B2B in 2026</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">MEDDPICC, Explained: A Practical Guide for Post-PMF B2B Teams</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">How to Build a Scalable GTM System for a $10M B2B Startup</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Growth Alliance</div>
+      <h2>You help B2B teams get found and build pipeline.<br>This is the same play, run on <span class="hl">Growth Alliance</span> itself.</h2>
+      <p>You've done the hard part: a clear offer, real proof, and the readiness signals most consultancies skip. What's missing is simply published content, so a category with 107,000 searches a month, almost none of it claimed, is sitting there for the taking. For an agency that sells growth, being the first to show up is the most on-brand move there is.</p>
+      <p>It's also where our two worlds fit together. You already run the LinkedIn, outbound, and CRM side; the blog and AEO layer is the piece nobody on your team wants to own. We can run it for you, or behind your brand for your own clients, and either way you'd join a network where firms like GrowTal already get cited for the exact fractional-growth queries you want. This free audit is the map, and the five posts above are where I'd start.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Grab time with us &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Growth Alliance, August 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
