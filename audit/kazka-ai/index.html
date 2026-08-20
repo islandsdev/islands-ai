@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kazka AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+    --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+  .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:40px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:650px;}
+  .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+  .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+  .lsection{background:#ffffff; color:#15140f;}
+  .lsection h2, .lsection h3{color:#15140f;}
+  .lsection .lede{color:#55524a;}
+  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection.scoreband .num{color:#c8622a;}
+  .lsection.scoreband .num span{color:#7a766c;}
+  .lsection.scoreband p.desc{color:#3a3830;}
+  .lsection.scoreband .gaugelabels{color:#7a766c;}
+  .lsection.scoreband .gauge .marker{background:#15140f;}
+  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .barrow .name{color:#2c2a24;}
+  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+  .lsection .barrow .pct{color:#7a766c;}
+  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+  .lsection .blogtitle{color:#15140f;}
+  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .proofstats .n{color:#15140f;}
+  .lsection .proofstats .l{color:#6f6b60;}
+  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+  .lsection .proofcard .who{color:#7a766c;}
+  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+  .lsection .card .label{color:#7a766c;}
+  .lsection .card .stat{color:#15140f;}
+  .lsection .card .body{color:#3a3830;}
+  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+  .lsection .quote b{color:#2c2a24;}
+  .lsection .card .divider{background:#e3ded2;}
+  .lsection .card .why{color:#3a3830;}
+  .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="context-right">Islands x Kazka AI</div>
+      <div class="context-left">AI Visibility Audit - August 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+      <h1>You tell clients the problem is never the technology.<br>Here's the problem that is: AI can't find <span class="hl">Kazka</span>.</h1>
+      <p class="sub">You have the sharpest point of view in your category, a named 5-Pillar Framework, 100-plus implementations, and a founder on record. But when a buyer asks AI the exact questions you're built to answer, like why their team won't use the AI tools they bought, HBR and Deloitte come back, not Kazka. We measured how you show up across five AI engines and forty-five searches, and where the opening is.</p>
+      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 18, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Search is moving from Google to AI</h2>
+      <p class="lede">You already know this shift better than most, it's the one you help clients through. As search moves to AI, the firms that get cited, recommended, and chosen are the ones that publish their point of view where the engines can read it.</p>
+      <div class="statcols">
+        <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+        <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+        <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband lsection">
+    <div class="wrap inner">
+      <div class="num">2.4<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">Kazka AI's Overall AI + Search Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:48%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for whether a buyer can find you, in Google or in AI. The point of view is strong; the score is low for one reason, almost none of it is published where engines can read it. That's the gap, and it's the most fixable kind.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The point of view is sharp. It's just not published anywhere.</h2>
+      <p class="lede">Four findings: one real asset you're sitting on, and three gaps that all trace back to having nothing for the engines to read.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">Your point of view is an asset</span><span class="pill ahead">Ahead</span></div>
+          <div class="stat">100+ implementations</div>
+          <div class="body">You have what most consultancies lack: a clear, quotable POV. A named 5-Pillar Framework, 100-plus implementations across healthcare and real estate, a founder on record in Alex Lee, and lines like "the problem is never the technology."</div>
+          <div class="quote">When AI does find you, it has strong, distinctive material to quote. The credibility is already there.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">A sharp, specific POV is exactly what AI engines prefer to cite over generic consultant-speak. That's the expensive part to build, and you've built it.</div>
+          <div class="how-lbl">How Islands builds on it</div>
+          <div class="how">We turn the framework and your 100-plus implementations into published content the engines can actually read, in your voice, not generic AI filler.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Your questions, answered by strangers</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 of your own</div>
+          <div class="body">The prompts that are literally your positioning, "why is my team not using the AI tools we bought," "how to move AI from pilot to production," "how to overcome employee fear of AI," get answered by HBR, SHRM, Deloitte, and random consultancies. Kazka is absent from every one.</div>
+          <div class="quote"><b>"Why is my team not using the AI tools we bought?"</b> &rarr; HBR and generic blogs got cited, not the firm whose entire pitch is that exact problem.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">This is your buyer at the moment of pain, and AI hands them a weaker answer from someone else. Nobody owns these questions yet, so they're yours to take.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">Our keyword-gap and writing agents took Blanka from 20 to 132 AI-answer appearances in 90 days, a 6.6&times; jump. We'd point them straight at your adoption questions.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">The giants own the category</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 of 17 searches</div>
+          <div class="body">Across 17 category searches like "AI strategy consultant" and "artificial intelligence consultant" (8,100/mo), BCG X, Cognizant, and Publicis Sapient rank or own Google's AI answer box. Kazka appears on none.</div>
+          <div class="quote"><b>"AI strategy consultant"</b> &rarr; BCG X owns the AI Overview. Kazka: not found.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">You can't outspend BCG, but you can out-specific them. They answer these questions generically; your adoption-layer niche is a lane they don't run in, and right now it's wide open.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">GrowTal went from no ranking authority to 318 keywords in Google's top 10 in 90 days. We'd target the specific adoption terms the giants ignore, not fight them head-on.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">AI doesn't know who you are</span><span class="pill behind">Behind</span></div>
+          <div class="stat">"KAZKA"</div>
+          <div class="body">Google's Knowledge Panel for your brand shows "KAZKA," a different entity, and there's no LinkedIn company page. The site also has no blog, no llms.txt, and no robots.txt, and it's slow: 48/100 on mobile with 4.5 seconds of blocked interactivity.</div>
+          <div class="quote">No blog, no llms.txt, no robots.txt, and Google confuses you with an unrelated "KAZKA." The engines have little to anchor who you are.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">AI needs a clear, crawlable identity to cite you confidently, and a slow, un-indexed site with a mistaken entity gives it every reason not to. This is foundational, and all of it is fixable.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We add the llms.txt, robots.txt, and schema, clean up the entity, fix the speed, and publish content in your name so "Kazka AI the consultancy" becomes unmistakable.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Actually Cited Kazka</div>
+        <p class="lede" style="margin-bottom:22px;">Out of the 16 buyer questions we tested per engine.</p>
+        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:31%;"></div></div><span class="pct">31%</span></div>
+        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:31%;"></div></div><span class="pct">31%</span></div>
+        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:25%;"></div></div><span class="pct">25%</span></div>
+        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
+        <div class="chartnote">Every engine is low, and the reason is refreshingly simple: there's no blog, no llms.txt, and a slow site for them to read. You have the sharpest point of view in your category and it's almost entirely unpublished. Fix that and these numbers move quickly, the pack even flags your page speed as the first thing to address.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section lsection" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">Your exact POV, aimed at the questions nobody owns</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Why Your Team Isn't Using the AI Tools You Paid For (and How to Fix It)</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Moving AI From Pilot to Production: A Service Business Playbook</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">How to Overcome Your Team's Fear of AI</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">Why AI Pilots Fail in Healthcare</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">The AI Adoption Layer vs. the Technology Layer, Explained</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof lsection">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Kazka</div>
+      <h2>You have the POV. You're just <span class="hl">not published</span> where AI can read it.</h2>
+      <p>You've got the framework, the founder story, and 100-plus implementations. What you don't have is anything for the engines to cite, no blog, no llms.txt, and a slow site, so the exact questions you're built to answer go to HBR and BCG instead. The category giants are generic; your adoption-layer niche is wide open and it's yours to own.</p>
+      <p>This audit is the map, and the five posts above are where we'd start. We connect to your stack, write in your voice, the 5 pillars, the "we stay until something changes" ethos, ship straight to your site, and get other brands citing you so AI treats you as the authority you already are.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a free consultation &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Kazka AI, August 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
