@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&A Club AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+ --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+ --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+ --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+ }
+ *{box-sizing:border-box;}
+ html{scroll-behavior:smooth;}
+ body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+ .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+ h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+ .muted{color:var(--muted);}
+ a{color:var(--orange-soft); text-decoration:none;}
+ .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+ .eyebrow.onwhite{color:var(--orange);}
+ .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+ .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+ .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+ .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+ .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+ .hero{padding:80px 0 44px; background:var(--bg);}
+ .hero h1{font-size:39px; line-height:1.2;}
+ .hero h1 .hl{color:var(--orange-soft);}
+ .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:652px;}
+ .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+ .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+ .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+ .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+ .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+ @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+ .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+ .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+ .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+ .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+ .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+ .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+ .scoreband .scoretext{flex:1; min-width:260px;}
+ .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+ background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+ .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+ .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+ .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+ .section{padding:64px 0; background:var(--bg);}
+ .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+ .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+ .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+ @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+ .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+ .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+ .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+ .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+ .pill.behind{background:var(--red-bg); color:var(--red);}
+ .pill.ahead{background:var(--green-bg); color:var(--green);}
+ .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+ .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+ .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+ .quote b{color:#cfccc4; font-weight:600;}
+ .card .divider{height:1px; background:var(--border); margin:14px 0;}
+ .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+ .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+ .card .how{font-size:13px; color:#cfccc4;}
+ .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+ .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+ .barrow .name{color:#d8d5cd;}
+ .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+ .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+ .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+ .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+ .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+ .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+ .blogrow:last-child{border-bottom:none;}
+ .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+ .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+ .priceband{background:var(--bg-2); padding:60px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .pricegrid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;}
+ @media (max-width:680px){ .pricegrid{grid-template-columns:1fr;} }
+ .pricecard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:26px;}
+ .pricecard .pname{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+ .pricecard .pprice{font-size:32px; font-weight:800; color:var(--white); margin-bottom:4px;}
+ .pricecard .pprice span{font-size:15px; color:var(--muted); font-weight:600;}
+ .pricecard .pbody{font-size:13px; color:#cfccc4; margin-top:10px;}
+ .pricenote{font-size:12.5px; color:var(--muted); margin-top:18px; font-style:italic;}
+ .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+ @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+ .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+ .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+ .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+ .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+ .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+ .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+ .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+ .pitch{padding:72px 0; background:var(--bg);}
+ .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+ .pitch h2 .hl{color:var(--orange-soft);}
+ .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+ footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+ footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+ footer .fnote{font-size:11.5px; color:var(--muted);}
+ .lsection{background:#ffffff; color:#15140f;}
+ .lsection h2, .lsection h3{color:#15140f;}
+ .lsection .lede{color:#55524a;}
+ .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+ .lsection.scoreband .num{color:#c8622a;}
+ .lsection.scoreband .num span{color:#7a766c;}
+ .lsection.scoreband p.desc{color:#3a3830;}
+ .lsection.scoreband .gaugelabels{color:#7a766c;}
+ .lsection.scoreband .gauge .marker{background:#15140f;}
+ .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .barrow .name{color:#2c2a24;}
+ .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+ .lsection .barrow .pct{color:#7a766c;}
+ .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+ .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+ .lsection .blogtitle{color:#15140f;}
+ .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+ .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .proofstats .n{color:#15140f;}
+ .lsection .proofstats .l{color:#6f6b60;}
+ .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+ .lsection .proofcard .who{color:#7a766c;}
+ .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .card .label{color:#7a766c;}
+ .lsection .card .stat{color:#15140f;}
+ .lsection .card .body{color:#3a3830;}
+ .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+ .lsection .quote b{color:#2c2a24;}
+ .lsection .card .divider{background:#e3ded2;}
+ .lsection .card .why{color:#3a3830;}
+ .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+ <div class="topbar">
+ <div class="wrap">
+ <div class="context-right">Islands x M&A Club</div>
+ <div class="context-left">AI Visibility Audit - August 2026</div>
+ </div>
+ </div>
+
+ <div class="hero rays">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+ <h1>Search "M&A Club" and you're everywhere.<br>Search what your future academy members ask, and you <span class="hl">disappear</span>.</h1>
+ <p class="sub">You're an established name: 18 years, 20 chapters, and AI already knows M&A Club as Canada's M&A network. But two things the raw numbers hide. Once we strip out people searching for you by name, your citation rate drops on most engines. And none of it reaches the founders your academy is built for, the ones asking how to buy or sell a business in Canada. We measured all of it across five AI engines, with branded searches removed so the scores reflect cold discovery.</p>
+ <div class="method">Tested 16 buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, then removed the branded and navigational searches (the ones with "M&A Club" in them) so the citation scores reflect people who don't already know you. Crawled the live site. Snapshot taken August 19, 2026.</div>
+ </div>
+ </div>
+
+ <div class="band-white">
+ <div class="wrap">
+ <div class="eyebrow onwhite">The Shift</div>
+ <h2>Search is moving from Google to AI</h2>
+ <p class="lede">You already sense this, it's why you want to become the media in Canadian M&A. As search moves to AI, the organizations that get cited, recommended, and chosen are the ones publishing real content the engines can read. For a network becoming a media brand, that is the whole game.</p>
+ <div class="statcols">
+ <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+ <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+ <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="scoreband lsection">
+ <div class="wrap inner">
+ <div class="num">3.3<span>/5</span></div>
+ <div class="scoretext">
+ <div class="eyebrow">M&A Club's Overall AI + Search Visibility Score</div>
+ <div class="gauge"><div class="marker" style="left:66%;"></div></div>
+ <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+ <p class="desc">One grade for whether a buyer can find you, in Google or in AI, scored after removing branded searches. Your entity authority keeps this on par. The gaps are cold discovery and, most importantly, the academy audience you're not visible to at all yet.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+ <h2>Real authority on the club. Almost nothing on the academy.</h2>
+ <p class="lede">Four findings: one genuine strength, the branded inflation to be honest about, the academy audience you're invisible to, and the easiest win you're leaving on the table.</p>
+
+ <div class="cards">
+ <div class="card">
+ <div class="top"><span class="label">You're a recognized entity</span><span class="pill ahead">Ahead</span></div>
+ <div class="stat">89% on Perplexity</div>
+ <div class="body">Even after removing branded searches, AI still cites M&A Club on most category questions. On "largest M&A network in Canada" and "best M&A networking events in Toronto," you show up. Eighteen years, 20 chapters, and a National Advisory Board give you authority most networks can't match.</div>
+ <div class="quote"><b>"What is the largest M&A network in Canada?"</b> &rarr; all five engines cite you.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">This is a real head start. AI already trusts you as an entity in Canadian M&A, which is the hardest thing to earn. We build on it rather than start from zero.</div>
+ <div class="how-lbl">How Islands builds on it</div>
+ <div class="how">We widen that lead to the engines and questions where you're softer, and turn your members' content into citations that compound.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">The numbers look better than they are</span><span class="pill behind">Behind</span></div>
+ <div class="stat">81% &rarr; 67%</div>
+ <div class="body">The raw pack made AEO look dominant (94% on Perplexity, 81% on ChatGPT), but a lot of that is people searching "M&A Club" by name. Strip the branded searches out and ChatGPT drops to 67%, and on cold category questions the engines cite you far less consistently.</div>
+ <div class="quote"><b>"Where to find M&A deal partners in Alberta"</b> &rarr; Axial, Dentons, and Mergr got cited. Not M&A Club.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">Branded visibility means people who already know you can find you. It does nothing to win the stranger, and the stranger is exactly who the academy needs.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We target the non-branded, cold-discovery questions so you get cited by people who have never heard the name M&A Club.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">The academy audience can't find you</span><span class="pill behind">Behind</span></div>
+ <div class="stat">0 coverage</div>
+ <div class="body">Your 2027 bet is the academy: teaching founders to sell their business and to grow by acquisition. But not one of the questions those founders ask, "how to sell my business in Canada," "how to buy a business," "exit preparation," touches your visibility, because you have no content aimed at them yet.</div>
+ <div class="quote">You told us there are barely 20 places in Canada that teach this, and you're one of them. Right now AI can't connect M&A Club to any of it.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">This is the wider market you're building toward, every founder in the country, and it's wide open. Whoever publishes the founder-education content first becomes the default answer AI gives.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We build a content track aimed squarely at the buy-side and sell-side founder questions, so the academy has an inbound engine before it even launches nationally.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">Your best content is hidden</span><span class="pill behind">Behind</span></div>
+ <div class="stat">10K readers, 0 on site</div>
+ <div class="body">You publish a newsletter to about 10,000 people every week, and none of it lives on your website, so Google and AI can't see it. There's no llms.txt, thin schema, and your members at firms like Deloitte and Blakes produce endless expert content you're not capturing.</div>
+ <div class="quote">You said it yourself: "how the hell are our newsletters not posted on our website?" Every issue you've sent is invisible surface area.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">This is the single easiest win here. You're already producing the content; it's just not anywhere the engines can read it and cite it.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We publish your newsletter and your members' content to the site automatically, add the llms.txt and schema, and turn a weekly email into permanent, citable pages.</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:0;">
+ <div class="wrap">
+ <div class="chartbox">
+ <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Cited M&A Club, Branded Searches Removed</div>
+ <p class="lede" style="margin-bottom:22px;">Non-branded buyer questions only, so this reflects people who don't already know you.</p>
+ <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:89%;"></div></div><span class="pct">89%</span></div>
+ <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:67%;"></div></div><span class="pct">67%</span></div>
+ <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:56%;"></div></div><span class="pct">56%</span></div>
+ <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:56%;"></div></div><span class="pct">56%</span></div>
+ <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:56%;"></div></div><span class="pct">56%</span></div>
+ <div class="chartnote">These are the honest numbers: strong on Perplexity, softer everywhere else, and lower than the raw pack because the branded searches are stripped out. Two of the questions you still win here are your own Gala and Forum, which people already know. The real headroom is the cold category questions, and the entire founder-education side, where you don't register yet.</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:0;">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+ <h2 style="font-size:26px; margin-bottom:24px;">Aimed at the founders your academy wants</h2>
+ <div class="blogbox">
+ <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">How to Sell Your Business in Canada: A Founder's Exit Playbook</span></div>
+ <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Growth by Acquisition: How to Buy Your First Business in Canada</span></div>
+ <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">What Is Entrepreneurship Through Acquisition (ETA) and How to Start</span></div>
+ <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">How to Find M&A Deal Partners and Advisors in Canada</span></div>
+ <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Preparing a Mid-Market Company for a $20M to $75M Exit</span></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="priceband">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">What It Costs</div>
+ <h2 style="font-size:26px; margin-bottom:8px;">Done-for-you, priced for outcomes</h2>
+ <p class="lede" style="font-size:14px; color:#a3a09a; max-width:560px; margin-bottom:8px;">The content engine that earns citations, and the technical work that ships it. The audit itself is free.</p>
+ <div class="pricegrid">
+ <div class="pricecard">
+ <div class="pname">Content engine</div>
+ <div class="pprice">$2,500<span> USD/month</span></div>
+ <div class="pbody">Done-for-you content, human-reviewed and published straight to your site and newsletter. Covers unlimited content; we recommend three pieces a week for quality, drawn from your members' expertise and your 20 monthly chapter meetings. Flat monthly fee.</div>
+ </div>
+ <div class="pricecard">
+ <div class="pname">Technical + analytics</div>
+ <div class="pprice">$75<span>/hour blended</span></div>
+ <div class="pbody">The execution layer: getting your newsletter onto the site, adding llms.txt and schema, and setting up attribution so you can see which content drives memberships and academy signups. One blended rate, tracked against a budget we agree on.</div>
+ </div>
+ </div>
+ <div class="pricenote">The initial audit is free. You only pay for implementation, and there's no long-term retainer. First content is live within about a week.</div>
+ </div>
+ </div>
+
+ <div class="proof lsection">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+ <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+ <div class="proofgrid">
+ <div class="proofcard">
+ <div class="co">Blanka, private-label beauty</div>
+ <div class="proofstats">
+ <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+ <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+ <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+ </div>
+ <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+ <div class="who">Karli Leitl, COO, Blanka</div>
+ </div>
+ <div class="proofcard">
+ <div class="co">GrowTal, B2B marketplace</div>
+ <div class="proofstats">
+ <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+ <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+ <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+ </div>
+ <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+ <div class="who">Sarah Little, Operations, GrowTal</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="pitch rays">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:14px;">What This Means For M&A Club</div>
+ <h2>You want to become the media in Canadian M&A.<br>This is how AI starts <span class="hl">citing you</span> as it.</h2>
+ <p>The authority is already there: 18 years, 20 chapters, and members at Deloitte, KPMG, and Blakes producing endless expert content. What's missing is getting that content where the engines can read it, and pointing it at the founders your academy is built to reach. Right now your best writing sits in a weekly email that never touches your website.</p>
+ <p>We publish your newsletter and members' insights to your site automatically, build the founder-education track that makes the academy discoverable before it even launches nationally, and set up the attribution so you can see it converting to members and signups. The five posts above are where we'd start.</p>
+ <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a call with us &rarr;</a>
+ </div>
+ </div>
+
+ <footer>
+ <div class="wrap">
+ <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for M&A Club, August 2026</div>
+ </div>
+ </footer>
+
+</body>
+</html>
