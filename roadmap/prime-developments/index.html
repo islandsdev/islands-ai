@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Developments | 90-Day Content and Visibility Roadmap | Islands</title>
+<meta name="description" content="The 90-day plan Islands is running for Prime Developments: content production, ranking, AI-answer citations, attribution and lead capture. Scope, cadence, cost and what we need from you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#ffffff; --bg-off:#f6f5f2;
+--ink:#0a0a0a; --ink-2:#121212; --card:#161615;
+--border:#e6e4df; --border-dk:#2a2926;
+--muted:#6b6862; --muted-dk:#a3a09a;
+--orange:#e0793d; --orange-2:#ef8b4e; --orange-bg:rgba(224,121,61,0.12);
+--red-bg:rgba(196,66,54,0.12); --amber-bg:rgba(199,146,42,0.14); --green-bg:rgba(63,138,89,0.13);
+--red:#c44236; --amber:#a8791f; --green:#3f8a59;
+--maxw:1120px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);
+font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 48px;}
+a{color:var(--orange);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin:0 0 18px;}
+h1{font-size:clamp(40px,6.6vw,80px);font-weight:800;letter-spacing:-.03em;line-height:1.02;margin:0;}
+h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:0 0 20px;}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:0 0 10px;}
+.grad{background:linear-gradient(90deg,var(--orange),var(--orange-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.muted{color:var(--muted);}
+.btn{display:inline-block;background:var(--orange);color:#111;font-weight:600;font-size:16px;
+padding:15px 26px;border-radius:14px;transition:transform .12s ease;}
+.btn:hover{text-decoration:none;transform:translateY(-1px);}
+.bar{background:var(--ink);color:var(--bg);}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;gap:16px;}
+.logo{color:var(--bg);height:34px;display:flex;align-items:center;}
+.logo svg{height:34px;width:auto;display:block;}
+.bar-meta{font-size:14px;color:var(--muted-dk);text-align:right;}
+section{padding:clamp(64px,9vw,112px) 0;}
+.dark{background:var(--ink);color:var(--bg);}
+.off{background:var(--bg-off);}
+.lead{font-size:clamp(19px,2.4vw,22px);max-width:680px;margin:22px 0 0;}
+.dark .lead{color:var(--muted-dk);}
+.sub{max-width:680px;color:var(--muted);margin:18px 0 0;}
+.dark .sub{color:var(--muted-dk);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:56px;}
+.stat .num{font-size:clamp(36px,4.6vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1;}
+.stat .num.bad{color:var(--orange);}
+.stat p{margin:12px 0 0;font-size:16px;max-width:230px;color:var(--muted);}
+.dark .stat p{color:var(--muted-dk);}
+.src{font-size:13px;color:var(--muted);margin-top:28px;}
+.dark .src{color:var(--muted-dk);}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.card{border:1px solid var(--border);border-radius:16px;padding:30px;background:var(--bg);}
+.off .card{background:#fff;}
+.dark .card{background:var(--card);border-color:var(--border-dk);}
+.card p{margin:0;color:var(--muted);font-size:16px;}
+.dark .card p{color:var(--muted-dk);}
+.card ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:15.5px;}
+.dark .card ul{color:var(--muted-dk);}
+.card li{margin-bottom:7px;}
+.pill{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+padding:5px 11px;border-radius:999px;background:var(--orange-bg);color:var(--orange);margin-bottom:14px;}
+.pill.red{background:var(--red-bg);color:var(--red);}
+.pill.amber{background:var(--amber-bg);color:var(--amber);}
+.pill.green{background:var(--green-bg);color:var(--green);}
+.scores{margin-top:48px;display:flex;flex-direction:column;gap:26px;max-width:820px;}
+.score-row{display:grid;grid-template-columns:132px 1fr 56px;gap:20px;align-items:center;}
+.score-lab{font-weight:700;font-size:16px;}
+.score-lab span{display:block;font-weight:400;font-size:13px;color:var(--muted-dk);letter-spacing:0;text-transform:none;}
+.track{height:14px;border-radius:999px;background:var(--border-dk);overflow:hidden;}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--orange),var(--orange-2));}
+.fill.zero{background:var(--red);width:2px;}
+.score-val{font-weight:800;font-size:22px;text-align:right;letter-spacing:-.02em;}
+.engines{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:40px;}
+.engine{border:1px solid var(--border-dk);border-radius:14px;padding:20px 16px;text-align:center;background:var(--card);}
+.engine .e-num{font-size:30px;font-weight:800;color:var(--red);letter-spacing:-.02em;}
+.engine .e-name{font-size:14px;font-weight:600;margin-top:6px;}
+.engine .e-sub{font-size:12px;color:var(--muted-dk);margin-top:3px;}
+.funnel-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;margin-top:48px;}
+.fn-item{border-left:3px solid var(--border);padding:4px 0 4px 20px;margin-bottom:26px;}
+.fn-item.t{border-color:#e8c9ae;} .fn-item.m{border-color:#e0a06e;} .fn-item.b{border-color:var(--orange);}
+.fn-item h4{margin:0 0 6px;font-size:17px;font-weight:700;}
+.fn-item p{margin:0;font-size:15.5px;color:var(--muted);}
+.fn-count{font-weight:800;color:var(--ink);}
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.month{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
+.month-head{padding:22px 26px;border-bottom:1px solid var(--border);}
+.month-head .mno{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);}
+.month-head h3{margin:8px 0 4px;font-size:22px;}
+.month-head p{margin:0;font-size:14px;color:var(--muted);}
+.month-body{padding:22px 26px 28px;}
+.ws{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start;}
+.ws-n{flex:0 0 26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;
+display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.ws-t{font-size:15.5px;line-height:1.5;}
+.ws-t b{display:block;font-weight:600;font-size:15.5px;}
+.ws-t span{color:var(--muted);font-size:14.5px;}
+.month-out{margin:20px 26px 26px;padding:16px 18px;background:var(--bg-off);border-radius:12px;font-size:14.5px;}
+.month-out b{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600;}
+.tbl{width:100%;border-collapse:collapse;margin-top:40px;font-size:16px;}
+.tbl th{text-align:left;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+font-weight:600;padding:0 0 14px;border-bottom:1px solid var(--border);}
+.tbl td{padding:16px 0;border-bottom:1px solid var(--border);vertical-align:top;}
+.tbl td:first-child{font-weight:600;padding-right:28px;width:42%;}
+.tbl td:last-child{color:var(--muted);}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;}
+.box{border:1px solid var(--border);border-radius:16px;padding:30px;background:#fff;}
+.box.out{background:var(--bg-off);}
+.box ul{margin:16px 0 0;padding-left:18px;color:var(--muted);font-size:16px;}
+.box li{margin-bottom:9px;}
+.price{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.p-card{border:1px solid var(--border-dk);border-radius:16px;padding:30px;background:var(--card);}
+.p-card .p-num{font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1;}
+.p-card .p-lab{font-size:15px;color:var(--muted-dk);margin-top:10px;}
+.p-card .p-note{font-size:14px;color:var(--muted-dk);margin-top:14px;padding-top:14px;border-top:1px solid var(--border-dk);}
+.asks{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px;}
+.ask{background:var(--card);border:1px solid var(--border-dk);border-radius:16px;padding:30px;}
+.ask .pill{background:rgba(224,121,61,0.18);}
+.ask p{color:var(--muted-dk);font-size:16px;margin:0;}
+svg.viz{width:100%;height:auto;display:block;}
+.footer{padding:44px 0;}
+.footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.footer .logo{height:26px;} .footer .logo svg{height:26px;}
+.footer .meta{font-size:14px;color:var(--muted-dk);}
+@media(max-width:900px){
+.cards,.months,.price,.split,.asks,.funnel-grid{grid-template-columns:1fr;}
+.stats{grid-template-columns:repeat(2,1fr);}
+.engines{grid-template-columns:repeat(2,1fr);}
+.funnel-grid{gap:36px;}
+}
+@media(max-width:520px){
+.wrap{padding:0 24px;}
+.stats{grid-template-columns:1fr;}
+.engines{grid-template-columns:1fr;}
+.score-row{grid-template-columns:110px 1fr 44px;gap:14px;}
+.tbl td:first-child{width:50%;padding-right:16px;}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="il" viewBox="0 0 128 40"><path d="M20 3C21.5742 3 23.1058 3.18335 24.5752 3.5293C22.7082 4.47405 21.3164 6.1228 21.2148 8.86133C18.5973 6.38444 12.3234 3.35112 8.16309 11.0293L18.666 10.4102C14.5531 11.0294 6.55185 14.4142 7.44922 23.001L19.9912 11.958C16.4561 15.3296 11.2425 23.3937 18.666 28.6777L22.1328 11.958C23.8058 15.1365 26.6162 23.0755 26.3027 32.1475C24.5373 31.3484 22.5171 30.6692 20.3018 30.291C18.812 30.0117 15.1898 29.8967 12.6201 31.6699C10.4129 33.193 7.9259 36.1553 6.53711 38C2.521 34.3199 5.43631e-06 29.0169 0 23.1211C0 12.0086 8.95428 3.00013 20 3ZM29.4434 5.38086C35.7268 8.77331 40 15.4447 40 23.1211C40 28.8462 37.6226 34.0117 33.8076 37.6758C33.6605 37.4256 33.4831 37.1523 33.2705 36.8545C32.9109 36.4678 32.3867 35.9825 31.7188 35.4463C31.6349 29.301 30.0109 17.326 23.8662 11.0293L34.3701 12.6807C33.2484 9.9629 29.5767 5.5383 23.8662 9.58398L29.4434 5.38086Z" fill="currentColor"/><path d="M52.4561 26.0172V15.2109H54.8088V26.0172H52.4561Z" fill="currentColor"/><path d="M62.1717 26.2282C61.5335 26.2282 60.9277 26.1579 60.3544 26.0172C59.7919 25.8766 59.3106 25.6873 58.9103 25.4493L59.105 23.2751C59.5918 23.578 60.1002 23.816 60.6303 23.989C61.1711 24.1513 61.6687 24.2324 62.123 24.2324C62.6422 24.2324 63.0641 24.1243 63.3886 23.9079C63.7131 23.6916 63.8754 23.4049 63.8754 23.0479C63.8754 22.7883 63.7943 22.5882 63.632 22.4476C63.4698 22.2962 63.2588 22.1663 62.9992 22.0582C62.7396 21.95 62.4529 21.831 62.1392 21.7012C61.7823 21.5498 61.4145 21.3929 61.0359 21.2307C60.6681 21.0684 60.322 20.8737 59.9975 20.6465C59.6838 20.4086 59.4241 20.1057 59.2186 19.7379C59.0239 19.3701 58.9266 18.905 58.9266 18.3425C58.9266 17.3149 59.2781 16.5036 59.9812 15.9086C60.6843 15.3029 61.6633 15 62.9181 15C63.8808 15 64.8543 15.1947 65.8387 15.5841L65.4817 17.7259C65.0815 17.4988 64.6488 17.3203 64.1837 17.1905C63.7294 17.0607 63.2967 16.9958 62.8856 16.9958C62.3772 16.9958 61.9824 17.0985 61.7012 17.304C61.4199 17.4988 61.2793 17.7638 61.2793 18.0991C61.2793 18.4128 61.3929 18.6562 61.62 18.8293C61.858 18.9915 62.1555 19.1484 62.5124 19.2998C62.8694 19.4512 63.2588 19.6081 63.6807 19.7704C64.1134 19.9218 64.519 20.1219 64.8976 20.3707C65.287 20.6087 65.6061 20.9332 65.8549 21.3442C66.1037 21.7445 66.2281 22.2637 66.2281 22.9019C66.2281 23.9512 65.8712 24.7679 65.1572 25.352C64.4541 25.9361 63.4589 26.2282 62.1717 26.2282Z" fill="currentColor"/><path d="M70.2037 26.0172V15.2109H72.5564V23.9728H76.4506V26.0172H70.2037Z" fill="currentColor"/><path d="M79.4829 26.0172L83.4419 15.2109H86.2652L90.273 26.0172H87.8391L86.9629 23.5509H82.7118L81.8843 26.0172H79.4829ZM83.3933 21.539H86.2652L84.8049 17.4014L83.3933 21.539Z" fill="currentColor"/><path d="M93.627 26.0172V15.2109H96.3854L100.864 22.7883V15.2109H103.022V26.0172H100.296L95.785 18.3912V26.0172H93.627Z" fill="currentColor"/><path d="M109.102 26.0335C108.81 26.0335 108.518 26.0335 108.226 26.0335C107.945 26.0335 107.664 26.0281 107.382 26.0172V15.2109C107.728 15.2001 108.075 15.1947 108.421 15.1947C108.767 15.1947 109.108 15.1947 109.443 15.1947C109.789 15.1947 110.135 15.1947 110.481 15.1947C110.828 15.1947 111.168 15.2001 111.504 15.2109C112.575 15.2218 113.499 15.4381 114.278 15.86C115.057 16.271 115.657 16.8605 116.079 17.6286C116.512 18.3858 116.728 19.2836 116.728 20.322C116.728 21.4578 116.48 22.453 115.982 23.3076C115.495 24.1513 114.808 24.8111 113.921 25.2871C113.034 25.7522 111.996 25.9956 110.806 26.0172C110.525 26.0281 110.238 26.0335 109.946 26.0335C109.665 26.0335 109.383 26.0335 109.102 26.0335ZM109.735 23.9728H110.79C111.882 23.9728 112.742 23.6537 113.37 23.0155C113.997 22.3773 114.311 21.5011 114.311 20.3869C114.311 19.3809 114.04 18.6075 113.499 18.0667C112.969 17.5258 112.201 17.2554 111.195 17.2554H109.735V23.9728Z" fill="currentColor"/><path d="M123.63 26.2282C122.991 26.2282 122.386 26.1579 121.812 26.0172C121.25 25.8766 120.769 25.6873 120.368 25.4493L120.563 23.2751C121.05 23.578 121.558 23.816 122.088 23.989C122.629 24.1513 123.127 24.2324 123.581 24.2324C124.1 24.2324 124.522 24.1243 124.847 23.9079C125.171 23.6916 125.333 23.4049 125.333 23.0479C125.333 22.7883 125.252 22.5882 125.09 22.4476C124.928 22.2962 124.717 22.1663 124.457 22.0582C124.198 21.95 123.911 21.831 123.597 21.7012C123.24 21.5498 122.872 21.3929 122.494 21.2307C122.126 21.0684 121.78 20.8737 121.455 20.6465C121.142 20.4086 120.882 20.1057 120.677 19.7379C120.482 19.3701 120.385 18.905 120.385 18.3425C120.385 17.3149 120.736 16.5036 121.439 15.9086C122.142 15.3029 123.121 15 124.376 15C125.339 15 126.312 15.1947 127.297 15.5841L126.94 17.7259C126.54 17.4988 126.107 17.3203 125.642 17.1905C125.187 17.0607 124.755 16.9958 124.344 16.9958C123.835 16.9958 123.44 17.0985 123.159 17.304C122.878 17.4988 122.737 17.7638 122.737 18.0991C122.737 18.4128 122.851 18.6562 123.078 18.8293C123.316 18.9915 123.613 19.1484 123.97 19.2998C124.327 19.4512 124.717 19.6081 125.139 19.7704C125.571 19.9218 125.977 20.1219 126.356 20.3707C126.745 20.6087 127.064 20.9332 127.313 21.3442C127.562 21.7445 127.686 22.2637 127.686 22.9019C127.686 23.9512 127.329 24.7679 126.615 25.352C125.912 25.9361 124.917 26.2282 123.63 26.2282Z" fill="currentColor"/></symbol></svg>
+<header class="bar">
+<div class="wrap">
+<span class="logo" aria-label="Islands">
+<svg viewBox="0 0 128 40" role="img" aria-label="Islands"><use href="#il"/></svg>
+</span>
+<span class="bar-meta">Prime Developments &middot; 90-Day Roadmap &middot; September 2026</span>
+</div>
+</header>
+<section class="dark">
+<div class="wrap">
+<p class="eyebrow">Prime Developments &times; Islands</p>
+<h1>You build the best basements<br>in the GTA.<br><span class="grad">Nobody can find you.</span></h1>
+<p class="lead">Your site scores well on the things engines check. It scores zero on the thing buyers now use. This is the 90-day plan to fix that, what it costs, and what sits outside it.</p>
+<p style="margin-top:36px;"><a class="btn" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery">Book the roadmap walkthrough</a></p>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="eyebrow">The starting line</p>
+<h2>Where Prime stands today.</h2>
+<p class="sub">These are measured numbers from your visibility audit, not estimates. They are the baseline every month of this roadmap gets scored against.</p>
+<div class="stats">
+<div class="stat"><div class="num bad">0</div><p>Articles published. The whole site is six pages, and none of them is editorial.</p></div>
+<div class="stat"><div class="num bad">0%</div><p>Share of voice across all five AI answer engines, over 16 test prompts.</p></div>
+<div class="stat"><div class="num bad">0 / 45</div><p>Search rows where Prime places in Google's top 30 or inside an AI Overview.</p></div>
+<div class="stat"><div class="num">13</div><p>Rows where a named competitor is placed and Prime is not. That is the gap.</p></div>
+</div>
+<p class="src">Source: Venture Input Pack, Prime Developments v2. Site crawl plus DataForSEO 5-engine probe, Lighthouse and brand-SERP check, dated 2026-08-05. Search volumes in that pack were measured against the United States index, so GTA demand is understated rather than overstated.</p>
+</div>
+</section>
+<section class="dark">
+<div class="wrap">
+<p class="eyebrow">The diagnosis</p>
+<h2>The plumbing works. There is nothing running through it.</h2>
+<p class="lead">Nineteen signals were scored out of five. Prime is strong on foundation and strong on citation-readiness. Then it hits a wall, because both of those only pay off when there is content to point at.</p>
+<div class="scores">
+<div class="score-row">
+<div class="score-lab">SEO<span>Foundation, 7 signals</span></div>
+<div class="track"><div class="fill" style="width:74%"></div></div>
+<div class="score-val">3.7</div>
+</div>
+<div class="score-row">
+<div class="score-lab">GEO<span>Citation-readiness, 7 signals</span></div>
+<div class="track"><div class="fill" style="width:80%"></div></div>
+<div class="score-val">4.0</div>
+</div>
+<div class="score-row">
+<div class="score-lab">AEO<span>Citations actually won, 5 engines</span></div>
+<div class="track"><div class="fill zero"></div></div>
+<div class="score-val" style="color:var(--red)">0.0</div>
+</div>
+</div>
+<p class="sub" style="margin-top:36px;">Clean sitemap, live llms.txt, GeneralContractor schema, sharp metadata, four verified proof points including the 25 years, the 200-plus completed projects and the $5,000 on-time guarantee. All of it is quotable. None of it has been quoted, because there is no article for an engine to lift it from.</p>
+<div class="engines">
+<div class="engine"><div class="e-num">0</div><div class="e-name">ChatGPT</div><div class="e-sub">of 16 prompts</div></div>
+<div class="engine"><div class="e-num">0</div><div class="e-name">Perplexity</div><div class="e-sub">of 16 prompts</div></div>
+<div class="engine"><div class="e-num">0</div><div class="e-name">Google AIO</div><div class="e-sub">of 16 prompts</div></div>
+<div class="engine"><div class="e-num">0</div><div class="e-name">Gemini</div><div class="e-sub">of 16 prompts</div></div>
+<div class="engine"><div class="e-num">0</div><div class="e-name">Claude</div><div class="e-sub">of 16 prompts</div></div>
+</div>
+<p class="src">When a GTA homeowner asks any of these five engines who should finish their basement, the answer names Assured, Harmony, GSR or an American contractor. Overall visibility across all 19 signals averages 2.8 out of 5.</p>
+</div>
+</section>
+<section class="off">
+<div class="wrap">
+<p class="eyebrow">The demand map</p>
+<h2>61 targets, split by how close the reader is to hiring.</h2>
+<p class="sub">Every target in the pack is tagged by funnel stage. Prime currently covers none of them. The plan works bottom-up and top-down at once: decision-stage pages convert the traffic, awareness-stage articles create it.</p>
+<div class="funnel-grid">
+<div>
+<svg class="viz" viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Funnel showing 24 top-of-funnel, 23 middle-of-funnel and 14 bottom-of-funnel targets">
+<defs>
+<linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#f0d7c2"/><stop offset="100%" stop-color="#e8c9ae"/>
+</linearGradient>
+<linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#e9b688"/><stop offset="100%" stop-color="#e0a06e"/>
+</linearGradient>
+<linearGradient id="g3" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#e0793d"/><stop offset="100%" stop-color="#ef8b4e"/>
+</linearGradient>
+</defs>
+<polygon points="20,20 540,20 452,130 108,130" fill="url(#g1)"/>
+<polygon points="112,140 448,140 384,250 176,250" fill="url(#g2)"/>
+<polygon points="180,260 380,260 322,360 238,360" fill="url(#g3)"/>
+<text x="280" y="66" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#5a4636">TOFU</text>
+<text x="280" y="104" text-anchor="middle" font-family="Inter,sans-serif" font-size="34" font-weight="800" fill="#0a0a0a">24</text>
+<text x="280" y="184" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#5a3a22">MOFU</text>
+<text x="280" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="34" font-weight="800" fill="#0a0a0a">23</text>
+<text x="280" y="300" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#4a2410">BOFU</text>
+<text x="280" y="338" text-anchor="middle" font-family="Inter,sans-serif" font-size="34" font-weight="800" fill="#2b1408">14</text>
+</svg>
+</div>
+<div>
+<div class="fn-item t">
+<h4><span class="fn-count">24</span> awareness targets</h4>
+<p>Someone who does not yet know Prime exists. City-level searches across Mississauga, Vaughan, Etobicoke, Scarborough, North York, Richmond Hill, Brampton, Oakville and Markham, plus the mold and failure questions people ask before they ever type a company name. "How to prevent basement mold" alone carries measurable monthly demand and nobody owns it.</p>
+</div>
+<div class="fn-item m">
+<h4><span class="fn-count">23</span> consideration targets</h4>
+<p>Someone shortlisting. Cost of a basement renovation in Toronto, how to read a renovation quote, how to avoid hidden costs, what moisture-first construction actually means, how a $5,000 on-time guarantee works. Prime has the best answer in the market to every one of these and has published none of them.</p>
+</div>
+<div class="fn-item b">
+<h4><span class="fn-count">14</span> decision targets</h4>
+<p>Someone about to hire. Prime versus Assured, Harmony, GSR, Easy Renovation and Toronto General Contractors. What is in a build-out. Essential versus Diamond. Reviews and the project gallery. Competitors are already being cited on these comparisons, which means they are answering questions about Prime that Prime is not answering.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="eyebrow">How we choose what to write</p>
+<h2>Every post is an expansion, a gap, or a trend.</h2>
+<p class="sub">Three buckets, running in parallel. Expansion compounds what you already have proof for. Gap takes ground a competitor is holding. Trend puts you in front of demand before it peaks. Roughly 40 / 40 / 20 by volume.</p>
+<div class="cards">
+<div class="card">
+<span class="pill green">Expansion</span>
+<h3>Own what you have already earned</h3>
+<p>You have four verified, citable proof points and zero articles built on them. This is the cheapest visibility in the plan because the substance already exists.</p>
+<ul>
+<li>Moisture-first construction, explained from the restoration work that produced it</li>
+<li>Essential versus Diamond, line by line, with what each tier includes</li>
+<li>How a fixed itemized quote is built and why numbers move on other bids</li>
+<li>How the $5,000 on-time guarantee actually works</li>
+<li>Completed project walkthroughs from the 200-plus GTA builds</li>
+</ul>
+</div>
+<div class="card">
+<span class="pill red">Gap</span>
+<h3>Take ground competitors are holding</h3>
+<p>Thirteen rows where a rival is placed and Prime is absent. These are winnable because the incumbents are ranked but weak, mostly page-two positions and thin pages.</p>
+<ul>
+<li>City pages: Mississauga, Vaughan, Etobicoke, Scarborough, North York, Brampton</li>
+<li>Comparison pages against all five named competitors</li>
+<li>Cost of a basement renovation in Toronto, currently held by an AI Overview citation that is not yours</li>
+<li>Best basement builders in the GTA, where two rivals place and you do not</li>
+</ul>
+</div>
+<div class="card">
+<span class="pill amber">Trend</span>
+<h3>Get in front of where demand is moving</h3>
+<p>The surfaces buyers use are shifting faster than the keywords are. This bucket is the reason the plan is not just a blog.</p>
+<ul>
+<li>Legal secondary suites and basement apartments, the fastest-moving question in GTA below-grade work</li>
+<li>Answer-engine formats: front-loaded answers, FAQ schema, question-shaped headings</li>
+<li>Underpinning versus bench footing, and when each is genuinely required</li>
+<li>Basement ROI and rental math for investor-owners</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="off">
+<div class="wrap">
+<p class="eyebrow">The plan</p>
+<h2>Ten workstreams across three months.</h2>
+<p class="sub">Content starts in week one. Everything else layers on top of a publishing engine that is already running, because measurement and outreach are worthless without something to measure and something to point at.</p>
+<div class="months">
+<div class="month">
+<div class="month-head">
+<div class="mno">Month 1 &middot; Weeks 1 to 4</div>
+<h3>Build the engine</h3>
+<p>2 posts per week &middot; 8 posts</p>
+</div>
+<div class="month-body">
+<div class="ws"><div class="ws-n">1</div><div class="ws-t"><b>Start content writing</b><span>First 8 posts against the highest-scoring targets, led by mold prevention and the moisture-first story.</span></div></div>
+<div class="ws"><div class="ws-n">2</div><div class="ws-t"><b>Fine-tune content channels</b><span>Payload schema, post templates, Prime's voice locked, and a video slot at the top of every article for Ammar.</span></div></div>
+<div class="ws"><div class="ws-n">4</div><div class="ws-t"><b>Website copy, first wave</b><span>Two comparison pages and two how-to pages shipped alongside the posts.</span></div></div>
+<div class="ws"><div class="ws-n">7</div><div class="ws-t"><b>Measurement groundwork</b><span>GA4 and GTM installed, Ahrefs and DataForSEO baselines locked so month 2 has something to move against.</span></div></div>
+</div>
+<div class="month-out"><b>What you see</b>Posts live in Payload, a single domain, and a baseline report you can hold every later month against.</div>
+</div>
+<div class="month">
+<div class="month-head">
+<div class="mno">Month 2 &middot; Weeks 5 to 8</div>
+<h3>Get found</h3>
+<p>3 posts per week &middot; 12 posts</p>
+</div>
+<div class="month-body">
+<div class="ws"><div class="ws-n">3</div><div class="ws-t"><b>Find the channels</b><span>Where GTA homeowners and investors actually read: local groups, Houzz, TrustedPros, Reddit, YouTube, email.</span></div></div>
+<div class="ws"><div class="ws-n">4</div><div class="ws-t"><b>Website copy, full build</b><span>The X versus Y and X for Y page set: all five competitor comparisons plus the city pages.</span></div></div>
+<div class="ws"><div class="ws-n">5</div><div class="ws-t"><b>Get ranking</b><span>Internal linking, FAQ schema, answer blocks, and the mobile speed fixes flagged in the audit.</span></div></div>
+<div class="ws"><div class="ws-n">7</div><div class="ws-t"><b>Attribution pipeline live</b><span>Form, call and booking events wired end to end, so a lead traces back to the post that produced it.</span></div></div>
+</div>
+<div class="month-out"><b>What you see</b>First rankings on low-competition city and comparison terms, and the first leads with a named source.</div>
+</div>
+<div class="month">
+<div class="month-head">
+<div class="mno">Month 3 &middot; Weeks 9 to 12</div>
+<h3>Compound it</h3>
+<p>4 posts per week &middot; 16 posts</p>
+</div>
+<div class="month-body">
+<div class="ws"><div class="ws-n">6</div><div class="ws-t"><b>Deepen the site</b><span>Project case studies with before conditions, decisions, cost and outcome. Your highest-value format.</span></div></div>
+<div class="ws"><div class="ws-n">8</div><div class="ws-t"><b>Get other brands citing Prime</b><span>3 to 4 placements to start, scaling past 6, tracked through our pre-built Ahrefs and DataForSEO connectors.</span></div></div>
+<div class="ws"><div class="ws-n">9</div><div class="ws-t"><b>Response engine</b><span>When someone replies to a post, a comment or a video, it routes to a person with context attached.</span></div></div>
+<div class="ws"><div class="ws-n">10</div><div class="ws-t"><b>Conversions and leads</b><span>Full-quarter report: traffic, citations, leads, cost per lead, and what month 4 should do differently.</span></div></div>
+</div>
+<div class="month-out"><b>What you see</b>36 posts live, off-site citations building, and a reporting line from a published article to a booked consultation.</div>
+</div>
+</div>
+<p class="src">36 posts over 90 days maps to the 36 committed targets in the pack: 12 content keywords, 12 answer-box queries, 12 AI prompts. Cadence is a ramp, not a promise on any single week. If Payload access lands late, week one slides.</p>
+</div>
+</section>
+<section class="dark">
+<div class="wrap">
+<p class="eyebrow">Why it compounds</p>
+<h2>The flywheel, and why measurement sits inside it.</h2>
+<p class="lead">Most content programmes stop at publish. This one closes the loop, which is the only reason month three is worth more than month one.</p>
+<svg class="viz" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flywheel: publish, get cited, capture, attribute, respond" style="margin-top:48px;max-width:900px;">
+<defs>
+<marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto">
+<path d="M0,0 L9,4.5 L0,9 z" fill="#e0793d"/>
+</marker>
+</defs>
+<g font-family="Inter,sans-serif">
+<g>
+<rect x="20" y="150" width="150" height="100" rx="14" fill="#161615" stroke="#2a2926"/>
+<text x="95" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#e0793d">01</text>
+<text x="95" y="212" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">Publish</text>
+<text x="95" y="232" text-anchor="middle" font-size="12" fill="#a3a09a">On target, on cadence</text>
+</g>
+<g>
+<rect x="195" y="150" width="150" height="100" rx="14" fill="#161615" stroke="#2a2926"/>
+<text x="270" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#e0793d">02</text>
+<text x="270" y="212" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">Get cited</text>
+<text x="270" y="232" text-anchor="middle" font-size="12" fill="#a3a09a">Google and 5 engines</text>
+</g>
+<g>
+<rect x="370" y="150" width="150" height="100" rx="14" fill="#161615" stroke="#2a2926"/>
+<text x="445" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#e0793d">03</text>
+<text x="445" y="212" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">Capture</text>
+<text x="445" y="232" text-anchor="middle" font-size="12" fill="#a3a09a">Form, call, booking</text>
+</g>
+<g>
+<rect x="545" y="150" width="150" height="100" rx="14" fill="#161615" stroke="#2a2926"/>
+<text x="620" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#e0793d">04</text>
+<text x="620" y="212" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">Attribute</text>
+<text x="620" y="232" text-anchor="middle" font-size="12" fill="#a3a09a">GA4, GTM, Ahrefs</text>
+</g>
+<g>
+<rect x="720" y="150" width="150" height="100" rx="14" fill="#161615" stroke="#2a2926"/>
+<text x="795" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#e0793d">05</text>
+<text x="795" y="212" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">Respond</text>
+<text x="795" y="232" text-anchor="middle" font-size="12" fill="#a3a09a">Reply with context</text>
+</g>
+<line x1="172" y1="200" x2="188" y2="200" stroke="#e0793d" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="347" y1="200" x2="363" y2="200" stroke="#e0793d" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="522" y1="200" x2="538" y2="200" stroke="#e0793d" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="697" y1="200" x2="713" y2="200" stroke="#e0793d" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M795 262 C795 330, 640 345, 445 345 C250 345, 95 330, 95 262" fill="none" stroke="#e0793d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+<text x="445" y="372" text-anchor="middle" font-size="13" font-weight="600" fill="#e0793d">What converted tells us what to write next</text>
+<text x="445" y="60" text-anchor="middle" font-size="14" font-weight="600" fill="#a3a09a">Each turn of the loop makes the next post cheaper and better targeted</text>
+<line x1="95" y1="90" x2="795" y2="90" stroke="#2a2926" stroke-width="1"/>
+<text x="95" y="120" text-anchor="middle" font-size="12" fill="#6b6862">Week 1</text>
+<text x="795" y="120" text-anchor="middle" font-size="12" fill="#6b6862">Week 12</text>
+</g>
+</svg>
+</div>
+</section>
+<section>
+<div class="wrap">
+<p class="eyebrow">Scope</p>
+<h2>What is included, and what is not.</h2>
+<p class="sub">The line is simple. Recurring work that runs on our systems is in. One-off engineering and third-party spend is quoted before we touch it, never after.</p>
+<div class="split">
+<div class="box">
+<span class="pill green">In scope</span>
+<h3>Covered by the monthly</h3>
+<ul>
+<li>Content strategy, keyword and AI-prompt targeting against the pack</li>
+<li>Writing and editing, ramping from 2 to 4 posts per week</li>
+<li>On-page SEO, internal linking, schema and answer blocks</li>
+<li>Comparison, how-to and city page copy</li>
+<li>Publishing into Payload CMS and content channel setup</li>
+<li>GA4 and GTM configuration and the attribution pipeline</li>
+<li>Ahrefs and DataForSEO tracking through our pre-built connectors</li>
+<li>Off-site placement outreach, 3 to 4 brands to start</li>
+<li>Monthly reporting and a quarterly review</li>
+</ul>
+</div>
+<div class="box out">
+<span class="pill amber">Additional</span>
+<h3>Quoted separately, always in advance</h3>
+<ul>
+<li>Graphics and design at $55 CAD per hour, typically about $25 per post for 3 to 4 pieces</li>
+<li>One-off engineering to bolt systems together: custom Payload fields, API plumbing, new page templates outside the standard set</li>
+<li>The domain redirect and any hosting or DNS work</li>
+<li>Video production and editing. Ammar records, we brief and slot it</li>
+<li>Site photography and project footage</li>
+<li>Paid media budget and third-party tool licences</li>
+<li>Permit, legal or code review of technical claims</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="dark">
+<div class="wrap">
+<p class="eyebrow">Investment</p>
+<h2>What it costs to start.</h2>
+<div class="price">
+<div class="p-card">
+<div class="p-num">$1,500</div>
+<div class="p-lab">per month, all in for the retainer</div>
+<div class="p-note">Covers everything in the in-scope column. No setup fee.</div>
+</div>
+<div class="p-card">
+<div class="p-num">$55<span style="font-size:20px;font-weight:600;">/hr</span></div>
+<div class="p-lab">graphics and design, CAD</div>
+<div class="p-note">Runs about $25 per post for 3 to 4 pieces. Roughly $300 a month at full cadence.</div>
+</div>
+<div class="p-card">
+<div class="p-num">36</div>
+<div class="p-lab">posts across the quarter</div>
+<div class="p-note">At the full run rate that is under $50 of retainer per published piece. We are fast.</div>
+</div>
+</div>
+<p class="src">Graphics are billed on actual hours, not estimated. You approve the volume each month, and you can run at zero graphics if you want to.</p>
+</div>
+</section>
+<section class="off">
+<div class="wrap">
+<p class="eyebrow">Reporting</p>
+<h2>What gets measured, and when you see it.</h2>
+<table class="tbl">
+<thead><tr><th>Metric</th><th>Where it comes from and when it moves</th></tr></thead>
+<tbody>
+<tr><td>Published volume and coverage</td><td>Payload. Tracked against the 36 committed targets from week one.</td></tr>
+<tr><td>Keyword positions</td><td>Ahrefs and DataForSEO, weekly. First movement expected on low-competition city and comparison terms in month 2.</td></tr>
+<tr><td>AI citation share of voice</td><td>DataForSEO 5-engine probe, re-run monthly against the same 16 prompts. Baseline is 0%.</td></tr>
+<tr><td>Organic sessions and page engagement</td><td>GA4, from the day it is installed in month 1.</td></tr>
+<tr><td>Leads and source attribution</td><td>GTM event layer into GA4. Live in month 2, so month 3 is the first full month of clean lead data.</td></tr>
+<tr><td>Off-site citations and referring domains</td><td>Ahrefs. Starts moving in month 3 as placements land.</td></tr>
+<tr><td>Cost per lead</td><td>Reported from month 3 onward, once there is enough volume for the number to mean anything.</td></tr>
+</tbody>
+</table>
+<p class="src">One honest note on timing: content is a compounding channel, not a paid one. Month 1 produces almost no traffic. Month 2 produces movement. Month 3 is where the curve starts to be worth looking at, and the quarter after that is where it pays.</p>
+</div>
+</section>
+<section class="dark">
+<div class="wrap">
+<p class="eyebrow">This week</p>
+<h2>Two things we need from you<br><span class="grad">to start on time.</span></h2>
+<p class="lead">Both are small, and both are on the critical path. Week one does not start until the first one lands.</p>
+<div class="asks">
+<div class="ask">
+<span class="pill">Blocker</span>
+<h3>Payload CMS access for Marina</h3>
+<p>A login and password is fine. Marina configures the schema and connects it to our content agents, which is what lets us start putting posts in immediately rather than sitting on drafts. This is the single thing standing between today and a week-one publish.</p>
+</div>
+<div class="ask">
+<span class="pill">Recommended</span>
+<h3>Redirect basementsbyprime.ca to primedevelopments.ca</h3>
+<p>A permanent 301, not a temporary redirect. Running two domains splits whatever authority you have across both and gives engines two competing answers to the same question. Consolidating onto the domain with more history means every post from week one compounds into one place instead of two.</p>
+</div>
+</div>
+<p style="margin-top:44px;"><a class="btn" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery">Book the roadmap walkthrough</a></p>
+</div>
+</section>
+<footer class="bar footer">
+<div class="wrap">
+<span class="logo" aria-label="Islands">
+<svg viewBox="0 0 128 40" role="img" aria-label="Islands"><use href="#il"/></svg>
+</span>
+<span class="meta">90-day roadmap prepared for Prime Developments &middot; Baseline data from the Venture Input Pack, 2026-08-05 &middot; <a href="https://islandshq.xyz">islandshq.xyz</a></span>
+</div>
+</footer>
+</body>
+</html>
