@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niche Websites AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+ --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+ --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+ --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+ }
+ *{box-sizing:border-box;}
+ html{scroll-behavior:smooth;}
+ body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+ .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+ h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+ .muted{color:var(--muted);}
+ a{color:var(--orange-soft); text-decoration:none;}
+ .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+ .eyebrow.onwhite{color:var(--orange);}
+ .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+ .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+ .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+ .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+ .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+ .hero{padding:80px 0 44px; background:var(--bg);}
+ .hero h1{font-size:39px; line-height:1.2;}
+ .hero h1 .hl{color:var(--orange-soft);}
+ .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:652px;}
+ .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+ .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+ .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+ .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+ .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+ @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+ .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+ .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+ .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+ .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+ .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+ .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+ .scoreband .scoretext{flex:1; min-width:260px;}
+ .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+ background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+ .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+ .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+ .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+ .section{padding:64px 0; background:var(--bg);}
+ .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+ .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+ .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+ @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+ .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+ .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+ .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+ .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+ .pill.behind{background:var(--red-bg); color:var(--red);}
+ .pill.ahead{background:var(--green-bg); color:var(--green);}
+ .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+ .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+ .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+ .quote b{color:#cfccc4; font-weight:600;}
+ .card .divider{height:1px; background:var(--border); margin:14px 0;}
+ .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+ .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+ .card .how{font-size:13px; color:#cfccc4;}
+ .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+ .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+ .barrow .name{color:#d8d5cd;}
+ .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+ .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+ .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+ .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+ .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+ .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+ .blogrow:last-child{border-bottom:none;}
+ .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+ .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+ .priceband{background:var(--bg-2); padding:60px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .pricegrid{display:grid; grid-template-columns:1.1fr 1fr; gap:18px; margin-top:8px;}
+ @media (max-width:680px){ .pricegrid{grid-template-columns:1fr;} }
+ .pricecard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:26px;}
+ .pricecard .pname{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+ .pricecard .pprice{font-size:32px; font-weight:800; color:var(--white); margin-bottom:4px;}
+ .pricecard .pprice span{font-size:15px; color:var(--muted); font-weight:600;}
+ .pricecard .pbody{font-size:13px; color:#cfccc4; margin-top:10px;}
+ .inclist{list-style:none; padding:0; margin:6px 0 0;}
+ .inclist li{font-size:13px; color:#cfccc4; padding:7px 0 7px 22px; position:relative; border-bottom:1px solid var(--border);}
+ .inclist li:last-child{border-bottom:none;}
+ .inclist li:before{content:"\2192"; position:absolute; left:0; color:var(--orange); font-weight:700;}
+ .pricenote{font-size:12.5px; color:var(--muted); margin-top:18px; font-style:italic;}
+ .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+ .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+ @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+ .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+ .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+ .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+ .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+ .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+ .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+ .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+ .pitch{padding:72px 0; background:var(--bg);}
+ .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+ .pitch h2 .hl{color:var(--orange-soft);}
+ .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+ footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+ footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+ footer .fnote{font-size:11.5px; color:var(--muted);}
+ .lsection{background:#ffffff; color:#15140f;}
+ .lsection h2, .lsection h3{color:#15140f;}
+ .lsection .lede{color:#55524a;}
+ .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+ .lsection.scoreband .num{color:#c8622a;}
+ .lsection.scoreband .num span{color:#7a766c;}
+ .lsection.scoreband p.desc{color:#3a3830;}
+ .lsection.scoreband .gaugelabels{color:#7a766c;}
+ .lsection.scoreband .gauge .marker{background:#15140f;}
+ .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .barrow .name{color:#2c2a24;}
+ .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
+ .lsection .barrow .pct{color:#7a766c;}
+ .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
+ .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .blogrow{border-bottom:1px solid #e3ded2;}
+ .lsection .blogtitle{color:#15140f;}
+ .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
+ .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .proofstats .n{color:#15140f;}
+ .lsection .proofstats .l{color:#6f6b60;}
+ .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
+ .lsection .proofcard .who{color:#7a766c;}
+ .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
+ .lsection .card .label{color:#7a766c;}
+ .lsection .card .stat{color:#15140f;}
+ .lsection .card .body{color:#3a3830;}
+ .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
+ .lsection .quote b{color:#2c2a24;}
+ .lsection .card .divider{background:#e3ded2;}
+ .lsection .card .why{color:#3a3830;}
+ .lsection .card .how{color:#3a3830;}
+</style>
+</head>
+<body>
+
+ <div class="topbar">
+ <div class="wrap">
+ <div class="context-right">Islands x Niche Websites</div>
+ <div class="context-left">AI Visibility Audit - September 2026</div>
+ </div>
+ </div>
+
+ <div class="hero rays">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+ <h1>You optimize sites for a living.<br>So why does AI cite yours <span class="hl">2 times out of 80</span>?</h1>
+ <p class="sub">This is the strange part. Your site is built better than almost anything we audit: full schema, an llms.txt, even an agents.md, the files most sites never add. And yet across five AI engines and 16 buyer questions, you were cited twice, total. Even when someone asks "Niche Websites vs Wix," AI recommends Wix. The optimization isn't the problem. The problem is you built a site that covers every niche and owns none, so AI has nothing to recommend you for.</p>
+ <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 25, 2026. Every number below traces back to a public, repeatable test.</div>
+ </div>
+ </div>
+
+ <div class="band-white">
+ <div class="wrap">
+ <div class="eyebrow onwhite">The Shift</div>
+ <h2>Search is moving from Google to AI</h2>
+ <p class="lede">You already know this better than most of your clients, it's the arbitrage you're selling them. The same shift decides who wins your own category: when a business owner asks AI "who should build my website," the specialist with real content gets named, and the generalist gets skipped.</p>
+ <div class="statcols">
+ <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+ <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+ <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="scoreband lsection">
+ <div class="wrap inner">
+ <div class="num">2.8<span>/5</span></div>
+ <div class="scoretext">
+ <div class="eyebrow">Niche Websites' Overall AI + Search Visibility Score</div>
+ <div class="gauge"><div class="marker" style="left:56%;"></div></div>
+ <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+ <p class="desc">One grade for whether a buyer can find you, in Google or in AI. Your technical foundation props this up. What drags it down is measured citations, which are near zero, because AI can't tell what you specialize in or trust who you are.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+ <h2>The build is flawless. The strategy behind it isn't there yet.</h2>
+ <p class="lede">Four findings: the expert-level foundation you already laid, the citation paradox it exposes, the missing niche, and the identity and authority AI can't see.</p>
+
+ <div class="cards">
+ <div class="card">
+ <div class="top"><span class="label">You did the hard technical work</span><span class="pill ahead">Ahead</span></div>
+ <div class="stat">llms.txt + agents.md</div>
+ <div class="body">This is expert-level optimization. Rich schema (ProfessionalService, Offer, FAQPage, OfferCatalog), both an llms.txt and an agents.md, and dedicated comparison pages against Wix, Squarespace, and Fiverr. Almost nobody we audit has all of this.</div>
+ <div class="quote">The plumbing is genuinely better than 99% of sites. Nothing here needs fixing.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">You've already done the part most companies pay us to fix. That means every improvement below compounds immediately, with no cleanup phase.</div>
+ <div class="how-lbl">How Islands builds on it</div>
+ <div class="how">We skip the foundation entirely and point straight at the two things holding you back: a niche and the authority to own it.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">The citation paradox</span><span class="pill behind">Behind</span></div>
+ <div class="stat">2 of 80</div>
+ <div class="body">With all that optimization, you were cited a total of 2 times across 80 tests. ChatGPT, Claude, and Google's AI: zero. On the questions your buyers ask, generic directories like Clutch and Forbes get named, and you don't.</div>
+ <div class="quote"><b>"Niche Websites vs Wix for professional business sites"</b> &rarr; AI cited Wix. Not you, on your own comparison question.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">This proves the issue isn't technical. Perfect markup can't make AI recommend you if it can't tell what you're the best choice for.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We give the engines a reason to cite you: depth of content on a specific niche, so you become the obvious answer instead of one more generalist.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">Every niche, no niche</span><span class="pill behind">Behind</span></div>
+ <div class="stat">0 of 13 terms</div>
+ <div class="body">You said it yourself: the site covers every niche and owns none. AI recommends specialists. "Best website designer for plumbers," "for law firms," "for dentists," each has a clear winner, and across all 13 category searches, you don't appear on one.</div>
+ <div class="quote">The service trades, plumbers, roofers, contractors, are wide open and just waking up to AI search. That's a lane nobody has claimed.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">Picking a lane is what turns your speed and margin into repeatable inbound. A generalist competes with Wix on price; a specialist gets recommended by name.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We build the content that makes you the cited go-to for the niche you choose, so buyers in that lane find you before they find a template builder.</div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="label">AI can't tell who you are</span><span class="pill behind">Behind</span></div>
+ <div class="stat">A dictionary word</div>
+ <div class="body">The knowledge graph maps "Niche" to the ecology term, not your company. There's no Google Knowledge Panel and no LinkedIn company page. And your single strongest trust signal, that you're the former VP of GoDaddy, is nowhere AI can see it.</div>
+ <div class="quote">The site also loads slowly, 45/100 on mobile, which is worth fixing for a company that sells fast, professional websites.</div>
+ <div class="divider"></div>
+ <div class="why-lbl">Why it matters</div>
+ <div class="why">AI needs a clear entity and real, credentialed authorship to cite you with confidence. Your credibility is world-class and completely invisible to the engines.</div>
+ <div class="how-lbl">How Islands closes it</div>
+ <div class="how">We clean up the entity, put your founder story and GoDaddy background front and center, fix the speed, and publish content in your name so AI learns to trust you.</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:0;">
+ <div class="wrap">
+ <div class="chartbox">
+ <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Actually Cited Niche Websites</div>
+ <p class="lede" style="margin-bottom:22px;">Out of the 16 buyer questions we tested per engine.</p>
+ <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:6%;"></div></div><span class="pct">6%</span></div>
+ <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:6%;"></div></div><span class="pct">6%</span></div>
+ <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+ <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+ <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0%</span></div>
+ <div class="chartnote">Here's the irony in one chart: you have every AI-readiness file a site can have, and you're cited less than anyone we audit. It's not a technical gap, it's a niche and authority gap. The upside is that your category is wide open ("web design for small business" gets 4,400 searches a month and nobody owns it) and your foundation is already built, so this moves fast once we point it in one direction.</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section lsection" style="padding-top:0;">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+ <h2 style="font-size:26px; margin-bottom:24px;">Built around the service-trades niche we discussed</h2>
+ <div class="blogbox">
+ <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Best Website Design for Plumbers: What Actually Gets You Booked</span></div>
+ <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Do Home-Service Contractors Still Need a Website in the AI Search Era?</span></div>
+ <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Website Design for Roofers: Turning Clicks Into Booked Estimates</span></div>
+ <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">How Local Trades Show Up When Customers Ask AI for a Recommendation</span></div>
+ <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">Wix vs. a Professional Build for Service Businesses: An Honest Comparison</span></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="priceband">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">The Quote</div>
+ <h2 style="font-size:26px; margin-bottom:8px;">Done-for-you, and it pays for itself fast</h2>
+ <p class="lede" style="font-size:14px; color:#a3a09a; max-width:560px; margin-bottom:8px;">One flat monthly fee to run the content engine that makes you the cited specialist. The audit itself is free.</p>
+ <div class="pricegrid">
+ <div class="pricecard">
+ <div class="pname">What's included</div>
+ <ul class="inclist">
+ <li>Around 3 researched posts a week, published to your site</li>
+ <li>Aimed at the niche you pick, so AI names you as the specialist</li>
+ <li>Keyword and competitive research, plus our backlink network</li>
+ <li>Your GoDaddy credibility and founder story built into the site's authority</li>
+ <li>Entity cleanup and a free technical audit with your fixes prioritized</li>
+ <li>Weekly reports, first content live in about five days</li>
+ </ul>
+ </div>
+ <div class="pricecard">
+ <div class="pname">Content engine</div>
+ <div class="pprice">$3,000<span>/month</span></div>
+ <div class="pbody">Flat fee, no long-term lock-in. At your build prices, one or two inbound clients a month covers it, and a cited niche should bring in more than that.</div>
+ <div class="pricenote" style="margin-top:16px;">Any site fixes beyond content (speed, entity, structure) are scoped separately, so you only pay for what you approve.</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="proof lsection">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+ <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+ <div class="proofgrid">
+ <div class="proofcard">
+ <div class="co">Blanka, private-label beauty</div>
+ <div class="proofstats">
+ <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+ <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+ <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+ </div>
+ <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+ <div class="who">Karli Leitl, COO, Blanka</div>
+ </div>
+ <div class="proofcard">
+ <div class="co">GrowTal, B2B marketplace</div>
+ <div class="proofstats">
+ <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+ <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+ <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+ </div>
+ <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+ <div class="who">Sarah Little, Operations, GrowTal</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="pitch rays">
+ <div class="wrap">
+ <div class="eyebrow" style="margin-bottom:14px;">What This Means For Niche Websites</div>
+ <h2>You've already won the hard part. Now pick a lane, and let AI make you the <span class="hl">obvious answer</span>.</h2>
+ <p>The foundation is done, better than almost anyone. What's missing is a niche to own, the content to own it, and your own credibility made visible so AI trusts who you are. Do that and a category nobody has claimed becomes a steady stream of inbound, the small, quick clients you said you want more of.</p>
+ <p>You can change the whole site with one prompt, you told me that yourself. We bring the other half: the strategy and the content that turns your speed into a machine buyers actually find. The five posts above are where we'd start on Tuesday.</p>
+ <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a call with us &rarr;</a>
+ </div>
+ </div>
+
+ <footer>
+ <div class="wrap">
+ <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Niche Websites, September 2026</div>
+ </div>
+ </footer>
+
+</body>
+</html>
