@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berry AI Visibility Audit | Islands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
+    --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
+    --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .muted{color:var(--muted);}
+  a{color:var(--orange-soft); text-decoration:none;}
+  .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .eyebrow.onwhite{color:var(--orange);}
+  .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
+  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .hero{padding:80px 0 44px; background:var(--bg);}
+  .hero h1{font-size:39px; line-height:1.2;}
+  .hero h1 .hl{color:var(--orange-soft);}
+  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:652px;}
+  .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
+  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
+  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
+  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
+  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
+  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
+  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
+  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
+  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
+  .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
+  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
+  .scoreband .scoretext{flex:1; min-width:260px;}
+  .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+  .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
+  .section{padding:64px 0; background:var(--bg);}
+  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
+  .pill.behind{background:var(--red-bg); color:var(--red);}
+  .pill.ahead{background:var(--green-bg); color:var(--green);}
+  .pill.onpar{background:var(--amber-bg); color:var(--amber);}
+  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
+  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
+  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
+  .quote b{color:#cfccc4; font-weight:600;}
+  .card .divider{height:1px; background:var(--border); margin:14px 0;}
+  .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
+  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
+  .card .how{font-size:13px; color:#cfccc4;}
+  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
+  .barrow{display:grid; grid-template-columns:150px 1fr 64px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
+  .barrow .name{color:#d8d5cd;}
+  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
+  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
+  .barfill.rival{background:rgba(255,255,255,0.16);}
+  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
+  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+  /* engine diagram */
+  .enginewrap{padding:64px 0; background:var(--bg);}
+  .engine-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:8px;}
+  @media (max-width:680px){ .engine-grid{grid-template-columns:1fr 1fr;} }
+  .estep{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 15px; position:relative;}
+  .estep.hl{border-color:var(--orange); background:linear-gradient(180deg, rgba(224,121,61,0.10), var(--card));}
+  .estep .en{font-size:11px; font-weight:800; color:var(--orange); margin-bottom:8px;}
+  .estep .et{font-size:14px; font-weight:700; color:var(--white); margin-bottom:5px;}
+  .estep .ed{font-size:11.5px; color:#b7b4ac; line-height:1.45;}
+  .estep .etag{display:inline-block; margin-top:9px; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; font-weight:700; color:var(--orange); background:var(--orange-bg); padding:3px 7px; border-radius:20px;}
+  .loopnote{margin-top:16px; padding:14px 16px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted);}
+  .loopnote b{color:var(--orange-soft);}
+  .humannote{margin-top:12px; display:flex; align-items:center; gap:10px; font-size:12.5px; color:#cfccc4;}
+  .humannote .dot{width:20px;height:20px;border-radius:50%;background:var(--orange-bg);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:none;}
+  /* backlink section */
+  .backlink{padding:64px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .blgrid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:26px;}
+  @media (max-width:680px){ .blgrid{grid-template-columns:1fr;} }
+  .blcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .blcard .bln{font-size:34px; font-weight:800; color:var(--orange-soft); line-height:1; margin-bottom:8px;}
+  .blcard .blt{font-size:14px; font-weight:700; color:var(--white); margin-bottom:8px;}
+  .blcard .blb{font-size:13px; color:#cfccc4;}
+  .blogbox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
+  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .blogrow:last-child{border-bottom:none;}
+  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
+  .priceband{background:var(--bg-2); padding:60px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .pricegrid{display:grid; grid-template-columns:1.1fr 1fr; gap:18px; margin-top:8px;}
+  @media (max-width:680px){ .pricegrid{grid-template-columns:1fr;} }
+  .pricecard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:26px;}
+  .pricecard .pname{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .pricecard .pprice{font-size:32px; font-weight:800; color:var(--white); margin-bottom:4px;}
+  .pricecard .pprice span{font-size:15px; color:var(--muted); font-weight:600;}
+  .pricecard .pbody{font-size:13px; color:#cfccc4; margin-top:10px;}
+  .inclist{list-style:none; padding:0; margin:6px 0 0;}
+  .inclist li{font-size:13px; color:#cfccc4; padding:7px 0 7px 22px; position:relative; border-bottom:1px solid var(--border);}
+  .inclist li:last-child{border-bottom:none;}
+  .inclist li:before{content:"\2192"; position:absolute; left:0; color:var(--orange); font-weight:700;}
+  .pricenote{font-size:12.5px; color:var(--muted); margin-top:18px; font-style:italic;}
+  .proof{background:var(--bg); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
+  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
+  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
+  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
+  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
+  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
+  .pitch{padding:72px 0; background:var(--bg);}
+  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .pitch h2 .hl{color:var(--orange-soft);}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
+  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer .fnote{font-size:11.5px; color:var(--muted);}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="context-right">Islands x Berry AI</div>
+      <div class="context-left">AI Visibility Audit - September 2026</div>
+    </div>
+  </div>
+
+  <div class="hero rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
+      <h1>Berry sells AI agents that talk to the customers humans can't reach.<br>But when a buyer asks AI about you, it finds <span class="hl">an airport</span>.</h1>
+      <p class="sub">You already told me the site isn't optimized yet, so this won't be a surprise. Here's the sharp version. On the 16 questions your buyers actually ask AI, from "how do I scale NRR without hiring more CSMs" to "best tools for automated SaaS renewals," Berry was cited zero times across all five engines. Gainsight was named in eight of them. And when an engine does look up "Berry AI," the knowledge graph points it at Berry Airfield, an airport. The product is built to be the AI in the room. Right now the AI in the room has never heard of it.</p>
+      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked the entity graph, and crawled the live site. Snapshot taken September 1, 2026. Every number below traces back to a public, repeatable test.</div>
+    </div>
+  </div>
+
+  <div class="band-white">
+    <div class="wrap">
+      <div class="eyebrow onwhite">The Shift</div>
+      <h2>Your buyers are asking AI, not Google</h2>
+      <p class="lede">CS and RevOps leaders now open ChatGPT or Perplexity to shortlist tools before they ever hit a website. Whoever the model names gets the demo. Whoever it skips never enters the evaluation, no matter how good the product is.</p>
+      <div class="statcols">
+        <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
+        <div><div class="num">5&times;</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
+        <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreband">
+    <div class="wrap inner">
+      <div class="num">1.8<span>/5</span></div>
+      <div class="scoretext">
+        <div class="eyebrow">Berry AI's Overall AI + Search Visibility Score</div>
+        <div class="gauge"><div class="marker" style="left:36%;"></div></div>
+        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
+        <p class="desc">One grade for whether a buyer can find you, in Google or in AI. Your metadata and crawlability are genuinely strong. What pulls this down to a 1.8 is measured citations, which are zero on every engine, plus an entity the models have confused with something else entirely.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
+      <h2>The product is ahead of its category. The visibility is behind it.</h2>
+      <p class="lede">Four findings: the citation blackout, the airport problem, the competitors already owning your questions, and the foundation that's ready for content the moment you point it.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top"><span class="label">Cited by AI: zero</span><span class="pill behind">Behind</span></div>
+          <div class="stat">0 of 16</div>
+          <div class="body">Across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, Berry was cited on none of the 16 buyer questions we tested. Not "ranked low," not "mentioned without a link," absent. For a company whose entire pitch is being the smartest agent in the conversation, being invisible to the agents buyers ask first is the gap that matters most.</div>
+          <div class="quote"><b>"Scaling post-sales without hiring more CSMs"</b> &rarr; the exact problem Berry solves. AI named Gainsight. Berry did not appear.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">The buyer's shortlist is now written by the model before your sales team gets a chance. If Berry isn't in the answer, it isn't in the evaluation.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We publish depth on the specific questions your buyers ask, in a format the engines can lift, until Berry becomes the answer instead of the omission.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">AI thinks Berry is an airport</span><span class="pill behind">Behind</span></div>
+          <div class="stat">Wrong entity</div>
+          <div class="body">The knowledge graph maps "Berry" to Berry Airfield, and Wikidata returns an airport in the United States. There's no Crunchbase profile and no named leadership visible to the engines. So even when a model tries to look Berry up, it retrieves the wrong thing, and quietly drops you from the answer.</div>
+          <div class="quote">A real strength is buried here: Ann, your CEO, is the exact founder authority AI wants to see. Right now it's invisible to the models.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">AI won't confidently recommend a brand it can't cleanly identify. A confused entity is a citation ceiling no amount of content can break through on its own.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We establish Berry as a distinct entity, Crunchbase, Wikidata, a clear brand graph, and put Ann's founder story where the models read it, so "Berry AI" resolves to you.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Rivals own your questions</span><span class="pill behind">Behind</span></div>
+          <div class="stat">Gainsight 8, you 0</div>
+          <div class="body">On the same 16 questions, Gainsight was cited eight times and ChurnZero three. Berry has no "vs" or comparison content, so when a buyer asks the model to compare renewal and expansion tools, the incumbents get listed and the sharper, newer product isn't in the room to argue its case.</div>
+          <div class="quote">Your positioning, autonomous agent vs. legacy CSM dashboard, is a strong "vs" story. AI just hasn't been given it to repeat.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">Comparison and "best tools for X" prompts are where deals get shortlisted. Owning them is how a challenger gets into consideration sets it isn't invited to yet.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We build the comparison and category content that puts Berry beside Gainsight, Totango, and ChurnZero in the answers, on the terms that flatter an autonomous agent.</div>
+        </div>
+
+        <div class="card">
+          <div class="top"><span class="label">Foundation is ready</span><span class="pill onpar">Mostly there</span></div>
+          <div class="stat">5/5 metadata</div>
+          <div class="body">The good news you'll like: crawlability, sitemap, and metadata are strong, titles are already optimized for "AI for Renewals" and "NRR for SaaS." What's missing is the AI layer: no schema, no llms.txt, no FAQ content, and thin long-form volume. Mobile stability is also shaky (layout-shift score 0.244), worth a quick fix.</div>
+          <div class="quote">This is the fast part. The plumbing is sound, so new content compounds immediately with no cleanup phase first.</div>
+          <div class="divider"></div>
+          <div class="why-lbl">Why it matters</div>
+          <div class="why">A clean foundation means the gap is content and authority, not a rebuild. That's the difference between months of remediation and results inside a quarter.</div>
+          <div class="how-lbl">How Islands closes it</div>
+          <div class="how">We add schema, an llms.txt, FAQ answer blocks, and a steady stream of researched posts, so the engines finally have something of yours to cite.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="chartbox">
+        <div class="eyebrow" style="margin-bottom:6px;">Who AI Names When Your Buyers Ask, And Who It Doesn't</div>
+        <p class="lede" style="margin-bottom:22px;">Citations across the 16 renewal, expansion, and post-sales questions we tested per engine.</p>
+        <div class="barrow"><span class="name">Gainsight</span><div class="bartrack"><div class="barfill rival" style="width:50%;"></div></div><span class="pct">8 of 16</span></div>
+        <div class="barrow"><span class="name">ChurnZero</span><div class="bartrack"><div class="barfill rival" style="width:19%;"></div></div><span class="pct">3 of 16</span></div>
+        <div class="barrow"><span class="name">Berry AI</span><div class="bartrack"><div class="barfill" style="width:2%; opacity:0.25;"></div></div><span class="pct">0 of 16</span></div>
+        <div class="chartnote">Same questions, same engines. The incumbents show up because AI has years of content and a clean entity to draw on. Berry doesn't, yet. The upside: these questions have no dominant AI answer, the category is still forming, and your foundation is already built, so this moves faster than it would for the legacy players.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="enginewrap">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">How Our Content Engine Works</div>
+      <h2 style="font-size:28px; margin-bottom:8px;">One request in. Ranking, AI-cited content out. Every month.</h2>
+      <p class="lede" style="font-size:14px; color:var(--muted); max-width:600px; margin-bottom:26px;">A closed loop of specialized AI agents, with a person reviewing at every stage. It's the same idea as your Revenue Agents, pointed at your visibility instead of your renewals.</p>
+      <div class="engine-grid">
+        <div class="estep"><div class="en">01</div><div class="et">Research</div><div class="ed">We study your best content and real search demand, so topics track what CS and RevOps buyers actually ask.</div></div>
+        <div class="estep"><div class="en">02</div><div class="et">Insights</div><div class="ed">We connect your own tools and customer conversations, so the angle comes from your market, not a template.</div></div>
+        <div class="estep"><div class="en">03</div><div class="et">Strategy</div><div class="ed">Topics are mapped across the funnel and prioritized into a rolling roadmap, highest impact first.</div></div>
+        <div class="estep"><div class="en">04</div><div class="et">Writing</div><div class="ed">Drafted in Berry's voice, built to rank in Google and in AI answers like ChatGPT and Perplexity.</div></div>
+        <div class="estep"><div class="en">05</div><div class="et">Review</div><div class="ed">A multi-stage editorial loop clears a strict quality bar before anything moves forward.</div></div>
+        <div class="estep"><div class="en">06</div><div class="et">Publish</div><div class="ed">Formatted and on brand, delivered to your site as a ready-to-approve draft.</div></div>
+        <div class="estep hl"><div class="en">07</div><div class="et">Backlinks</div><div class="ed">Linked across your own site and cited by our network of established sites.</div><span class="etag">Authority you can't build alone</span></div>
+        <div class="estep"><div class="en">08</div><div class="et">Reporting</div><div class="ed">We track rankings, traffic, and AI visibility, then feed the results into the next round.</div></div>
+      </div>
+      <div class="loopnote"><b>The engine compounds.</b> Results and every new article feed the next cycle, so output gets sharper over time, and Berry's share of the AI answers climbs month over month.</div>
+      <div class="humannote"><span class="dot">&#10003;</span><span>A person reviews and approves at every stage. Nothing publishes itself.</span></div>
+    </div>
+  </div>
+
+  <div class="backlink">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">What Makes Islands Different</div>
+      <h2 style="font-size:28px; margin-bottom:12px;">The backlink network you can't build alone</h2>
+      <p class="lede" style="font-size:14.5px; color:var(--muted); max-width:620px; margin-bottom:6px;">Anyone can write posts. The reason AI and Google trust a source enough to cite it is authority, and authority comes from other credible sites linking to and referencing your content. That's the piece most content shops can't deliver. We can, because we've spent years building the network.</p>
+      <div class="blgrid">
+        <div class="blcard">
+          <div class="bln">Owned network</div>
+          <div class="blt">Established sites, not link farms</div>
+          <div class="blb">Your best content gets cited and linked across a network of real, authoritative sites we've built and maintain. That's the signal AI engines weigh most heavily when deciding who to trust in a category, and it's exactly what a confused, newer entity like Berry needs most.</div>
+        </div>
+        <div class="blcard">
+          <div class="bln">4&times;</div>
+          <div class="blt">Backlinks earned for Blanka</div>
+          <div class="blb">202 to 804 in 90 days, alongside a 6.6x jump in AI answer appearances. The two move together: more authority in, more citations out. It's the same loop we'd run to make "Berry AI" resolve to you and get named on your buyers' questions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:var(--bg-2); border-top:1px solid var(--border);">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
+      <h2 style="font-size:26px; margin-bottom:24px;">Built around the renewal and expansion questions your buyers ask AI</h2>
+      <div class="blogbox">
+        <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">How to Scale NRR Without Hiring More CSMs</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">AI Agents vs. Human CSMs: Where Each One Actually Wins</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">Berry AI vs. Gainsight: Autonomous Revenue Agent or Legacy CSM Platform?</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">The Playbook for Automating SaaS Renewals in the Long Tail</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">What Is an AI Revenue Agent, and How It Protects GRR</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="priceband">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Pricing</div>
+      <h2 style="font-size:26px; margin-bottom:8px;">Done-for-you, one flat monthly fee</h2>
+      <p class="lede" style="font-size:14px; color:#a3a09a; max-width:560px; margin-bottom:8px;">The full engine, agents, editors, backlink network, and reporting, run for you every month. The audit itself is free.</p>
+      <div class="pricegrid">
+        <div class="pricecard">
+          <div class="pname">What's included</div>
+          <ul class="inclist">
+            <li>Around 3 researched posts a week, published to your site</li>
+            <li>Aimed at the renewal, expansion, and NRR questions your buyers ask AI</li>
+            <li>Comparison content that puts Berry beside Gainsight and ChurnZero</li>
+            <li>Our backlink network building the authority AI trusts</li>
+            <li>Entity cleanup so "Berry AI" resolves to you, not an airport</li>
+            <li>Schema, llms.txt, and FAQ blocks added; weekly reports, first content in about five days</li>
+          </ul>
+        </div>
+        <div class="pricecard">
+          <div class="pname">Content engine</div>
+          <div class="pprice">$3,000<span>/month</span></div>
+          <div class="pbody">Flat fee, no long-term lock-in. For a product priced on NRR, a single expansion or saved renewal that traces back to an AI answer covers this many times over.</div>
+          <div class="pricenote" style="margin-top:16px;">Any site fixes beyond content (mobile stability, structure) are scoped separately, so you only pay for what you approve.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
+      <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
+      <div class="proofgrid">
+        <div class="proofcard">
+          <div class="co">Blanka, private-label beauty</div>
+          <div class="proofstats">
+            <div><div class="n">6.6&times;</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
+            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
+            <div><div class="n">4&times;</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
+          </div>
+          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
+          <div class="who">Karli Leitl, COO, Blanka</div>
+        </div>
+        <div class="proofcard">
+          <div class="co">GrowTal, B2B marketplace</div>
+          <div class="proofstats">
+            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
+            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
+            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
+          </div>
+          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
+          <div class="who">Sarah Little, Operations, GrowTal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pitch rays">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:14px;">What This Means For Berry</div>
+      <h2>You built the agent buyers want. Now let's make it the one AI <span class="hl">recommends</span>.</h2>
+      <p>The product is ahead of the category and the site's foundation is already sound. What's missing is a clean entity, the content that answers your buyers' questions, and the backlink authority that makes AI trust who you are. Fix those three and Berry stops being the omission on "how do I scale NRR without hiring" and starts being the answer.</p>
+      <p>Your Revenue Agents cover the accounts your team can't reach. Our engine covers the buyers your marketing can't reach yet, the ones asking AI before they ever find your site. Same idea, pointed at your pipeline.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a call with us &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Berry AI, September 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
