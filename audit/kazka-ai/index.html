@@ -11,282 +11,343 @@
   :root{
     --bg:#0a0a0a; --bg-2:#121212; --card:#161615; --border:#2a2926;
     --white:#f6f5f2; --muted:#a3a09a; --orange:#e0793d; --orange-soft:#f0a56a;
-    --orange-bg:rgba(224,121,61,0.12); --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
-    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12); --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
+    --orange-bg:rgba(224,121,61,0.12);
+    --red:#e8664f; --red-bg:rgba(232,102,79,0.12);
+    --amber:#e0b04a; --amber-bg:rgba(224,176,74,0.12);
+    --green:#7fb88f; --green-bg:rgba(127,184,143,0.12);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
-  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  body{margin:0; background:var(--bg); color:var(--white); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:820px; margin:0 auto; padding:0 20px;}
   h1,h2,h3{font-weight:700; margin:0; letter-spacing:-0.01em;}
-  .muted{color:var(--muted);}
   a{color:var(--orange-soft); text-decoration:none;}
+  .muted{color:var(--muted);}
   .eyebrow{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:700;}
-  .eyebrow.onwhite{color:var(--orange);}
-  .rays{background-image: repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
-  .topbar{padding:22px 0; border-bottom:1px solid var(--border); background:var(--bg);}
-  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
-  .topbar .context-left{font-size:12px; color:var(--muted); letter-spacing:0.02em;}
-  .topbar .context-right{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
-  .hero{padding:80px 0 44px; background:var(--bg);}
-  .hero h1{font-size:40px; line-height:1.2;}
+  .rays{background-image:repeating-linear-gradient(100deg, transparent 0 18px, rgba(224,121,61,0.10) 18px 19px); background-position:right;}
+  .topbar{padding:18px 0; border-bottom:1px solid var(--border); background:var(--bg);}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .topbar .brand{font-size:13px; color:var(--white); font-weight:700; letter-spacing:0.04em;}
+  .topbar .ctx{font-size:12px; color:var(--muted);}
+  /* hero */
+  .hero{padding:56px 0 40px; background:var(--bg);}
+  .domlink{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--orange-soft); background:var(--orange-bg); border:1px solid var(--border); padding:5px 11px; border-radius:20px; margin:14px 0 20px;}
+  .hero h1{font-size:32px; line-height:1.18;}
   .hero h1 .hl{color:var(--orange-soft);}
-  .hero p.sub{font-size:16.5px; color:#d8d5cd; margin-top:22px; max-width:650px;}
-  .method{margin-top:28px; padding:16px 18px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted); font-style:italic;}
-  .band-white{background:var(--white); color:#0f0f0e; padding:64px 0;}
-  .band-white h2{font-size:30px; margin:10px 0 14px; color:#0f0f0e;}
-  .band-white p.lede{font-size:15px; color:#4a4740; max-width:600px; margin-bottom:36px;}
-  .statcols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px;}
-  @media (max-width:680px){ .statcols{grid-template-columns:1fr;} }
-  .statcols .num{font-size:44px; font-weight:800; color:#0f0f0e;}
-  .statcols .lbl{font-size:13.5px; color:#4a4740; margin-top:6px;}
-  .statcols .src{font-size:11px; color:#8a8680; margin-top:8px;}
-  .scoreband{padding:56px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
-  .scoreband .inner{display:flex; gap:40px; align-items:center; flex-wrap:wrap;}
-  .scoreband .num{font-size:72px; font-weight:800; color:var(--orange-soft); line-height:1;}
-  .scoreband .num span{font-size:26px; color:var(--muted); font-weight:600;}
-  .scoreband .scoretext{flex:1; min-width:260px;}
+  .hero p.sub{font-size:15.5px; color:#d8d5cd; margin-top:18px; max-width:640px;}
+  .method{margin-top:22px; padding:14px 16px; background:var(--bg-2); border:1px solid var(--border); border-radius:10px; font-size:12px; color:var(--muted); font-style:italic;}
+  /* grade band */
+  .scoreband{padding:44px 0; background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .scoreband .inner{display:flex; gap:34px; align-items:center; flex-wrap:wrap;}
+  .grade{font-size:78px; font-weight:800; color:var(--amber); line-height:0.9; letter-spacing:-0.03em;}
+  .scoretext{flex:1; min-width:250px;}
+  .collide{display:inline-block; margin-top:12px; font-size:11px; font-weight:700; letter-spacing:0.04em; color:var(--amber); background:var(--amber-bg); border:1px solid var(--border); padding:4px 10px; border-radius:20px;}
   .gauge{position:relative; height:10px; border-radius:6px; overflow:hidden; margin:14px 0 10px;
-    background:linear-gradient(90deg, var(--red) 0%, var(--red) 45%, var(--amber) 45%, var(--amber) 68%, var(--green) 68%, var(--green) 100%); opacity:0.6;}
+    background:linear-gradient(90deg, var(--red) 0%, var(--red) 33%, var(--amber) 33%, var(--amber) 66%, var(--green) 66%, var(--green) 100%); opacity:0.65;}
   .gauge .marker{position:absolute; top:-5px; width:3px; height:20px; background:var(--white); border-radius:2px;}
-  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;}
-  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:470px;}
-  .section{padding:64px 0; background:var(--bg);}
-  .section h2{font-size:30px; margin-bottom:10px; line-height:1.25;}
-  .section .lede{font-size:14.5px; color:var(--muted); max-width:580px; margin-bottom:34px;}
-  .cards{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
-  @media (max-width:680px){ .cards{grid-template-columns:1fr;} }
-  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; flex-direction:column;}
-  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
-  .card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:700;}
-  .pill{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; white-space:nowrap; font-weight:700;}
-  .pill.behind{background:var(--red-bg); color:var(--red);}
-  .pill.ahead{background:var(--green-bg); color:var(--green);}
-  .card .stat{font-size:30px; font-weight:800; color:var(--white); margin-bottom:8px;}
-  .card .body{font-size:13.5px; color:#cfccc4; margin-bottom:6px;}
-  .quote{font-size:12px; color:var(--muted); border-left:2px solid var(--border); padding-left:11px; margin-top:9px;}
-  .quote b{color:#cfccc4; font-weight:600;}
-  .card .divider{height:1px; background:var(--border); margin:14px 0;}
-  .card .why-lbl,.card .how-lbl{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:6px;}
-  .card .why{font-size:13px; color:#cfccc4; margin-bottom:14px;}
-  .card .how{font-size:13px; color:#cfccc4;}
-  .chartbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:28px 26px 20px;}
-  .barrow{display:grid; grid-template-columns:150px 1fr 56px; align-items:center; gap:14px; margin-bottom:14px; font-size:13px;}
-  .barrow .name{color:#d8d5cd;}
-  .bartrack{background:rgba(255,255,255,0.06); border-radius:6px; height:16px; overflow:hidden; border:1px solid var(--border);}
-  .barfill{height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); border-radius:6px;}
-  .barrow .pct{text-align:right; color:var(--muted); font-size:12px;}
-  .chartnote{margin-top:16px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
-  .blogbox{background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:6px 26px;}
-  .blogrow{display:flex; align-items:center; gap:16px; padding:17px 0; border-bottom:1px solid var(--border);}
+  .gaugelabels{display:flex; justify-content:space-between; font-size:10px; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase;}
+  .scoreband p.desc{font-size:14px; color:#d8d5cd; margin-top:14px; max-width:460px;}
+  /* generic section */
+  .section{padding:52px 0; background:var(--bg);}
+  .section.alt{background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .section h2{font-size:25px; margin-bottom:10px; line-height:1.25;}
+  .section .lede{font-size:14px; color:var(--muted); max-width:600px; margin-bottom:28px;}
+  /* think box */
+  .thinkbox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .thinkbox .q{font-size:12px; color:var(--muted); font-style:italic; margin-bottom:12px;}
+  .thinkbox .ans{font-size:15px; color:#e9e6de; line-height:1.6;}
+  .gap{margin-top:16px; padding:13px 15px; background:var(--amber-bg); border:1px solid var(--border); border-radius:10px; font-size:13px; color:#e4d9c2;}
+  .gap b{color:var(--amber);}
+  /* results grid */
+  .gridwrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .gcards{border:1px solid var(--border); border-radius:14px; overflow:hidden; min-width:520px;}
+  .grow{display:grid; grid-template-columns:1.7fr 0.9fr 0.9fr 0.9fr 0.9fr 0.9fr; border-bottom:1px solid var(--border);}
+  .grow:last-child{border-bottom:none;}
+  .ghead{background:var(--bg-2);}
+  .gcell{padding:12px 10px; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; border-left:1px solid var(--border); color:#cfccc4;}
+  .gcell.q{justify-content:flex-start; text-align:left; border-left:none; color:#e9e6de; font-weight:500; font-size:12.5px; line-height:1.35;}
+  .ghead .gcell{font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+  .chip{width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .chip.y{background:var(--green-bg); color:var(--green);}
+  .chip.p{background:var(--amber-bg); color:var(--amber);}
+  .chip.n{background:var(--red-bg); color:var(--red);}
+  .chip.na{background:rgba(255,255,255,0.05); color:var(--muted);}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; font-size:11.5px; color:var(--muted);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:14px; height:14px; border-radius:50%; display:inline-block;}
+  .gridnote{margin-top:18px; font-size:12.5px; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:16px;}
+  .gridnote b{color:#cfccc4; font-style:normal;}
+  /* competitors */
+  .compgrid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+  .compcard{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; font-size:14px; font-weight:600; color:var(--white);}
+  .compcard span{display:block; font-size:11px; color:var(--muted); font-weight:500; margin-top:4px;}
+  /* engine diagram */
+  .engine-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  .estep{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 13px; position:relative;}
+  .estep.hl{border-color:var(--orange); background:linear-gradient(180deg, rgba(224,121,61,0.10), var(--card));}
+  .estep .en{width:22px; height:22px; border-radius:50%; background:var(--white); color:#0f0f0e; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:9px;}
+  .estep .et{font-size:13.5px; font-weight:700; color:var(--white); margin-bottom:4px;}
+  .estep .ed{font-size:11px; color:#b7b4ac; line-height:1.42;}
+  .estep .etag{display:inline-block; margin-top:8px; font-size:9px; letter-spacing:0.05em; text-transform:uppercase; font-weight:700; color:var(--orange); background:var(--orange-bg); padding:3px 6px; border-radius:20px;}
+  .loopnote{margin-top:14px; padding:13px 15px; background:var(--bg); border:1px solid var(--border); border-radius:10px; font-size:12.5px; color:var(--muted);}
+  .loopnote b{color:var(--orange-soft);}
+  .humannote{margin-top:11px; display:flex; align-items:center; gap:10px; font-size:12.5px; color:#cfccc4;}
+  .humannote .dot{width:20px; height:20px; border-radius:50%; background:var(--orange-bg); color:var(--orange); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex:none;}
+  /* two-col info cards (integration / security) */
+  .infogrid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .infocard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px;}
+  .infocard h3{font-size:16px; margin-bottom:6px;}
+  .infocard .sub{font-size:12.5px; color:var(--muted); margin-bottom:14px;}
+  .inclist{list-style:none; padding:0; margin:0;}
+  .inclist li{font-size:13px; color:#cfccc4; padding:8px 0 8px 20px; position:relative; border-bottom:1px solid var(--border);}
+  .inclist li:last-child{border-bottom:none;}
+  .inclist li:before{content:"\2192"; position:absolute; left:0; color:var(--orange); font-weight:700;}
+  /* blog */
+  .blogbox{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:4px 22px;}
+  .blogrow{display:flex; align-items:center; gap:15px; padding:15px 0; border-bottom:1px solid var(--border);}
   .blogrow:last-child{border-bottom:none;}
-  .blognum{font-size:13px; font-weight:800; color:var(--orange); width:22px; flex:none;}
-  .blogtitle{font-size:14.5px; color:var(--white); font-weight:500;}
-  .proof{background:var(--bg-2); padding:56px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
-  .proofgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
-  @media (max-width:680px){ .proofgrid{grid-template-columns:1fr;} }
-  .proofcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
-  .proofcard .co{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
-  .proofstats{display:flex; gap:22px; margin-bottom:14px;}
-  .proofstats .n{font-size:24px; font-weight:800; color:var(--white);}
-  .proofstats .l{font-size:11px; color:var(--muted); margin-top:2px;}
-  .proofcard .q{font-size:13px; color:#d8d5cd; font-style:italic; border-top:1px solid var(--border); padding-top:14px;}
-  .proofcard .who{font-size:11.5px; color:var(--muted); margin-top:8px;}
-  .pitch{padding:72px 0; background:var(--bg);}
-  .pitch h2{font-size:32px; margin-bottom:18px; line-height:1.25;}
+  .blognum{font-size:12px; font-weight:800; color:var(--orange); width:22px; flex:none;}
+  .blogtitle{font-size:14px; color:var(--white); font-weight:500;}
+  /* volume */
+  .volcard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; display:flex; gap:26px; align-items:center; flex-wrap:wrap;}
+  .volcard .vn{font-size:40px; font-weight:800; color:var(--orange-soft); line-height:1;}
+  .volcard .vt{flex:1; min-width:220px; font-size:13.5px; color:#cfccc4;}
+  .tag{display:inline-block; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; font-weight:700; color:var(--muted); background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:3px 7px; border-radius:20px; margin-bottom:8px;}
+  /* pricing */
+  .pricegrid{display:grid; grid-template-columns:1.1fr 1fr; gap:16px;}
+  .pricecard{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;}
+  .pricecard .pname{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .pricecard .pprice{font-size:32px; font-weight:800; color:var(--white); margin-bottom:4px;}
+  .pricecard .pprice span{font-size:15px; color:var(--muted); font-weight:600;}
+  .pricecard .pbody{font-size:13px; color:#cfccc4; margin-top:10px;}
+  .pricenote{font-size:12px; color:var(--muted); margin-top:16px; font-style:italic;}
+  /* pitch */
+  .pitch{padding:64px 0; background:var(--bg);}
+  .pitch h2{font-size:28px; margin-bottom:16px; line-height:1.25;}
   .pitch h2 .hl{color:var(--orange-soft);}
-  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:28px;}
-  footer{padding:30px 0 54px; border-top:1px solid var(--border); background:var(--bg);}
-  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  .pitch p{font-size:15px; color:#d8d5cd; max-width:600px; margin-bottom:26px;}
+  .btn{display:inline-block; padding:14px 24px; border-radius:8px; font-size:14px; letter-spacing:0.02em; font-weight:700;}
+  .btn.orange{background:var(--orange); color:#171104;}
+  footer{padding:28px 0 50px; border-top:1px solid var(--border); background:var(--bg);}
   footer .fnote{font-size:11.5px; color:var(--muted);}
-  .lsection{background:#ffffff; color:#15140f;}
-  .lsection h2, .lsection h3{color:#15140f;}
-  .lsection .lede{color:#55524a;}
-  .lsection.scoreband{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
-  .lsection.scoreband .num{color:#c8622a;}
-  .lsection.scoreband .num span{color:#7a766c;}
-  .lsection.scoreband p.desc{color:#3a3830;}
-  .lsection.scoreband .gaugelabels{color:#7a766c;}
-  .lsection.scoreband .gauge .marker{background:#15140f;}
-  .lsection .chartbox{background:#f4f2ee; border:1px solid #e3ded2;}
-  .lsection .barrow .name{color:#2c2a24;}
-  .lsection .bartrack{background:#eae6dd; border:1px solid #e3ded2;}
-  .lsection .barrow .pct{color:#7a766c;}
-  .lsection .chartnote{color:#7a766c; border-top:1px solid #e3ded2;}
-  .lsection .blogbox{background:#f4f2ee; border:1px solid #e3ded2;}
-  .lsection .blogrow{border-bottom:1px solid #e3ded2;}
-  .lsection .blogtitle{color:#15140f;}
-  .lsection.proof{border-top:1px solid #e3ded2; border-bottom:1px solid #e3ded2;}
-  .lsection .proofcard{background:#f4f2ee; border:1px solid #e3ded2;}
-  .lsection .proofstats .n{color:#15140f;}
-  .lsection .proofstats .l{color:#6f6b60;}
-  .lsection .proofcard .q{color:#3a3830; border-top:1px solid #e3ded2;}
-  .lsection .proofcard .who{color:#7a766c;}
-  .lsection .card{background:#f4f2ee; border:1px solid #e3ded2;}
-  .lsection .card .label{color:#7a766c;}
-  .lsection .card .stat{color:#15140f;}
-  .lsection .card .body{color:#3a3830;}
-  .lsection .quote{color:#6f6b60; border-left:2px solid #e3ded2;}
-  .lsection .quote b{color:#2c2a24;}
-  .lsection .card .divider{background:#e3ded2;}
-  .lsection .card .why{color:#3a3830;}
-  .lsection .card .how{color:#3a3830;}
+  @media (max-width:680px){
+    .hero h1{font-size:26px;}
+    .engine-grid{grid-template-columns:1fr 1fr;}
+    .compgrid{grid-template-columns:1fr 1fr;}
+    .infogrid{grid-template-columns:1fr;}
+    .pricegrid{grid-template-columns:1fr;}
+    .grade{font-size:64px;}
+  }
 </style>
 </head>
 <body>
 
   <div class="topbar">
     <div class="wrap">
-      <div class="context-right">Islands x Kazka AI</div>
-      <div class="context-left">AI Visibility Audit - August 2026</div>
+      <div class="brand">Islands &middot; AI Visibility Audit</div>
+      <div class="ctx">Prepared for Kazka AI</div>
     </div>
   </div>
 
   <div class="hero rays">
     <div class="wrap">
-      <div class="eyebrow" style="margin-bottom:18px;">Public AI + Search Visibility Audit</div>
-      <h1>You tell clients the problem is never the technology.<br>Here's the problem that is: AI can't find <span class="hl">Kazka</span>.</h1>
-      <p class="sub">You have the sharpest point of view in your category, a named 5-Pillar Framework, 100-plus implementations, and a founder on record. But when a buyer asks AI the exact questions you're built to answer, like why their team won't use the AI tools they bought, HBR and Deloitte come back, not Kazka. We measured how you show up across five AI engines and forty-five searches, and where the opening is.</p>
-      <div class="method">Tested 16 real buyer questions across ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude, checked 45 related searches, and crawled the live site. Snapshot taken August 18, 2026. Every number below traces back to a public, repeatable test.</div>
+      <div class="eyebrow">AI Visibility Audit &middot; Kazka AI</div>
+      <a class="domlink" href="https://www.kazka.ai" target="_blank" rel="noopener">kazka.ai &#8599;</a>
+      <h1>AI knows Kazka's name.<br>It just doesn't know to <span class="hl">recommend you</span>.</h1>
+      <p class="sub">You said it on our call: the LLMs describe Kazka well when someone searches your name. Here's the catch. We asked the five engines your buyers use the questions they actually type, the ones asked before anyone has heard of you, and Kazka was named zero times. Your competitors were named every time. You already know Claude. The question is whether Claude knows you when it counts.</p>
+      <div class="method">We queried ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude on 16 buyer prompts (DataForSEO, snapshot August 18, 2026). This is a directional estimate to spark a conversation, not a paid audit. Every result below traces back to a real query.</div>
     </div>
   </div>
 
-  <div class="band-white">
-    <div class="wrap">
-      <div class="eyebrow onwhite">The Shift</div>
-      <h2>Search is moving from Google to AI</h2>
-      <p class="lede">You already know this shift better than most, it's the one you help clients through. As search moves to AI, the firms that get cited, recommended, and chosen are the ones that publish their point of view where the engines can read it.</p>
-      <div class="statcols">
-        <div><div class="num">76.4%</div><div class="lbl">of businesses struggle to show up in AI search</div><div class="src">SearchScore, 2026</div></div>
-        <div><div class="num">5×</div><div class="lbl">higher conversion when buyers arrive from AI vs. traditional search</div><div class="src">Exposure Ninja, 2026</div></div>
-        <div><div class="num">357%</div><div class="lbl">growth in referral visits generated by AI platforms</div><div class="src">Similarweb, 2026</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="scoreband lsection">
+  <div class="scoreband">
     <div class="wrap inner">
-      <div class="num">2.4<span>/5</span></div>
+      <div class="grade">D</div>
       <div class="scoretext">
-        <div class="eyebrow">Kazka AI's Overall AI + Search Visibility Score</div>
-        <div class="gauge"><div class="marker" style="left:48%;"></div></div>
-        <div class="gaugelabels"><span>Behind</span><span>On par</span><span>Ahead</span></div>
-        <p class="desc">One grade for whether a buyer can find you, in Google or in AI. The point of view is strong; the score is low for one reason, almost none of it is published where engines can read it. That's the gap, and it's the most fixable kind.</p>
+        <div class="eyebrow">Kazka AI's AI Visibility Grade</div>
+        <div class="gauge"><div class="marker" style="left:25%;"></div></div>
+        <div class="gaugelabels"><span>F &middot; Invisible</span><span>C &middot; Inconsistent</span><span>A &middot; Owns it</span></div>
+        <p class="desc">AI recognizes you and cites you on branded searches, that is what keeps this off an F. But on the non-branded questions that bring in new buyers, you barely register, and a competitor's name comes back instead.</p>
+        <span class="collide">&#9888; Brand-name collision</span>
       </div>
     </div>
   </div>
 
-  <div class="section lsection">
+  <div class="section">
     <div class="wrap">
-      <div class="eyebrow" style="margin-bottom:10px;">What We Found</div>
-      <h2>The point of view is sharp. It's just not published anywhere.</h2>
-      <p class="lede">Four findings: one real asset you're sitting on, and three gaps that all trace back to having nothing for the engines to read.</p>
-
-      <div class="cards">
-        <div class="card">
-          <div class="top"><span class="label">Your point of view is an asset</span><span class="pill ahead">Ahead</span></div>
-          <div class="stat">100+ implementations</div>
-          <div class="body">You have what most consultancies lack: a clear, quotable POV. A named 5-Pillar Framework, 100-plus implementations across healthcare and real estate, a founder on record in Alex Lee, and lines like "the problem is never the technology."</div>
-          <div class="quote">When AI does find you, it has strong, distinctive material to quote. The credibility is already there.</div>
-          <div class="divider"></div>
-          <div class="why-lbl">Why it matters</div>
-          <div class="why">A sharp, specific POV is exactly what AI engines prefer to cite over generic consultant-speak. That's the expensive part to build, and you've built it.</div>
-          <div class="how-lbl">How Islands builds on it</div>
-          <div class="how">We turn the framework and your 100-plus implementations into published content the engines can actually read, in your voice, not generic AI filler.</div>
-        </div>
-
-        <div class="card">
-          <div class="top"><span class="label">Your questions, answered by strangers</span><span class="pill behind">Behind</span></div>
-          <div class="stat">0 of your own</div>
-          <div class="body">The prompts that are literally your positioning, "why is my team not using the AI tools we bought," "how to move AI from pilot to production," "how to overcome employee fear of AI," get answered by HBR, SHRM, Deloitte, and random consultancies. Kazka is absent from every one.</div>
-          <div class="quote"><b>"Why is my team not using the AI tools we bought?"</b> &rarr; HBR and generic blogs got cited, not the firm whose entire pitch is that exact problem.</div>
-          <div class="divider"></div>
-          <div class="why-lbl">Why it matters</div>
-          <div class="why">This is your buyer at the moment of pain, and AI hands them a weaker answer from someone else. Nobody owns these questions yet, so they're yours to take.</div>
-          <div class="how-lbl">How Islands closes it</div>
-          <div class="how">Our keyword-gap and writing agents took Blanka from 20 to 132 AI-answer appearances in 90 days, a 6.6&times; jump. We'd point them straight at your adoption questions.</div>
-        </div>
-
-        <div class="card">
-          <div class="top"><span class="label">The giants own the category</span><span class="pill behind">Behind</span></div>
-          <div class="stat">0 of 17 searches</div>
-          <div class="body">Across 17 category searches like "AI strategy consultant" and "artificial intelligence consultant" (8,100/mo), BCG X, Cognizant, and Publicis Sapient rank or own Google's AI answer box. Kazka appears on none.</div>
-          <div class="quote"><b>"AI strategy consultant"</b> &rarr; BCG X owns the AI Overview. Kazka: not found.</div>
-          <div class="divider"></div>
-          <div class="why-lbl">Why it matters</div>
-          <div class="why">You can't outspend BCG, but you can out-specific them. They answer these questions generically; your adoption-layer niche is a lane they don't run in, and right now it's wide open.</div>
-          <div class="how-lbl">How Islands closes it</div>
-          <div class="how">GrowTal went from no ranking authority to 318 keywords in Google's top 10 in 90 days. We'd target the specific adoption terms the giants ignore, not fight them head-on.</div>
-        </div>
-
-        <div class="card">
-          <div class="top"><span class="label">AI doesn't know who you are</span><span class="pill behind">Behind</span></div>
-          <div class="stat">"KAZKA"</div>
-          <div class="body">Google's Knowledge Panel for your brand shows "KAZKA," a different entity, and there's no LinkedIn company page. The site also has no blog, no llms.txt, and no robots.txt, and it's slow: 48/100 on mobile with 4.5 seconds of blocked interactivity.</div>
-          <div class="quote">No blog, no llms.txt, no robots.txt, and Google confuses you with an unrelated "KAZKA." The engines have little to anchor who you are.</div>
-          <div class="divider"></div>
-          <div class="why-lbl">Why it matters</div>
-          <div class="why">AI needs a clear, crawlable identity to cite you confidently, and a slow, un-indexed site with a mistaken entity gives it every reason not to. This is foundational, and all of it is fixable.</div>
-          <div class="how-lbl">How Islands closes it</div>
-          <div class="how">We add the llms.txt, robots.txt, and schema, clean up the entity, fix the speed, and publish content in your name so "Kazka AI the consultancy" becomes unmistakable.</div>
-        </div>
+      <div class="eyebrow" style="margin-bottom:10px;">What AI Thinks You Are</div>
+      <h2>The good news: AI describes Kazka accurately.</h2>
+      <div class="thinkbox">
+        <div class="q">"What is Kazka AI?", asked of the engines</div>
+        <div class="ans">Kazka AI is an AI adoption consultancy for service businesses, founded by Alex Lee. It focuses on the human and process side of adoption, habits, leadership, and workflows, rather than just tools, and is built around a 5-Pillar AI Adoption Framework refined over 100+ implementations across professional services, real estate, and healthcare.</div>
+        <div class="gap"><b>The catch:</b> "KAZKA" as an entity is muddy to the engines. The public knowledge signals point at an unrelated Ukrainian music group, there is no Wikidata record, no Crunchbase, and no company LinkedIn on your brand result. So the models can recite what you do when handed your name, but they have nothing tying Kazka to the buyer questions where a recommendation actually happens.</div>
       </div>
     </div>
   </div>
 
-  <div class="section lsection" style="padding-top:0;">
+  <div class="section alt">
     <div class="wrap">
-      <div class="chartbox">
-        <div class="eyebrow" style="margin-bottom:6px;">How Often Each AI Actually Cited Kazka</div>
-        <p class="lede" style="margin-bottom:22px;">Out of the 16 buyer questions we tested per engine.</p>
-        <div class="barrow"><span class="name">Perplexity</span><div class="bartrack"><div class="barfill" style="width:31%;"></div></div><span class="pct">31%</span></div>
-        <div class="barrow"><span class="name">Gemini</span><div class="bartrack"><div class="barfill" style="width:31%;"></div></div><span class="pct">31%</span></div>
-        <div class="barrow"><span class="name">Google AI Overviews</span><div class="bartrack"><div class="barfill" style="width:25%;"></div></div><span class="pct">25%</span></div>
-        <div class="barrow"><span class="name">ChatGPT</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
-        <div class="barrow"><span class="name">Claude</span><div class="bartrack"><div class="barfill" style="width:19%;"></div></div><span class="pct">19%</span></div>
-        <div class="chartnote">Every engine is low, and the reason is refreshingly simple: there's no blog, no llms.txt, and a slow site for them to read. You have the sharpest point of view in your category and it's almost entirely unpublished. Fix that and these numbers move quickly, the pack even flags your page speed as the first thing to address.</div>
+      <div class="eyebrow" style="margin-bottom:10px;">25 data points &middot; the questions your buyers ask</div>
+      <h2>Where you show up when buyers ask, and where you don't.</h2>
+      <p class="lede">Five real buyer questions, run live against the five engines. Green means you were recommended, amber a passing mention, red absent.</p>
+      <div class="gridwrap">
+        <div class="gcards">
+          <div class="grow ghead">
+            <div class="gcell q">Buyer question</div>
+            <div class="gcell">ChatGPT</div>
+            <div class="gcell">Perplexity</div>
+            <div class="gcell">AI Overviews</div>
+            <div class="gcell">Gemini</div>
+            <div class="gcell">Claude</div>
+          </div>
+          <div class="grow">
+            <div class="gcell q">Best AI adoption consultants for service businesses</div>
+            <div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div>
+          </div>
+          <div class="grow">
+            <div class="gcell q">Why is my team not using the AI tools we bought?</div>
+            <div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div>
+          </div>
+          <div class="grow">
+            <div class="gcell q">AI adoption challenges for commercial real estate firms</div>
+            <div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div>
+          </div>
+          <div class="grow">
+            <div class="gcell q">How to move AI from pilot to production</div>
+            <div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div>
+          </div>
+          <div class="grow">
+            <div class="gcell q">AI adoption for travel and hospitality companies</div>
+            <div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div><div class="gcell"><span class="chip n">&#215;</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--green);"></i> Recommended</span>
+        <span><i style="background:var(--amber);"></i> Mentioned</span>
+        <span><i style="background:var(--red);"></i> Absent</span>
+      </div>
+      <div class="gridnote"><b>Read this the right way.</b> Kazka does get cited when someone searches "Kazka," your founder, or your San Diego event. That is real, and it is why you are a D and not an F. But branded searches only reach people who already know you. On the five questions above, the ones a buyer types before they have heard of Kazka, a competitor is named every single time. That is the gap between being known and being chosen.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Who AI Names Instead of You</div>
+      <h2>The names your buyers see first.</h2>
+      <p class="lede">Pulled from the actual answers the engines gave on your buyer questions, not a generic competitor list.</p>
+      <div class="compgrid">
+        <div class="compcard">BCG X<span>enterprise AI</span></div>
+        <div class="compcard">Harvey<span>legal AI</span></div>
+        <div class="compcard">Clio<span>law firm ops</span></div>
+        <div class="compcard">Deloitte<span>AI strategy</span></div>
+        <div class="compcard">Gartner<span>frameworks</span></div>
+        <div class="compcard">CDW<span>pilot to production</span></div>
       </div>
     </div>
   </div>
 
-  <div class="section lsection" style="padding-top:0;">
+  <div class="section alt">
     <div class="wrap">
-      <div class="eyebrow" style="margin-bottom:10px;">Five Posts We'd Write First</div>
-      <h2 style="font-size:26px; margin-bottom:24px;">Your exact POV, aimed at the questions nobody owns</h2>
+      <div class="eyebrow" style="margin-bottom:10px;">How Our Content Engine Works</div>
+      <h2>One request in. Ranking, AI-cited content out. Every month.</h2>
+      <p class="lede">A closed loop of specialized agents, with a person reviewing at every stage. This is the diagram I shared on our call, at a high level.</p>
+      <div class="engine-grid">
+        <div class="estep"><div class="en">1</div><div class="et">Research</div><div class="ed">We study your best content and real search demand, so topics track what buyers actually look for.</div></div>
+        <div class="estep"><div class="en">2</div><div class="et">Insights</div><div class="ed">We connect to your own tools and real customer conversations, so the angle comes from your market.</div></div>
+        <div class="estep"><div class="en">3</div><div class="et">Strategy</div><div class="ed">Topics are mapped across the funnel and prioritized into a rolling roadmap, highest impact first.</div></div>
+        <div class="estep"><div class="en">4</div><div class="et">Writing</div><div class="ed">Drafted in your brand voice, built to rank in Google and in AI answers like ChatGPT and Perplexity.</div></div>
+        <div class="estep"><div class="en">5</div><div class="et">Review</div><div class="ed">A multi-stage editorial loop clears a strict quality bar before anything moves forward.</div></div>
+        <div class="estep"><div class="en">6</div><div class="et">Publish</div><div class="ed">Formatted and on brand, delivered to your site as a ready-to-approve draft.</div></div>
+        <div class="estep hl"><div class="en">7</div><div class="et">Backlinks</div><div class="ed">Linked across your own site and cited by our network of established sites.</div><span class="etag">Authority you can't build alone</span></div>
+        <div class="estep"><div class="en">8</div><div class="et">Reporting</div><div class="ed">We track rankings, traffic, and AI visibility, then feed the results into the next round.</div></div>
+      </div>
+      <div class="loopnote"><b>The engine compounds.</b> Results and every new article feed the next cycle, so output gets sharper over time, and your share of the AI answers climbs month over month.</div>
+      <div class="humannote"><span class="dot">&#10003;</span><span>A person reviews and approves at every stage. Nothing publishes itself.</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Integration &amp; Security</div>
+      <h2>How it plugs in, and how your data is handled.</h2>
+      <p class="lede">You asked what happens when you open the kimono. Here is the high-level version, enough to see how it works without the trade secrets.</p>
+      <div class="infogrid">
+        <div class="infocard">
+          <h3>Integration</h3>
+          <div class="sub">We do the plumbing and run it for you.</div>
+          <ul class="inclist">
+            <li>Read-only connections to the sources that inform content: your CMS, analytics, Search Console, and call or meeting transcripts</li>
+            <li>We publish through an API into your CMS, so content flows in without copy-paste</li>
+            <li>Any integration outside our current library, we build at no cost</li>
+            <li>Live in about 3 to 5 business days from access, no setup fee</li>
+          </ul>
+        </div>
+        <div class="infocard">
+          <h3>Security</h3>
+          <div class="sub">Least access, human-gated, reversible.</div>
+          <ul class="inclist">
+            <li>Least-privilege access: only the scopes we need, nothing more</li>
+            <li>Your data is used to inform your content, and is not used to train public models</li>
+            <li>Every piece is reviewed and approved by a person before anything goes live</li>
+            <li>A dedicated shared channel for the account, and you can revoke access at any time</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pricenote" style="margin-top:16px;">Ali, our CEO, will walk you and Laura through the architecture in detail on the next call, this page keeps it high level on purpose.</p>
+    </div>
+  </div>
+
+  <div class="section alt">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">Posts To Publish First</div>
+      <h2>Five titles aimed at the questions you're invisible on.</h2>
+      <p class="lede">Each one targets a buyer query above, written in Kazka's voice, built to teach the engines what you do.</p>
       <div class="blogbox">
         <div class="blogrow"><span class="blognum">01</span><span class="blogtitle">Why Your Team Isn't Using the AI Tools You Paid For (and How to Fix It)</span></div>
-        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">Moving AI From Pilot to Production: A Service Business Playbook</span></div>
-        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">How to Overcome Your Team's Fear of AI</span></div>
-        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">Why AI Pilots Fail in Healthcare</span></div>
-        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">The AI Adoption Layer vs. the Technology Layer, Explained</span></div>
+        <div class="blogrow"><span class="blognum">02</span><span class="blogtitle">The Service Firm's Guide to Moving AI From Pilot to Production</span></div>
+        <div class="blogrow"><span class="blognum">03</span><span class="blogtitle">The Commercial Real Estate Playbook for AI Adoption That Actually Sticks</span></div>
+        <div class="blogrow"><span class="blognum">04</span><span class="blogtitle">AI Governance for Professional Services: A Practical Starting Framework</span></div>
+        <div class="blogrow"><span class="blognum">05</span><span class="blogtitle">How Travel and Hospitality Teams Turn AI Enthusiasm Into Daily Habits</span></div>
       </div>
     </div>
   </div>
 
-  <div class="proof lsection">
+  <div class="section">
     <div class="wrap">
-      <div class="eyebrow" style="margin-bottom:10px;">The content team behind fast-growing startups</div>
-      <h2 style="font-size:26px; margin-bottom:28px;">The same engine, already running elsewhere</h2>
-      <div class="proofgrid">
-        <div class="proofcard">
-          <div class="co">Blanka, private-label beauty</div>
-          <div class="proofstats">
-            <div><div class="n">6.6×</div><div class="l">AI answer appearances<br>20 &rarr; 132 in 90 days</div></div>
-            <div><div class="n">+46%</div><div class="l">website traffic<br>15K &rarr; 22K/mo</div></div>
-            <div><div class="n">4×</div><div class="l">backlinks earned<br>202 &rarr; 804</div></div>
-          </div>
-          <div class="q">"We rank #1 and show up in AI answers for cheaper than one junior marketer."</div>
-          <div class="who">Karli Leitl, COO, Blanka</div>
+      <div class="eyebrow" style="margin-bottom:10px;">The Size of the Room</div>
+      <h2>There's real demand behind these questions.</h2>
+      <div class="volcard">
+        <div class="vn">~10K+</div>
+        <div class="vt">
+          <span class="tag">Estimated</span>
+          <div>Estimated monthly Google searches across this cluster of AI-adoption and AI-strategy buyer questions and close variants. AI-query volume typically runs another 8 to 15% on top, and it's the fastest-growing slice. Right now that entire room is being handed to someone else.</div>
         </div>
-        <div class="proofcard">
-          <div class="co">GrowTal, B2B marketplace</div>
-          <div class="proofstats">
-            <div><div class="n">318</div><div class="l">keywords ranking<br>in the top 10</div></div>
-            <div><div class="n">+15%</div><div class="l">organic traffic<br>by day 30</div></div>
-            <div><div class="n">+8%</div><div class="l">of total impressions<br>from Islands content</div></div>
-          </div>
-          <div class="q">"Live in a week. By day 30, we had organic traffic we'd never had before."</div>
-          <div class="who">Sarah Little, Operations, GrowTal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section alt">
+    <div class="wrap">
+      <div class="eyebrow" style="margin-bottom:10px;">The Engagement</div>
+      <h2>Done-for-you, one flat monthly fee.</h2>
+      <p class="lede">The full engine, agents, editors, backlink network, and reporting, run for you every month so you can stay on sales and product. The audit itself is free.</p>
+      <div class="pricegrid">
+        <div class="pricecard">
+          <div class="pname">What's included</div>
+          <ul class="inclist">
+            <li>Around 3 researched posts a week, published to your site</li>
+            <li>Aimed at the AI-adoption and strategy questions your buyers ask</li>
+            <li>Newsletter and LinkedIn folded in as the engine scales</li>
+            <li>Our backlink network building the authority AI trusts</li>
+            <li>Entity cleanup so "Kazka" resolves to you, not a band</li>
+            <li>Human review at every step; first content live in about 5 days</li>
+          </ul>
+        </div>
+        <div class="pricecard">
+          <div class="pname">Content engine</div>
+          <div class="pprice">$3,000<span>/month</span></div>
+          <div class="pbody">Flat fee, all channels included, no long-term lock-in. One new client from an AI answer covers it many times over.</div>
+          <div class="pricenote" style="margin-top:16px;">You can be as involved or as hands-off as you want once it's proven. Steer the loop, don't live in the weeds.</div>
         </div>
       </div>
     </div>
@@ -295,16 +356,16 @@
   <div class="pitch rays">
     <div class="wrap">
       <div class="eyebrow" style="margin-bottom:14px;">What This Means For Kazka</div>
-      <h2>You have the POV. You're just <span class="hl">not published</span> where AI can read it.</h2>
-      <p>You've got the framework, the founder story, and 100-plus implementations. What you don't have is anything for the engines to cite, no blog, no llms.txt, and a slow site, so the exact questions you're built to answer go to HBR and BCG instead. The category giants are generic; your adoption-layer niche is wide open and it's yours to own.</p>
-      <p>This audit is the map, and the five posts above are where we'd start. We connect to your stack, write in your voice, the 5 pillars, the "we stay until something changes" ethos, ship straight to your site, and get other brands citing you so AI treats you as the authority you already are.</p>
-      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener" style="display:inline-block; padding:13px 22px; border-radius:8px; font-size:13px; letter-spacing:0.02em; font-weight:600; background:var(--orange); color:#171104;">Book a free consultation &rarr;</a>
+      <h2>AI is already choosing who gets recommended. Right now it isn't saying <span class="hl">Kazka</span>.</h2>
+      <p>You are known but not yet chosen. The fix is content that answers your buyers' real questions and the authority that makes the engines trust who you are, so the next time an operator asks "why won't my team use the AI tools we bought," Kazka is the name that comes back.</p>
+      <p>Islands is the AI-native content engine that teaches the LLMs and Google what you do and gets you ranking, so you can keep your time on sales and product while the room fills up.</p>
+      <a class="btn orange" href="https://calendly.com/nick-islandshq/islands-ai-content-discovery" target="_blank" rel="noopener">Book a 15-min chat &#8594;</a>
     </div>
   </div>
 
   <footer>
     <div class="wrap">
-      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Kazka AI, August 2026</div>
+      <div class="fnote">Prepared by <a href="https://www.islandshq.xyz/services/ai-content" target="_blank" rel="noopener"><strong style="color:var(--white);">Islands</strong></a> for Kazka AI, September 2026</div>
     </div>
   </footer>
 
