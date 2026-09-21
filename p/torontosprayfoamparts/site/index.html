@@ -125,19 +125,35 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
             color:var(--deep-text);font-style:normal}
 .voice .tlink{color:#EBE4D8;border-color:rgba(235,228,216,.5)}
 .voice .tlink:hover,.voice .tlink:focus-visible{color:#fff;border-color:#fff}
+/* the four reviews ride one track: native scroll-snap, so swipe works with no JS
+   and the buttons/dots are enhancement, not requirement */
+.carousel__track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;scrollbar-width:none}
+.carousel__track::-webkit-scrollbar{display:none}
+.carousel__track:focus-visible{outline:2px solid #EBE4D8;outline-offset:8px}
+.carousel__slide{flex:0 0 100%;min-width:100%;scroll-snap-align:start;scroll-snap-stop:always;
+  padding-right:6%}
+.carousel__bar{display:flex;align-items:center;gap:18px 28px;flex-wrap:wrap;
+  margin-top:clamp(26px,4vh,42px)}
+.carousel__dots{display:flex;gap:10px}
+.carousel__dot{width:9px;height:9px;border-radius:50%;padding:0;cursor:pointer;
+  border:1px solid rgba(235,228,216,.55);background:transparent;
+  transition:background-color 150ms ease,border-color 150ms ease,transform 160ms var(--ease-out)}
+.carousel__dot.is-active{background:var(--orange);border-color:var(--orange);transform:scale(1.2)}
+.carousel__nav{margin-left:auto;display:flex;gap:10px}
+.carousel__btn{width:44px;height:44px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(235,228,216,.45);background:transparent;color:#EBE4D8;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 150ms ease,color 150ms ease,transform 160ms var(--ease-out)}
+.carousel__btn:hover,.carousel__btn:focus-visible{border-color:#fff;color:#fff}
+.carousel__btn:active{transform:scale(.94)}
+.carousel__btn svg{width:18px;height:18px}
 .shop{background:var(--paper-2);padding:clamp(56px,9vh,110px) 0}
 .shop__in{display:grid;grid-template-columns:minmax(0,.58fr) minmax(0,1.42fr);
           gap:clamp(24px,5vw,72px);align-items:start}
 .shop h2{margin:16px 0 18px;max-width:14ch}
 .shop p{max-width:48ch}
 .shop__cta{margin-top:26px}
-.channels{margin-top:clamp(48px,7vh,84px);padding-top:clamp(26px,3.6vh,40px);
-          border-top:1px solid var(--rule)}
-.channels h3{font-size:13px;font-family:var(--text);font-weight:500;letter-spacing:.2em;
-             text-transform:uppercase;color:var(--body);margin-bottom:30px}
-.channels ul{list-style:none;display:flex;flex-wrap:wrap;align-items:center;
-             gap:clamp(26px,4.6vw,64px)}
-.channels img{height:34px;width:auto;opacity:.78}
 .about{padding:clamp(56px,9vh,110px) 0 clamp(40px,6vh,72px)}
 .about__in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
            gap:clamp(32px,6vw,88px);align-items:start}
@@ -194,6 +210,8 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
   .end__cols{grid-template-columns:1fr 1fr}
   .end__cols>div:first-child{grid-column:1/-1}
 }
+/* mobile: the vertical scale steps down hard here to keep the page short
+   (~6,040px with the review carousel). content is unchanged - only rhythm tightens. */
 @media(max-width:860px){
   body{font-size:16.5px}
   .site{padding:18px 0 0}
@@ -224,18 +242,15 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
   .rigs figure img{aspect-ratio:4/3;object-position:50% 42%}
   .finance{margin-top:14px}
   .rigs__cta{margin-top:22px}
-  .voice{padding:46px 0}
+  .voice{padding:40px 0}
   .voice__in{max-width:none;margin-left:0}
   .voice blockquote p{max-width:none;font-size:1.55rem;line-height:1.26}
   .voice blockquote p::before{margin-bottom:22px}
-  .voice footer{margin-top:22px;gap:10px 22px}
+  .voice footer{margin-top:18px;gap:10px 22px}
+  .carousel__bar{margin-top:16px}
   .shop{padding:42px 0}
   .shop__in{gap:18px}
   .shop h2{max-width:none;margin:12px 0 14px}
-  .channels{margin-top:38px;padding-top:24px}
-  .channels h3{margin-bottom:22px}
-  .channels ul{gap:18px 26px}
-  .channels img{height:24px}
   .about{padding:38px 0 28px}
   .about__in{gap:28px}
   .about h2{max-width:none;margin:14px 0 16px}
@@ -258,26 +273,54 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 @media(max-width:560px){
   .site nav{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:10px 22px}
 }
+/* ============================================================
+   MOTION - polish pass, second cut. transform + opacity only,
+   entrances fire once, reduced-motion respected. the first cut
+   was too quiet to register; this one is meant to be seen.
+   ============================================================ */
 .btn{transition:transform 160ms var(--ease-out),background-color 150ms ease}
+.btn:hover{transform:translateY(-2px)}
 .btn:active{transform:scale(.97)}
-.site nav a,.tlink,.svc,.finance a,.details a,.end ul a,.faq summary{
+.site nav a,.tlink,.finance a,.details a,.end ul a,.faq summary{
   transition:color 150ms ease,border-color 150ms ease,text-decoration-color 150ms ease}
+.svc{transition:color 150ms ease,transform 220ms var(--ease-out)}
+.index a:hover .svc,.index a:focus-visible .svc{transform:translateX(6px)}
 @media(hover:none){
-  .btn:hover{background:var(--blue)}
-  .index a:hover .svc{color:var(--ink)}
+  .btn:hover{background:var(--blue);transform:none}
+  .index a:hover .svc{color:var(--ink);transform:none}
   .tlink:hover{color:var(--blue);border-color:var(--blue)}
 }
-.js [data-reveal]{opacity:0;transform:translateY(14px);
-  transition:opacity 380ms var(--ease-out),transform 380ms var(--ease-out);
+/* load sequence: the header drifts down, the lockup rises, the
+   photograph settles out of a slow zoom. all gated on html.js */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* no explicit `to`: the settle lands on each breakpoint's own base transform */
+@keyframes heroSettle{from{transform:scale(var(--hero-from,1.16))}}
+.js .site{animation:fadeDown 520ms var(--ease-out) both}
+.js .lockup{animation:riseIn 560ms var(--ease-out) 80ms both}
+.js .hero-band img{animation:heroSettle 2600ms var(--ease-out) both}
+@media(max-width:860px){.hero-band{--hero-from:1.07}}
+/* first-view entrances. hidden state only applies once js has confirmed it is
+   running, so a no-script visitor sees everything immediately */
+.js [data-reveal]{opacity:0;transform:translateY(22px);
+  transition:opacity 520ms var(--ease-out),transform 520ms var(--ease-out);
   transition-delay:var(--d,0ms)}
 .js [data-reveal].is-in{opacity:1;transform:none}
-.index li:nth-child(2){--d:40ms}.index li:nth-child(3){--d:80ms}.index li:nth-child(4){--d:120ms}
-.index li:nth-child(5){--d:160ms}.index li:nth-child(6){--d:200ms}
+/* list-like things cascade; blocks arrive alone */
+.index li:nth-child(2){--d:50ms}.index li:nth-child(3){--d:100ms}.index li:nth-child(4){--d:150ms}
+.index li:nth-child(5){--d:200ms}.index li:nth-child(6){--d:250ms}
+.faq details:nth-of-type(2){--d:60ms}.faq details:nth-of-type(3){--d:120ms}
+.faq details:nth-of-type(4){--d:180ms}
+/* faq answer fades in on open; close is native and instant, so exit beats enter */
 .faq details[open] .a{animation:faqIn 240ms var(--ease-out) both}
 @keyframes faqIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){
   .js [data-reveal]{transform:none;transition:opacity 200ms ease;transition-delay:0ms}
-  .btn,.btn:active{transition:none;transform:none}
+  .btn,.btn:active,.btn:hover{transition:none;transform:none}
+  .js .site,.js .lockup,.js .hero-band img{animation:none}
+  .index a:hover .svc,.index a:focus-visible .svc{transform:none}
+  .carousel__track{scroll-behavior:auto}
+  .carousel__dot,.carousel__btn{transition:none}
   .faq details[open] .a{animation:none}
 }
 </style>
@@ -319,7 +362,7 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 </section>
 <section class="index" id="services">
   <div class="wrap">
-    <div class="index__head">
+    <div class="index__head" data-reveal>
       <h2>Spray foam industry services</h2>
       <p class="ledger"><b>100+</b> rigs built · <b>300+</b> happy clients · <b>1000+</b> products · <b>500+</b> foamers trained</p>
     </div>
@@ -353,7 +396,7 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 </section>
 <section class="rigs" id="rigs">
   <div class="wrap rigs__in">
-    <div>
+    <div data-reveal>
       <p class="kicker">Spray Foam Rig Building</p>
       <h2>TSP does rig building differently</h2>
       <p>Toronto Spray Foam Parts is your guarantee to your success story. Our Rig Building department is specialized and experienced to build your ideal spray foam rig based on your budget.</p>
@@ -369,45 +412,66 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 </section>
 <section class="voice" id="reviews">
   <div class="wrap">
-    <div class="voice__in">
-      <blockquote data-reveal>
-        <p>Toronto Spray Foam Parts takes the time to walk you through the issue and show you how to troubleshoot and solve the problem on your own the next time. I wouldn't consider taking my rig for service anywhere else. Enri has a customer for life.</p>
-        <footer>
-          <cite>Neil L.</cite>
+    <div class="voice__in" data-reveal>
+      <div class="carousel" data-carousel>
+        <div class="carousel__track" tabindex="0" aria-label="Client reviews">
+          <blockquote class="carousel__slide">
+            <p>Toronto Spray Foam Parts takes the time to walk you through the issue and show you how to troubleshoot and solve the problem on your own the next time. I wouldn't consider taking my rig for service anywhere else. Enri has a customer for life.</p>
+            <footer><cite>Neil L.</cite></footer>
+          </blockquote>
+          <blockquote class="carousel__slide">
+            <p>The crew was fantastic. It was a pleasure to work with them. They got straight to work and finished ahead of schedule.</p>
+            <footer><cite>Arber E.</cite></footer>
+          </blockquote>
+          <blockquote class="carousel__slide">
+            <p>Toronto Spray Foam Parts consistently delivers excellence. Their products are top-notch, offering durability and precision for flawless insulation projects. For hassle-free, high-quality spray foam parts, Toronto Spray Foam Parts is the go-to choice. Highly recommended!</p>
+            <footer><cite>Arber D.</cite></footer>
+          </blockquote>
+          <blockquote class="carousel__slide">
+            <p>Toronto Sprayfoam Parts - TSP offers reliable equipment and excellent service. Highly recommended.</p>
+            <footer><cite>Kushtrim S.</cite></footer>
+          </blockquote>
+        </div>
+        <div class="carousel__bar">
+          <div class="carousel__dots">
+            <button class="carousel__dot is-active" aria-label="Review 1 of 4"></button>
+            <button class="carousel__dot" aria-label="Review 2 of 4"></button>
+            <button class="carousel__dot" aria-label="Review 3 of 4"></button>
+            <button class="carousel__dot" aria-label="Review 4 of 4"></button>
+          </div>
           <a class="tlink" href="https://www.google.com/search?q=toronto+spray+foam+parts#lrd=0x882b2fdb0a749217:0x636cf684d8281c4d,1">Read all reviews on Google</a>
-        </footer>
-      </blockquote>
+          <div class="carousel__nav">
+            <button class="carousel__btn" data-prev aria-label="Previous review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button class="carousel__btn" data-next aria-label="Next review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <section class="shop">
   <div class="wrap">
     <div class="shop__in">
-      <div>
+      <div data-reveal>
         <p class="kicker">Spray Foam Equipment and Accessories</p>
         <h2>Explore top-quality products</h2>
       </div>
-      <div>
+      <div data-reveal style="--d:80ms">
         <p>Your one-stop destination for all things related to spray foam equipment and accessories. Whether you're looking for high-quality tools, hoses, insulation products, or specialized parts, we have everything a spray foam contractor needs.</p>
         <p class="shop__cta"><a class="btn" href="https://www.torontosprayfoamparts.ca/shop/">Shop spray foam equipment</a></p>
       </div>
-    </div>
-    <div class="channels" data-reveal>
-      <h3>Distribution channels for</h3>
-      <ul>
-        </ul>
     </div>
   </div>
 </section>
 <section class="about" id="contact">
   <div class="wrap about__in">
-    <div class="about__copy">
+    <div class="about__copy" data-reveal>
       <p class="kicker">About Us</p>
       <h2>Dedicated to meeting the needs of insulation contractors</h2>
       <p>Toronto Spray foam Parts is a qualified foam shop and service center where each insulation contractor can find what they need to keep their business running. With a convenient location in the North of Toronto, you will receive personalized service in time by qualified technicians.</p>
       <p>We focus on providing top of the line products, and efficient service. We store a wide range of spray foam supplies and equipment necessary anytime for your next spray foam project. Whether you are experiencing machinery disruptions or need support setting up your rig, we can help. Give us a call discuss further.</p>
     </div>
-    <dl class="details">
+    <dl class="details" data-reveal style="--d:80ms">
       <div><dt>Location</dt><dd>4490 Chesswood Dr. #2,<br>North York, ON, M3J 2B9</dd></div>
       <div><dt>Opening hours</dt><dd>7 am – 5 pm, Monday – Friday</dd></div>
       <div><dt>Office</dt><dd><a href="tel:+16479461656">(647) 946-1656</a></dd></div>
@@ -418,20 +482,20 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 </section>
 <section class="faq">
   <div class="wrap">
-    <h2>Frequently asked questions</h2>
-    <details>
+    <h2 data-reveal>Frequently asked questions</h2>
+    <details data-reveal>
       <summary>Can you customize a spray foam rig to my specific requirements?</summary>
       <p class="a">Yes, our Rig Building department specializes in creating custom spray foam rigs tailored to your unique needs and budget, ensuring optimal performance and reliability.</p>
     </details>
-    <details>
+    <details data-reveal>
       <summary>What kind of training programs do you provide?</summary>
       <p class="a">We offer comprehensive training programs conducted by certified professionals. These programs cover everything from basic operations to advanced techniques, ensuring your team is skilled and efficient.</p>
     </details>
-    <details>
+    <details data-reveal>
       <summary>Do you provide maintenance services for all types of spray foam equipment?</summary>
       <p class="a">Yes, our expert technicians provide maintenance services for a wide variety of spray foam equipment, ensuring your machines operate at peak performance and reducing downtime.</p>
     </details>
-    <details>
+    <details data-reveal>
       <summary>What insulation products do you carry?</summary>
       <p class="a">We stock a diverse range of high-quality insulation products, including spray foam materials and accessories, to meet all your project needs.</p>
     </details>
@@ -439,7 +503,7 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 </section>
 <footer class="end">
   <div class="wrap">
-    <div class="end__ask">
+    <div class="end__ask" data-reveal>
       <div>
         <h2>Request a quote</h2>
         <p>Ready to Work Together? Build a project with us!</p>
@@ -492,6 +556,29 @@ document.documentElement.classList.add('js');
     });
   },{rootMargin:'0px 0px -8% 0px',threshold:0.12});
   els.forEach(function(e){io.observe(e)});
+})();
+(function(){
+  var root=document.querySelector('[data-carousel]');
+  if(!root)return;
+  var track=root.querySelector('.carousel__track');
+  var count=track.children.length;
+  var dots=[].slice.call(root.querySelectorAll('.carousel__dot'));
+  function index(){return Math.round(track.scrollLeft/track.clientWidth);}
+  function go(i){
+    i=Math.max(0,Math.min(count-1,i));
+    track.scrollTo({left:i*track.clientWidth});
+  }
+  root.querySelector('[data-prev]').addEventListener('click',function(){go(index()-1)});
+  root.querySelector('[data-next]').addEventListener('click',function(){go(index()+1)});
+  dots.forEach(function(d,i){d.addEventListener('click',function(){go(i)})});
+  var t;
+  track.addEventListener('scroll',function(){
+    clearTimeout(t);
+    t=setTimeout(function(){
+      var i=index();
+      dots.forEach(function(d,j){d.classList.toggle('is-active',j===i)});
+    },80);
+  },{passive:true});
 })();
 </script>
 </body>
