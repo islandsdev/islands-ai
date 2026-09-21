@@ -73,16 +73,17 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 .hero-band{width:100%;height:clamp(320px,64vh,680px);overflow:hidden;background:var(--paper-2)}
 .hero-band img,.hero-band video{width:100%;height:100%;object-fit:cover;object-position:50% 48%;
                transform:scale(1.08);transform-origin:0% 50%;display:block}
-.hero-band{position:relative}
+.hero-band{position:relative;z-index:0}
 .hero-band iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   aspect-ratio:16/9;min-width:135%;min-height:135%;border:0;pointer-events:none}
-/* the still covers the player through YouTube's load-time control flash,
-   then settles and dissolves into the running video. reduced-motion keeps the still. */
-.hero-cover{position:absolute;inset:0;z-index:2}
-.js .hero-band .hero-cover{animation:heroSettle 2600ms var(--ease-out) both,
-  posterFade 900ms ease 4500ms forwards}
-@keyframes posterFade{to{opacity:0;visibility:hidden}}
-.hero-card{position:relative;background:var(--card);border-radius:var(--r);
+/* the still sits over the player and only lifts while YouTube reports the
+   video is actually playing; any pause, end or unstarted state puts it back,
+   so no player chrome (play/pause button, title bar) ever shows.
+   reduced-motion never loads the player and keeps the still. */
+.hero-cover{position:absolute;inset:0;z-index:2;transition:opacity 900ms ease,visibility 0s 900ms}
+.js .hero-band .hero-cover{animation:heroSettle 2600ms var(--ease-out) both}
+.hero-band.is-playing .hero-cover{opacity:0;visibility:hidden}
+.hero-card{position:relative;z-index:1;background:var(--card);border-radius:var(--r);
   max-width:min(440px,34vw);padding:clamp(26px,3vw,42px);
   margin-top:clamp(-120px,-8vw,-72px);
   box-shadow:0 26px 60px -34px rgba(46,34,20,.5)}
@@ -380,7 +381,7 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
   <figure class="hero-band">
     <!-- preview only: their hero video embedded from their own YouTube upload;
          the git-shipped version self-hosts a compressed loop instead -->
-    <iframe src="https://www.youtube-nocookie.com/embed/h02LsYkyLFE?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=h02LsYkyLFE&amp;controls=0&amp;rel=0&amp;playsinline=1&amp;iv_load_policy=3&amp;disablekb=1" title="" aria-hidden="true" tabindex="-1" allow="autoplay; compute-pressure" loading="eager"></iframe>
+    <iframe id="hero-yt" data-src="https://www.youtube-nocookie.com/embed/h02LsYkyLFE?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=h02LsYkyLFE&amp;controls=0&amp;rel=0&amp;playsinline=1&amp;iv_load_policy=3&amp;disablekb=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fislands-ai.com" title="" aria-hidden="true" tabindex="-1" allow="autoplay; compute-pressure" loading="eager"></iframe>
     <img class="hero-cover" src="https://www.torontosprayfoamparts.ca/wp-content/uploads/2024/06/spray-foam-guns.jpg" alt="" aria-hidden="true" width="2000" height="1333">
   </figure>
   <div class="wrap">
@@ -613,10 +614,28 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
 </footer>
 <script>
 document.documentElement.classList.add('js');
-if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){
-  var hv=document.querySelector('.hero-band video');
-  if(hv){hv.removeAttribute('autoplay');hv.pause();}
-}
+(function(){
+  var band=document.querySelector('.hero-band'),yt=document.getElementById('hero-yt');
+  if(!band||!yt)return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  yt.src=yt.getAttribute('data-src');
+  var YT='https://www.youtube-nocookie.com',heard=false;
+  yt.addEventListener('load',function(){
+    yt.contentWindow.postMessage(JSON.stringify({event:'listening',id:1,channel:'widget'}),YT);
+    /* safety net: if the player never reports state, show the video anyway after 8s */
+    setTimeout(function(){if(!heard)band.classList.add('is-playing')},8000);
+  });
+  window.addEventListener('message',function(e){
+    if(e.origin!==YT||e.source!==yt.contentWindow)return;
+    var d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data}catch(err){return}
+    if(!d)return;
+    heard=true;
+    var st=d.event==='onStateChange'?d.info:(d.event==='infoDelivery'&&d.info&&'playerState' in d.info?d.info.playerState:null);
+    if(st===null||st===undefined)return;
+    /* 1 playing, 3 buffering mid-loop: keep the video up. anything else: still. */
+    band.classList.toggle('is-playing',st===1||(st===3&&band.classList.contains('is-playing')));
+  });
+})();
 (function(){
   var els=document.querySelectorAll('[data-reveal]');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-in')});return;}
