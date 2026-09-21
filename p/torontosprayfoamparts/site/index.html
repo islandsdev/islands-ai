@@ -75,7 +75,13 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
                transform:scale(1.08);transform-origin:0% 50%;display:block}
 .hero-band{position:relative}
 .hero-band iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  aspect-ratio:16/9;min-width:100%;min-height:100%;border:0;pointer-events:none}
+  aspect-ratio:16/9;min-width:135%;min-height:135%;border:0;pointer-events:none}
+/* the still covers the player through YouTube's load-time control flash,
+   then settles and dissolves into the running video. reduced-motion keeps the still. */
+.hero-cover{position:absolute;inset:0;z-index:2}
+.js .hero-band .hero-cover{animation:heroSettle 2600ms var(--ease-out) both,
+  posterFade 900ms ease 4500ms forwards}
+@keyframes posterFade{to{opacity:0;visibility:hidden}}
 .hero-card{position:relative;background:var(--card);border-radius:var(--r);
   max-width:min(440px,34vw);padding:clamp(26px,3vw,42px);
   margin-top:clamp(-120px,-8vw,-72px);
@@ -341,6 +347,7 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
   .js [data-reveal]{transform:none;transition:opacity 200ms ease;transition-delay:0ms}
   .btn,.btn:active,.btn:hover{transition:none;transform:none}
   .js .site,.js .lockup,.js .hero-band img,.js .hero-band video{animation:none}
+  .js .hero-band .hero-cover{animation:none}
   .index a:hover .svc,.index a:focus-visible .svc{transform:none}
   .products a,.products a:hover,.products a:focus-visible{transition:none;transform:none}
   .carousel__track{scroll-behavior:auto}
@@ -373,7 +380,8 @@ h3{font-variation-settings:'opsz' 72;font-size:clamp(1.15rem,1.9vw,1.55rem);line
   <figure class="hero-band">
     <!-- preview only: their hero video embedded from their own YouTube upload;
          the git-shipped version self-hosts a compressed loop instead -->
-    <iframe src="https://www.youtube-nocookie.com/embed/h02LsYkyLFE?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=h02LsYkyLFE&amp;controls=0&amp;rel=0&amp;playsinline=1&amp;iv_load_policy=3&amp;disablekb=1" title="" aria-hidden="true" tabindex="-1" allow="autoplay" loading="eager"></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/h02LsYkyLFE?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=h02LsYkyLFE&amp;controls=0&amp;rel=0&amp;playsinline=1&amp;iv_load_policy=3&amp;disablekb=1" title="" aria-hidden="true" tabindex="-1" allow="autoplay; compute-pressure" loading="eager"></iframe>
+    <img class="hero-cover" src="https://www.torontosprayfoamparts.ca/wp-content/uploads/2024/06/spray-foam-guns.jpg" alt="" aria-hidden="true" width="2000" height="1333">
   </figure>
   <div class="wrap">
     <div class="hero-card" data-reveal>
