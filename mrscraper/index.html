@@ -85,14 +85,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: none; bo
 .side-head { display: grid; grid-template-columns: 7rem 1fr; gap: 1.5rem 2.5rem; align-items: start; }
 .side-head .label { font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 500; padding-top: 0.6rem; border-top: 2px solid var(--accent); }
 @media (max-width: 720px) { .side-head { grid-template-columns: 1fr; } }
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 3rem; margin-top: 2rem; }
-@media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
-.box-h { border-top: 2px solid var(--accent); padding-top: 1rem; }
-.box-a { border-top: 2px solid var(--ink); padding-top: 1rem; }
-.box-h h4, .box-a h4 { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
-.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-.plain li { position: relative; padding-left: 1.2rem; font-size: 0.95rem; }
-.plain li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-muted); }
 .vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 2rem; border-top: 1px solid var(--line); }
 .vocab > div { padding: 1.1rem 1.25rem 1.1rem 0; border-bottom: 1px solid var(--line); }
 .vocab .tag { display: inline-block; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.4rem; }
@@ -120,6 +112,7 @@ tbody tr:last-child td { border-bottom: 1px solid var(--line); }
 td:first-child { font-weight: 500; }
 .cta-btn { display: inline-block; margin-top: 1.5rem; border-radius: 800px; padding: 0.7rem 1.4rem; background: var(--accent); color: #fff; text-decoration: none; font-weight: 500; transition: background 300ms ease; }
 .cta-btn:hover { background: var(--ink); color: var(--surface); }
+.sources { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1.25rem; color: var(--ink-muted); font-size: 0.85rem; max-width: 60rem; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -158,7 +151,6 @@ td:first-child { font-weight: 500; }
       <a href="#blog"><span class="d">03</span><span class="t">The blog</span><span class="s">views and top pages</span></a>
       <a href="#channels"><span class="d">04</span><span class="t">Channels</span><span class="s">where traffic came from</span></a>
       <a href="#search"><span class="d">05</span><span class="t">Search</span><span class="s">Google and rankings</span></a>
-      <a href="#notes"><span class="d">06</span><span class="t">Notes</span><span class="s">what needs qualifying</span></a>
     </div>
   </nav>
 
@@ -273,7 +265,7 @@ td:first-child { font-weight: 500; }
         <small>Google AI Overview, citing MrScraper. Captured 16 October 2026.</small>
       </div>
 
-      <p class="note">Screenshots of all three results are held with the engagement files. Being named inside an AI Overview is the outcome the AEO work was scoped to produce, and it is the first evidence of it.</p>
+      <p class="note">Being named inside an AI Overview is the outcome the AEO work was scoped to produce, and this is the first evidence of it.</p>
     </div>
   </section>
 
@@ -423,76 +415,18 @@ td:first-child { font-weight: 500; }
     </div>
   </section>
 
-  <section id="notes">
-    <div class="wrap">
-      <div class="side-head">
-        <div class="label">06</div>
-        <div class="head">
-          <h2>What needs qualifying</h2>
-          <p class="lead">Four things in this data should be settled before any of it is used to make a decision.</p>
-        </div>
-      </div>
-
-      <div class="split">
-        <div class="box-h">
-          <h4>Key events need a definition</h4>
-          <ul class="plain">
-            <li>The property records <b>10,809 key events</b> across the period, 1,862 of them on blog pages.</li>
-            <li>Weekly pulls taken from <b>20 September onward returned zero</b> key events across every channel.</li>
-            <li>Both readings come from the same property, so the period total is concentrated in the earlier weeks.</li>
-            <li>The event definition should be confirmed before key events are used as a performance measure.</li>
-          </ul>
-        </div>
-        <div class="box-a">
-          <h4>Signup funnel is not signups</h4>
-          <ul class="plain">
-            <li>The exploration counts page views on <b>/auth/signup, /auth/register, /auth/google/success</b> and <b>/auth/email-verification</b>.</li>
-            <li>Each is attributed to the blog article the visitor landed on first.</li>
-            <li>It shows people <b>reaching</b> the signup funnel. It does not confirm completed accounts.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="split">
-        <div class="box-a">
-          <h4>Windows must match</h4>
-          <ul class="plain">
-            <li>The same three month Search Console view read <b>2.04K clicks and 694K impressions</b> on 16 October, and <b>1.36K and 452K</b> ten days later, because higher volume July days rolled out of range.</li>
-            <li>GA4 figures on this page cover 17 August to 20 October. Ahrefs figures cover the seven days to 28 October. They are not comparable to each other.</li>
-          </ul>
-        </div>
-        <div class="box-a">
-          <h4>Ahrefs traffic analytics is a different measure</h4>
-          <ul class="plain">
-            <li>The Ahrefs beta reports <b>11.5K visits</b> and <b>158K page views</b> for the week to 28 October.</li>
-            <li>That figure covers the whole domain including <b>app.mrscraper.com</b>, the logged in product.</li>
-            <li>It is not comparable to the GA4 website property or to organic traffic, and is excluded from the numbers above.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="split">
-        <div class="box-a">
-          <h4>Sources</h4>
-          <ul class="plain">
-            <li><b>GA4</b>, MrScraper Website property. Traffic acquisition, Pages and screens, and the “Blog: Conversions by article” exploration. Custom range 17 August to 20 October 2026.</li>
-            <li><b>Google Search Console</b>, mrscraper.com, three month view to 26 October 2026, search type Web.</li>
-            <li><b>Ahrefs</b> Site Explorer, mrscraper.com with subdomains, changes over last 7 days, read 28 October 2026.</li>
-            <li><b>Google result pages</b> captured 16 October 2026 for the three queries in section 02.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="cta">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Next step</span>
-        <h2>Settle the key event definition, then set a target</h2>
-        <p class="lead">Once key events report consistently, the signup funnel numbers on this page become a baseline worth holding the next quarter against.</p>
+        <h2>Four articles are already doing the work</h2>
+        <p class="lead">The signup funnel numbers on this page are the baseline. The next quarter is about widening the set of articles that produce them.</p>
       </div>
       <p><a class="cta-btn" href="https://calendly.com/islandshq/content-agency-call">Book the review</a></p>
+
+      <div class="sources">
+        <b>Sources.</b> GA4, MrScraper Website property: Traffic acquisition, Pages and screens, and the “Blog: Conversions by article” exploration, custom range 17 August to 20 October 2026. Google Search Console, mrscraper.com, three month view to 26 October 2026, search type Web. Ahrefs Site Explorer, mrscraper.com with subdomains, changes over last 7 days, read 28 October 2026. Google result pages captured 16 October 2026 for the three queries in section 02.
+      </div>
     </div>
   </section>
 
