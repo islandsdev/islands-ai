@@ -10,29 +10,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500&display=swap">
 <style>
 :root {
-  --surface: #ffffff; --surface-raised: #f6f6f6;
-  --ink: #141414; --ink-muted: #737373; --line: #e2e2e2;
-  --accent: #e54a22; --accent-soft: #fdeee9;
-  --panel: #141414; --panel-ink: #ffffff;
+  --surface: #ffffff; --ink: #141414; --ink-muted: #737373; --line: #e2e2e2;
+  --accent: #e54a22; --panel: #141414; --panel-ink: #ffffff;
   --panel-muted: #a3a3a3; --panel-line: #333333; --glow: #2b1d14;
   --font: 'Roobert', 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --max: 80rem; --gutter: clamp(1.25rem, 4vw, 2.5rem);
-  color-scheme: light;
-  box-sizing: border-box;
+  color-scheme: light; box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --surface: #141414; --surface-raised: #1f1f1e; --ink: #ffffff; --ink-muted: #a3a3a3;
-    --line: #333333; --accent-soft: #3a1d13; --panel: #0b0b0b; --panel-line: #2c2c2c;
+    --surface: #141414; --ink: #ffffff; --ink-muted: #a3a3a3;
+    --line: #333333; --panel: #0b0b0b; --panel-line: #2c2c2c;
     color-scheme: dark;
   }
-}
-:root[data-theme='dark'] {
-  --surface: #141414; --surface-raised: #1f1f1e; --ink: #ffffff; --ink-muted: #a3a3a3;
-  --line: #333333; --accent-soft: #3a1d13; --panel: #0b0b0b; --panel-line: #2c2c2c;
-  color-scheme: dark;
 }
 html { scroll-padding-top: env(safe-area-inset-top, 0px); }
 * { box-sizing: border-box; }
@@ -53,13 +45,12 @@ b, strong { font-weight: 500; }
 a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color 300ms ease; }
 a:hover { color: var(--accent); }
 .accent { color: var(--accent); }
-.muted { color: var(--ink-muted); }
 .eyebrow { display: block; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
 .lead { font-size: 1.125rem; line-height: 1.6; max-width: 44rem; }
 .head { display: grid; gap: 1.25rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
 .note { color: var(--ink-muted); font-size: 0.9rem; }
 .site-head { padding-block: 1.5rem 0; }
-.site-head .logo { color: var(--ink); font-weight: 500; letter-spacing: -0.01em; font-size: 1.1rem; text-decoration: none; }
+.site-head .logo { color: var(--ink); font-weight: 500; font-size: 1.1rem; text-decoration: none; letter-spacing: -0.01em; }
 .hero { padding-block: clamp(3rem, 8vw, 6rem) clamp(2.5rem, 5vw, 4rem); }
 .hero-inner { display: grid; gap: 1.5rem; max-width: 60rem; }
 .tldr { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.5rem; display: grid; grid-template-columns: 8rem 1fr; gap: 1rem 2rem; max-width: 60rem; }
@@ -147,7 +138,7 @@ td:first-child { font-weight: 500; }
       <h4>2. Specific patterns still win inside the current list</h4>
       <ul class="plain">
         <li>Even on the broken list, some emails clear <b>5-6% open rate</b> against the 3.6% site average.</li>
-        <li>Common thread: specific "you" hooks addressing reader identity, real founder case studies, career-pivoter reframes, medical beauty angles.</li>
+        <li>Common thread: specific "you" hooks addressing reader identity, real founder case studies, revenue-expansion angles for beauty pros, medical beauty angles.</li>
         <li>The November plan leans into these patterns and drops the weaker ones (generic category plays, abstract trend explainers).</li>
       </ul>
     </div>
@@ -181,7 +172,7 @@ td:first-child { font-weight: 500; }
     <div class="label">Blogs</div>
     <div class="head">
       <h2>7 blog posts, each with a specific job</h2>
-      <p class="lead">Every topic targets a real keyword opportunity from the 639-keyword competitor gap analysis. Four target KD 0 gaps where Selfnamed or Supliful rank and Blanka does not.</p>
+      <p class="lead">Every topic targets a real keyword opportunity from the 639-keyword competitor gap analysis. Two titles reframed per Karli's Nov 5 notes.</p>
     </div>
   </div>
   <div class="table-wrap">
@@ -189,11 +180,11 @@ td:first-child { font-weight: 500; }
       <thead><tr><th>Title</th><th>Primary keyword</th><th>Why this post exists</th></tr></thead>
       <tbody>
         <tr><td>How to Start Your Own Private Label Haircare Line in 2026</td><td><code>how to start a hair care line</code></td><td>KD 0 competitor gap. Selfnamed ranks #1, Blanka unranked. Flagship anchor for the Haircare Expansion email series.</td></tr>
-        <tr><td>White Label Shampoo vs Private Label Shampoo</td><td><code>white label shampoo</code></td><td>KD 0 competitor gap. Decision-stage content that converts haircare founders mid-launch.</td></tr>
+        <tr><td>Private Label Haircare vs. Custom Formulation Haircare: Which Path Fits Your Brand?</td><td><code>private label vs custom formulation</code></td><td>Reframed per Karli: Blanka treats white and private label as equivalent, so the honest comparison is private label (the app) vs custom formulation (Blanka Labs). Decision-stage query that maps the reader to one of two Blanka products.</td></tr>
         <tr><td>The Scalp Care Opportunity</td><td><code>private label scalp care</code></td><td>First-mover play in a category with no dominant independent brand. Publishes 3 days before the Nov 23 Scalp Care feature email so SEO starts indexing in time.</td></tr>
         <tr><td>The Beauty Founder's Q4 Playbook</td><td><code>beauty brand holiday marketing</code></td><td>Gives BFCM Campaign 1 a learn-more destination. Evergreen Q4 ranking.</td></tr>
         <tr><td>The Salon Owner's Guide to Launching a Branded Retail Line</td><td><code>private label beauty for salons</code></td><td>Dallas event asset. Publishes 2 days before Nov 12 so Karli has something shareable in-person.</td></tr>
-        <tr><td>Wholesale vs Private Label for Salons</td><td><code>wholesale vs private label beauty</code></td><td>Dallas event follow-up. Converts salon owners in decision stage.</td></tr>
+        <tr><td>Wholesale vs. Dropshipping: The Private Label Opportunity for Salons</td><td><code>wholesale vs dropshipping beauty</code></td><td>Reframed per Karli: wholesale and dropshipping are the two real fulfillment choices for a salon; private label is the product opportunity on top of either. Dallas event follow-up.</td></tr>
         <tr><td>The 2026 Private Label Skincare Launch Checklist</td><td><code>private label skincare</code></td><td>Blanka's biggest competitor gap by volume (450/mo, Selfnamed #4, Blanka unranked). Supports late-Nov Skincare Launch teaser.</td></tr>
       </tbody>
     </table>
@@ -214,7 +205,7 @@ td:first-child { font-weight: 500; }
     <table>
       <thead><tr><th>Day</th><th>Theme</th><th>Why this is the right theme</th></tr></thead>
       <tbody>
-        <tr><td>Monday</td><td>Career Pivoter / Identity Reframe</td><td>Highest-opening ICP (5.26% vs 3.6% site average). Subjects like 'You've been cutting hair for 10 years' and 'Your corporate skills are perfect for a beauty brand'.</td></tr>
+        <tr><td>Monday</td><td>Beauty Pro Revenue Expansion</td><td>Reframed per Karli: not about changing careers, about growing revenue inside the one you already have. Stylists add a product shelf next to the chair. Estheticians add a take-home skincare line. Hits Blanka's personal care beauty professional ICP directly.</td></tr>
         <tr><td>Tuesday</td><td>Founder Story (real case study)</td><td>Top-performing day in Sep-Oct data. The nail studio case study was the single highest opener in the whole large-list era (6.38%).</td></tr>
         <tr><td>Wednesday</td><td>Medical Beauty Pros (medspas, clinics)</td><td>High CTR ICP (2.36% CTR of opens) that was underserved before. New focus to diversify and chase the engagement signal.</td></tr>
         <tr><td>Thursday</td><td>Business Tactic / Education</td><td>Education-framed subjects pulled strong CTR historically (7.36% on 'White Label or Private Label?' format).</td></tr>
@@ -263,10 +254,10 @@ td:first-child { font-weight: 500; }
       <thead><tr><th>Blog (publish date)</th><th>Newsletter that links to it</th></tr></thead>
       <tbody>
         <tr><td>Q4 Playbook (Nov 1)</td><td>Nov 14 BFCM countdown + Nov 21 one-week-to-BF</td></tr>
-        <tr><td>Haircare Launch Guide (Nov 3)</td><td>Nov 10 stylist pivot + Nov 13 white vs private label</td></tr>
-        <tr><td>White vs Private Label Shampoo (Nov 10)</td><td>Nov 13 haircare decision</td></tr>
+        <tr><td>Haircare Launch Guide (Nov 3)</td><td>Nov 10 stylist expansion + Nov 13 private label vs custom formulation</td></tr>
+        <tr><td>Private Label vs. Custom Formulation Haircare (Nov 10)</td><td>Nov 13 haircare decision</td></tr>
         <tr><td>Salon Owner's Guide (Nov 10)</td><td>Nov 11 Michelle Elam case study</td></tr>
-        <tr><td>Wholesale vs Private Label for Salons (Nov 13)</td><td>Nov 12 medspa retail</td></tr>
+        <tr><td>Wholesale vs. Dropshipping for Salons (Nov 13)</td><td>Nov 12 medspa retail</td></tr>
         <tr><td>Scalp Care Opportunity (Nov 20)</td><td>Nov 20 scalp care opening (same-day pair)</td></tr>
         <tr><td>Skincare Launch Checklist (Nov 24)</td><td>Nov 26 '2027 founder' reflection</td></tr>
       </tbody>
